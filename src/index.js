@@ -2,9 +2,14 @@ const express = require('express');
 const morgan = require('morgan');
 const exhandle = require('express-handlebars');
 const path = require('path');
+const flash = require('connect-flash');
+const session = require('express-session')
+const MySQLStore = require('express-mysql-session')
+const passport = require('passport')
 
 //Iniciar
 const app = express();
+require('./lib/passport');
 
 //Configuracion
 app.set('port', process.env.PORT || 4000);
@@ -22,6 +27,9 @@ app.set('view engine', '.hbs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Variables globales
 app.use((req, res, next) => {
