@@ -1,36 +1,39 @@
 <link rel="stylesheet" href="/css/tel.css">
+<link rel="stylesheet" href="/css/imgs.css">
+
+<div class="container-fluid">
+    <div class="row">
+        <div id= "imgas" class="col">
+            <img id='i1' src="./img/building.jpg" alt="Building" width="790" height="650">
+            <img id= 'i2' src="./img/building2.jpg" alt="Building2" width="790" height="650">
+            <img id='i3' src="./img/building3.jpg" alt="Building3" width="790" height="650">
+        </div>
+    </div> 
+</div>
+
 <div class="container p-4">
     <div class="row">
         <div class="col">
-            <img src="./img/LogoCloudTower.png" alt="CloudTower">
+
         </div>
         <div class="col-md-4 mx-auto">
             <div class="card text-center">
                 <div class="card-header">
-                    <h3>Registro</h3>
+                    <h3>Inicio de sesion</h3>
                 </div>
                 <div class ="card-body">
-                    <form action="/signup" method="POST">
-                        <div class="form-group">
-                            <input type="text" name="fullname" placeholder="Nombre Completo" class="form-control" autofocus>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" name="telefono" placeholder="Numero de Telefono" class="form-control"
-                             required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                             <span class="note"> Formato: XXX-XXX-XXXX </span>
+                    <img src="/img/LogoCloudTower.png" alt="CloudTower" class="card-img mx-auto m-2 w-50">
+                    <form action="/login" method="POST">
                         </div>
                         <div class="form-group">
                             <input type="email" name="correo" placeholder="Correo Electronico" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="direccion" placeholder="Direccion" class="form-control">
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" placeholder="Contrasena" class="form-control">
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary btn-block">
-                                Registrarse
+                                Log in
                             </button>
                         </div>
                     </form>
