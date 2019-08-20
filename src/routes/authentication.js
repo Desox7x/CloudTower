@@ -24,6 +24,6 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/profile', (req, res) => {
-    res.send('Aqui estara el perfil');
+    res.render('profile');
 });
 module.exports = router;

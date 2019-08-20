@@ -7,5 +7,8 @@ router.get('/', (req, res) => {
 router.get('/about', (req, res) => {
     res.render('./layouts/about');
 });
+router.get('/contact', (req, res) => {
+    res.render('./layouts/contact');
+});
 
 module.exports = router;
