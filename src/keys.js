@@ -1,7 +1,7 @@
 module.exports = {
     database: {
         host: 'localhost',
-        user: 'Abdel',
+        user: 'Cloud',
         password: '12345678',
         database: 'cloudtowerdb'
     }

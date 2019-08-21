@@ -3,6 +3,7 @@
     position:absolute;
     left:-65px;
     top:0;
+
     -webkit-animation-name: fade;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-duration: 12s;
