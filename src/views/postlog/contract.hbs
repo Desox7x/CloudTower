@@ -1,0 +1,38 @@
+<style>
+    h1, label{
+        font-family: 'Times New Roman';
+        font-weight: bold;
+    }
+    
+</style>
+
+{{> navigationlog}}
+
+<h1 align="center">Rellene su plantilla</h1>
+
+{{!-- <script>    
+    function checkForm(form){
+        if (form.nameC.value == ""){
+            alert("Error: ha dejado campos vacios");
+            form.nameC.focus();
+            return false;
+        }
+    }
+</script> Validación del form: en proceso--}}
+
+<form id="test">
+    <div class= "container p-4">
+        <div class="row">
+            <div class="col">
+                <p>
+                    <label for="nameC">Nombre del cliente:</label><br>
+                    <input type="text" name="nameC" value="" placeholder="Ej. Juan Pérez">
+                </p>
+                <p>
+                    <input type="submit" value="Submit">
+                </p>
+            </div>
+        </div>
+    </div>
+    
+</form>
