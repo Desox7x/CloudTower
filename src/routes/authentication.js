@@ -24,6 +24,6 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/profile', (req, res) => {
-    res.render('profile');
+    res.render('postlog/profile');
 });
 module.exports = router;

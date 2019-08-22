@@ -21,6 +21,7 @@ app.engine('.hbs', exhandle({
     extname: '.hbs',
     helpers: require('./lib/handlebars')
 }));
+
 app.set('view engine', '.hbs');
 
 //Middlewares
@@ -31,7 +32,7 @@ app.use(session({
     store: new MySQLStore(database)
 }))
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(flash());
 app.use(passport.initialize());
