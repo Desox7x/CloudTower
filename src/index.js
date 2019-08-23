@@ -18,6 +18,7 @@ app.engine('.hbs', exhandle({
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
+    postlogDir: path.join(app.get('views'), 'postlog'),
     extname: '.hbs',
     helpers: require('./lib/handlebars')
 }));
@@ -43,6 +44,7 @@ app.use(passport.session());
 app.use((req, res, next) => {
     app.locals.success = req.flash('success');
     app.locals.message = req.flash('message');
+    app.locals.user = req.user;
     app.locals.Entidad = req.Entidad;
     next();
 });
