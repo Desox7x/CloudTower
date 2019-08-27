@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="/css/tel.css">
-<link rel="stylesheet" href="/css/imgs.css">
-
+{{!--
 <div class="container-fluid">
     <div class="row">
         <div id= "imgas" class="col">
@@ -10,42 +9,144 @@
         </div>
     </div> 
 </div>
+--}}
+<main class="inicio">
+    <header class="masthead d-flex">
 
-<div class="container p-4">
-    <div class="row">
-        <div class="col"></div>
-        <div class="col-md-4 mx-auto">
-            <div class="card text-center animated fadeIn">
-                <div class="card-header">
-                    <h3>Registro</h3>
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="dropdown">
+                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Registro de Clientes
+                        </button>
+                        <div class="card-body dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <form action="/signup" method="POST">
+                                <div class="form-group">
+                                    <input type="text" name="fullname" placeholder="Nombre Completo"
+                                        class="form-control" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="telefono" placeholder="Número de Telefono"
+                                        class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                    <span class="note"> Formato: XXX-XXX-XXXX </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="correo" placeholder="Correo Electrónico"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Contraseña"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">
+                                        Registrarse
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class ="card-body">
-                    <form action="/signup" method="POST">
-                        <div class="form-group">
-                            <input type="text" name="fullname" placeholder="Nombre Completo" class="form-control" autofocus>
+                <div class="col-md-4">
+                    <div class="dropdown">
+                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Registro de Inmobiliaria
+                        </button>
+                        <div class="card-body dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <form action="/" method="POST">
+                                <div class="form-group">
+                                    <input type="text" name="fullname" placeholder="Nombre Completo"
+                                        class="form-control" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="telefono" placeholder="Número de Telefono"
+                                        class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                    <span class="note"> Formato: XXX-XXX-XXXX </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="correo" placeholder="Correo Electrónico"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="sector" placeholder="Sector" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="Cedula" placeholder="Cedula" class="form-control" required
+                                        pattern="[0-9]{3}-[0-9]{7}-[0-9]{1}">
+                                    <span class="note"> Formato: XXX-XXXXXXX-X </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Contraseña"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">
+                                        Registrarse
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <input type="tel" name="telefono" placeholder="Número de Telefono" class="form-control"
-                             required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                             <span class="note"> Formato: XXX-XXX-XXXX </span>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="correo" placeholder="Correo Electrónico" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="direccion" placeholder="Dirección" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" placeholder="Contraseña" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary btn-block">
-                                Registrarse
-                            </button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="dropdown">
+                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Registro de Constructora
+                        </button>
+                        <div class="card-body dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <form action="/" method="POST">
+                                <div class="form-group">
+                                    <input type="text" name="fullname" placeholder="Nombre Completo"
+                                        class="form-control" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="telefono" placeholder="Número de Telefono"
+                                        class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                    <span class="note"> Formato: XXX-XXX-XXXX </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="correo" placeholder="Correo Electrónico"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="sector" placeholder="Sector" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="Cedula" placeholder="Cedula" class="form-control" required
+                                        pattern="[0-9]{3}-[0-9]{7}-[0-9]{1}">
+                                    <span class="note"> Formato: XXX-XXXXXXX-X </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Contraseña"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">
+                                        Registrarse
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
-    </div>
-</div>
+        </div>
+    </header>
+</main>

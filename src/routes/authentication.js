@@ -29,13 +29,15 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
     req.logOut();
     res.redirect('/login');
-})
+});
+
+
 router.get('/profile', (req, res) => {
     res.render('postlog/profile');
 });
 router.post('/upload', (req, res) => {
     console.log(req.file);
-    //pool.query("INSERT INTO Entidad(imgs) VALUES('" + req.file.filename + "')");
+    //pool.query("INSERT INTO Entidad set ?", );
     res.render('postlog/profile', {
         
         file: `uploads/${req.file.filename}`
