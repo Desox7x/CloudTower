@@ -7,9 +7,19 @@ const session = require('express-session')
 const MySQLStore = require('express-mysql-session')
 const passport = require('passport')
 const { database } = require('./keys');
+const multer = require('multer');
+const uuid = require('uuid/v4');
+
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, 'public/uploads'),
+    filename: (req, file, cb) => {
+        cb(null, uuid() + path.extname(file.originalname));
+    }
+});
 //Iniciar
 const app = express();
 require('./lib/passport');
+
 
 //Configuracion
 app.set('port', process.env.PORT || 4000);
@@ -25,6 +35,7 @@ app.engine('.hbs', exhandle({
 
 app.set('view engine', '.hbs');
 
+
 //Middlewares
 app.use(session({
     secret: 'cloudtowersession',
@@ -38,6 +49,21 @@ app.use(express.json());
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(multer({
+    storage,
+    dest: path.join(__dirname, 'public/uploads'),
+    limits: {fileSize: 10000000},
+    fileFilter: (req, file, cb) => {
+        const filetype = /jpeg|jpg|png/;
+        const mimetype = filetype.test(file.mimetype);
+        const extname = filetype.test(path.extname
+            (file.originalname).toLowerCase());
+        if (mimetype && extname) {
+            return cb(null, true);
+        }
+        cb("Error: Archivo no soportado");
+    }
+}).single('image'))
 
 
 //Variables globales

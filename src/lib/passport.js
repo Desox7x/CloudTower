@@ -46,7 +46,6 @@ passport.use('local.signup', new LocalStrategy({
     newUser.idEntidad = result.insertId;
     return done(null, newUser);
 }));
-
 passport.serializeUser((Entidad, done) => {
     done(null, Entidad.idEntidad);
 });

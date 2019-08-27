@@ -1,16 +1,71 @@
-
 <div class="container p-4">
     <div class="row">
         <div class="col-md-4">
             <div class="card text-center">
-                <div class="card-body">
-                    <h3>{{user.fullname}}</h3>
-                    <h4>{{user.direccion}}</h4>
+                <div class="card-header bg-light">
+                    <img src="{{file}}" alt="" class="w-100 h-100 img-thumbnail">
+                    
+                    
+                    <div class="card-body">
+                        
+
+                    </div>
+                    
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <form action="/upload" method="POST" enctype="multipart/form-data">
+                                <input type="file" name="image">
+                                <button type="Submit">
+                                    Upload
+                                </button>
+                            </form>
+                        </div>
+                    </li>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <h3 class="card-title text-white">
+                        {{user.fullname}} 
+                    </h3>
+                    
+                </div>
+                <div class="card-body">
+                    <h4 class="text-primary">
+                        ***Trabajo***
+                    </h4>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <h3 class="card-title text-white">
+                        Informacion
+                    </h3>
+                    
+                </div>
+                
+                <div class="card-body">
+                    <h5 class="text-primary">
+                        Telefono: {{user.telefono}}
+                        <br>
+                        Direccion: {{user.direccion}}
+                        <br>
+                        Correo: {{user.correo}}
+                        <br>
+                        Fecha de Nacimiento: 00/00/00
+                    </h5>
+                </div>
+            </div>
             
+            
+
 
         </div>
     </div>

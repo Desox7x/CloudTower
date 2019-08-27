@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const pool = require('../database')
 
 const passport = require('passport');
 const { isLoggedIn } = require('../lib/auth');
+
+
 
 router.get('/signup', (req, res) => {
     res.render('auth/signup')
@@ -30,4 +33,13 @@ router.get('/logout', (req, res) => {
 router.get('/profile', (req, res) => {
     res.render('postlog/profile');
 });
+router.post('/upload', (req, res) => {
+    console.log(req.file);
+    //pool.query("INSERT INTO Entidad(imgs) VALUES('" + req.file.filename + "')");
+    res.render('postlog/profile', {
+        
+        file: `uploads/${req.file.filename}`
+    });
+})
+
 module.exports = router;
