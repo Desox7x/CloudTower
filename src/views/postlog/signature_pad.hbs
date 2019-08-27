@@ -1,0 +1,119 @@
+<head>
+    <script type="text/javascript">
+        var canvas, ctx, flag = false,
+            prevX = 0,
+            currX = 0,
+            prevY = 0,
+            currY = 0,
+            dot_flag = false;
+
+        var x = "black",
+            y = 2;
+        
+        function init() {
+            canvas = document.getElementById('can');
+            ctx = canvas.getContext("2d");
+            w = canvas.width;
+            h = canvas.height;
+        
+            canvas.addEventListener("mousemove", function (e) {
+                findxy('move', e)
+            }, false);
+            canvas.addEventListener("mousedown", function (e) {
+                findxy('down', e)
+            }, false);
+            canvas.addEventListener("mouseup", function (e) {
+                findxy('up', e)
+            }, false);
+            canvas.addEventListener("mouseout", function (e) {
+                findxy('out', e)
+            }, false);
+        }
+        
+        function color(obj) {
+            switch (obj.id) {
+                case "black":
+                    x = "black";
+                    break;
+                case "blue":
+                    x = "blue";
+                    break;
+                case "red":
+                    x = "red";
+            }
+            y = 2;
+        
+        }
+        
+        function draw() {
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(currX, currY);
+            ctx.strokeStyle = x;
+            ctx.lineWidth = y;
+            ctx.stroke();
+            ctx.closePath();
+        }
+        
+        function erase() {
+            ctx.clearRect(0, 0, w, h);
+        }
+        
+        function save() {
+            var image = canvas.toDataURL();
+            
+            //link temporal
+            var tmpLink = document.createElement('a');
+            tmpLink.download = 'firma.png';
+            tmpLink.href = image;
+
+            //añadir link a body temporalmente y empezar descarga
+            document.body.appendChild(tmpLink);
+            tmpLink.click();
+            document.body.removeChild(tmpLink);
+        }
+        
+        function findxy(res, e) {
+            if (res == 'down') {
+                prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+        
+                flag = true;
+                dot_flag = true;
+                if (dot_flag) {
+                    ctx.beginPath();
+                    ctx.fillStyle = x;
+                    ctx.fillRect(currX, currY, 2, 2);
+                    ctx.closePath();
+                    dot_flag = false;
+                }
+            }
+            if (res == 'up' || res == "out") {
+                flag = false;
+            }
+            if (res == 'move') {
+                if (flag) {
+                    prevX = currX;
+                    prevY = currY;
+                    currX = e.clientX - canvas.offsetLeft;
+                    currY = e.clientY - canvas.offsetTop;
+                    draw();
+                }
+            }
+        }
+    </script>
+</head>
+
+
+<body id="try1" onload="init()">
+    <canvas id="can" width="400" height="290" style="position: fixed; top: 170px; left: 470px; border: 1px solid; border-radius: 4px; background-color: #fff"></canvas>
+    <div style="position: absolute; top: 100px; left: 615px;">Escoja un color:</div>    
+    <div style="position: absolute; top: 130px; left: 640px; width: 15px; height: 15px; background:black;" id="black" onclick="color(this)"></div>
+    <div style="position: absolute; top: 130px; left: 660px; width: 15px; height: 15px; background:blue;" id="blue" onclick="color(this)"></div>
+    <div style="position: absolute; top: 130px; left: 680px; width: 15px; height: 15px; background:red;" id="red" onclick="color(this)"></div>
+    <image id="img" src=""></image>
+    <button onclick="save()" style="position: fixed; bottom: 150px; left: 490px">Save</button>
+    <button onclick="erase()" style="position: fixed; bottom: 150px; left: 800px">Clear</button>
+</body>

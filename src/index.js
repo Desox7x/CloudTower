@@ -3,9 +3,9 @@ const morgan = require('morgan');
 const exhandle = require('express-handlebars');
 const path = require('path');
 const flash = require('connect-flash');
-const session = require('express-session')
-const MySQLStore = require('express-mysql-session')
-const passport = require('passport')
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session');
+const passport = require('passport');
 const { database } = require('./keys');
 //Iniciar
 const app = express();

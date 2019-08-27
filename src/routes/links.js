@@ -8,6 +8,8 @@ router.get('/dashboard', (req, res) => {
 router.get('/contract', (req, res) => {
     res.render('postlog/contract');
 });
-
+router.get('/signature_pad', (req, res) => {
+    res.render('postlog/signature_pad');
+});
 
 module.exports = router;
