@@ -4,6 +4,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const pool = require('../database');
 const helpers = require('../lib/helpers');
 
+const DB = require('../lib/DBData');
+
 passport.use('local.login', new LocalStrategy({
     usernameField: 'correo',
     passwordField: 'password',
@@ -42,6 +44,7 @@ passport.use('local.signup', new LocalStrategy({
     };
     newUser.password = await helpers.encryptPassword(password)
     const result = await pool.query('INSERT INTO Entidad SET ?', [newUser]);
+    
     console.log(result);
     newUser.idEntidad = result.insertId;
     return done(null, newUser);
@@ -51,6 +54,7 @@ passport.serializeUser((Entidad, done) => {
 });
 
 passport.deserializeUser(async (idEntidad, done) => {
-   const rows = await pool.query('SELECT * FROM Entidad Where idEntidad = ?', [idEntidad]);
+   //const rows = await pool.query('SELECT * FROM Entidad Where idEntidad = ?', [idEntidad]);
+   const rows = await DB.getUserById(idEntidad)
    done(null, rows[0]);
 })

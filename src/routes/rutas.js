@@ -1,16 +1,33 @@
 const express = require('express');
 const router = express.Router();
 
+const home = require('../controllers/HomeController');
+const user = require('../controllers/UserController');
+const auth = require('../controllers/AuthController');
 
-router.get('/', (req, res) => {
-    res.render('inicio')
-});
-router.get('/about', (req, res) => {
-    res.render('./layouts/about');
-});
-router.get('/contact', (req, res) => {
-    res.render('./postlog/contact');
-});
 
+// =========== HOME ================
+router.get('/', home.index);
+router.get('/about', home.about);
+router.get('/contact', home.contact);
+router.get('/profile', home.profile);
+
+
+// =========== USER ================
+router.get('/dashboard', user.dashboard);
+router.get('/contract', user.contract);
+router.get('/contract', user.signaturePad);
+router.post('/upload', user.uploadPOST);
+router.get('/signature_pad', user.signaturePad);
+
+
+// =========== AUTH =================
+router.get('/signup', auth.signup);
+router.post('/signup', auth.signupPOST);
+
+router.get('/login', auth.login)
+router.post('/login', auth.loginPOST);
+
+router.get('/logout', auth.logout);
 
 module.exports = router;

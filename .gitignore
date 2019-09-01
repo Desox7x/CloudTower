@@ -1,1 +1,4 @@
-
+node_modules/
+public/img/uploads/*.jpg
+public/img/uploads/*.png
+public/img/uploads/*.gif
