@@ -5,26 +5,8 @@ background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+
 font-family: 'Nunito';
 overflow: auto;
 }
-.inicio{
-    width: 100vw;
-    height: 100vh;
-}
-.masthead {
-    color: white;
-    min-height: 10px;
-    width: 100%;
-    height: 100%;
-    padding-top: 5px;
-    background: url('/img/modernglass.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    transition: 3s;
-}
-.masthead h1 {
-    font-size: 4rem;
-    margin: 0;
-    padding: 0;
+.carousel-inner {
+    position: fixed;
 }
 footer {
     position: absolute;
