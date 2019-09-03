@@ -1,13 +1,12 @@
-<!-- Codigo viejo, para arreglar un problema con el scrolling -->
-{{!-- <style>
-    .col {
-        overflow: auto;
-    }
-</style> --}}
-
 <style>
+    .container{
+        width: 3000px;
+        padding-top: 20px;
+    }
+
     .botones{
         text-align: center;
+        padding-top: 10px;
     }
 
     .button{
@@ -27,41 +26,28 @@
         background-color: #4682b4;
     }
 
+    h2, label{
+        font-family: "Book Antiqua";
+    }
+
 </style>
 
-<form class="form-horizontal" onsubmit="popUp()" target="_blank">
-    <fieldset>
-        <div class="container p-5">
-            <div class="row">
-                <div class="col">
-                    <!-- Form Name -->
-                    <legend>Rellene los campos:</legend>
-
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="name">Nombre completo</label>
-                        <div class="col-md-4">
-                            <input id="name" name="name" type="text" placeholder="Ej. Juan Pérez"
-                                class="form-control input-md" required="">
-
+<body>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col">
+                <h2>Rellene los campos:</h2>
+                <form class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dir">Dirección</label>
+                            <input type="text" class="form-control" id="dir" placeholder="Av. Lope de Vega" required>
+                            <div class="invalid-feedback">Digite una dirección valida</div>
                         </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="dir">Dirección</label>
-                        <div class="col-md-5">
-                            <input id="dir" name="dir" type="text" placeholder="Ej. Av. Lope de Vega con Juan B. Justo"
-                                class="form-control input-md" required="">
-                            <span class="help-block">Dirección del inmueble</span>
-                        </div>
-                    </div>
-
-                    <!-- Select -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="realty">Tipo de inmueble</label>
-                        <div class="col-md-4">
-                            <select id="realty" name="realty" class="form-control">
+                        <div class="form-group col-md-6">
+                            <label for="realtyType">Tipo de inmueble</label>
+                            <select name="realtyType" id="realtyType" class="custom-select" required>
+                                <option value="">Escoja...</option>
                                 <option value="1">Casa</option>
                                 <option value="2">Villa</option>
                                 <option value="3">Solar</option>
@@ -73,75 +59,89 @@
                                 <option value="9">Penthouse</option>
                                 <option value="10">Local de oficina</option>
                             </select>
+                            <div class="invalid-feedback">Escoja una opción valida</div>
                         </div>
                     </div>
-
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="tel">Teléfono</label>
-                        <div class="col-md-4">
-                            <input id="tel" name="tel" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Ej. 809-111-1111"
-                                class="form-control input-md" required="">
-
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="date">Fecha</label>
+                            <input type="date" class="form-control" id="date" name="date" required="">
+                            <div class="invalid-feedback">Digite una fecha valida</div>
                         </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="email">Correo</label>
-                        <div class="col-md-4">
-                            <input id="email" name="email" type="email" placeholder="Ej. correo@dir.com"
-                                class="form-control input-md" required="">
-
+                        <div class="form-group col-md-3">
+                            <label for="price">Precio</label>
+                            <input type="number" class="form-control" id="price" name="price" required="">
+                            <div class="invalid-feedback">Digite un precio valido</div>
                         </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="price">Precio a pagar</label>
-                        <div class="col-md-4">
-                            <input id="price" name="price" type="text" placeholder="" class="form-control input-md"
-                                required="">
-
-                        </div>
-                    </div>
-
-                    <!-- Select Basic -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="currency">Moneda</label>
-                        <div class="col-md-4">
-                            <select id="currency" name="currency" class="form-control">
+                        <div class="form-group col-md-3">
+                            <label for="currency">Moneda utilizada</label>
+                            <select name="currency" id="currency" class="custom-select" required>
+                                <option value="">Escoja...</option>
                                 <option value="1">USD</option>
                                 <option value="2">DOP</option>
                             </select>
+                            <div class="invalid-feedback">Escoja una opción valida</div>
                         </div>
                     </div>
-
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="date">Fecha</label>
-                        <div class="col-md-4">
-                            <input id="date" name="date" type="date" placeholder="Ej. 01/01/2019"
-                                class="form-control input-md" required=""><br>
+                    <h2>Información de los involucrados:</h2>
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="form-group col-md-8">
+                                <input type="text" id="nameC" class="form-control" required="" placeholder="Nombre del cliente">
+                                <div class="invalid-feedback">Digite un nombre valido</div>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <input type="email" id="emailC" class="form-control" required="" placeholder="Correo del cliente" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                <div class="invalid-feedback">Digite un correo valido</div>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <input type="text" id="telC" class="form-control" required="" placeholder="Número del cliente" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                <div class="invalid-feedback">Digite un número valido</div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="form-group col-md-8">
+                                <input type="text" id="nameR" class="form-control" required="" placeholder="Nombre del representante">
+                                <div class="invalid-feedback">Digite un nombre valido</div>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <input type="email" id="emailR" class="form-control" required="" placeholder="Correo del representante" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                <div class="invalid-feedback">Digite un correo valido</div>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <input type="text" id="telR" class="form-control" required="" placeholder="Número del representante" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                <div class="invalid-feedback">Digite un número valido</div>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Button -->
-                    <div class="form-group">
-                        <div class="botones">
-                            <button id="submit" name="submit" class="button" type="submit">Guardar</button>
-                            <button id="reset" name="reset" class="button" type="reset">Reset</button>
-                        </div>
+                    <div class="botones">
+                        <button id="submit" name="submit" class="button" type="submit">Guardar</button>
+                        <button id="reset" name="reset" class="button" type="reset">Reset</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-
-    </fieldset>
-</form>
+    </div>
+</body>
 
 <script>
-    function popUp() {
-        alert("Los datos fueron registrados");
-    }
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                alert("Los datos fueron registrados");
+            }, false);
+            });
+        }, false);
+    })();
 </script>

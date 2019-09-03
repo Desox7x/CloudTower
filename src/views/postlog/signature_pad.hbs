@@ -38,8 +38,6 @@
                 case "blue":
                     x = "blue";
                     break;
-                case "red":
-                    x = "red";
             }
             y = 2;
         
@@ -108,11 +106,10 @@
 
 
 <body id="try1" onload="init()">
-    <canvas id="can" width="400" height="290" style="position: fixed; top: 170px; left: 470px; border: 1px solid; border-radius: 4px; background-color: #fff"></canvas>
+    <canvas id="can" width="400" height="290" style="position: fixed; top: 170px; left: 470px; border: 1px solid #e3e0cc; border-radius: 4px; background-color: #fff"></canvas>
     <div style="position: absolute; top: 100px; left: 615px;">Escoja un color:</div>    
-    <div style="position: absolute; top: 130px; left: 640px; width: 15px; height: 15px; background:black;" id="black" onclick="color(this)"></div>
-    <div style="position: absolute; top: 130px; left: 660px; width: 15px; height: 15px; background:blue;" id="blue" onclick="color(this)"></div>
-    <div style="position: absolute; top: 130px; left: 680px; width: 15px; height: 15px; background:red;" id="red" onclick="color(this)"></div>
+    <div style="position: absolute; top: 130px; left: 650px; width: 15px; height: 15px; background: #000;" id="black" onclick="color(this)"></div>
+    <div style="position: absolute; top: 130px; left: 670px; width: 15px; height: 15px; background: #4169e1;" id="blue" onclick="color(this)"></div>
     <image id="img" src=""></image>
     <button onclick="save()" style="position: fixed; bottom: 150px; left: 490px">Save</button>
     <button onclick="erase()" style="position: fixed; bottom: 150px; left: 800px">Clear</button>
