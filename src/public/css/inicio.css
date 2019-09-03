@@ -1,0 +1,16 @@
+.carousel-item {
+    position: fixed;
+}
+
+.carousel-caption {
+    margin-bottom: 30%;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 50px, 100px;
+
+}
+.carousel-caption h5 {
+    font-size: 45px;
+}
+.carousel-caption p {
+    font-size: 15px;
+}

@@ -5,9 +5,7 @@ background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+
 font-family: 'Nunito';
 overflow: auto;
 }
-.carousel-inner {
-    position: fixed;
-}
+
 footer {
     position: absolute;
     bottom: 0;

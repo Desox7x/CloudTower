@@ -1,5 +1,5 @@
 
-#imgas img {
+/* #imgas img {
     position:absolute;
     left:-65px;
     top:0;
@@ -34,4 +34,9 @@
 #i3 {
     animation-delay: -4s;
 
+} */
+
+#carrusel {
+    width: 50vw;
+    position: fixed;
 }
