@@ -1,27 +1,52 @@
 <link rel="stylesheet" href="/css/tel.css">
-{{!--
+<style>
+    #carrusel {
+    width: 50vw;
+    position: fixed;
+}
+    .btn-lg {
+        margin: 20%;
+        width: 10rem;
+    }
+</style>
 <div class="container-fluid">
     <div class="row">
-        <div id= "imgas" class="col">
-            <img id='i2' src="./img/building.jpg" alt="Building" width="790" height="630">
-            <img id='i3' src="./img/building2.jpg" alt="Building2" width="790" height="630">
-            <img id='i1' src="./img/building3.jpg" alt="Building3" width="790" height="630">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" 
+            data-ride="carousel" data-interval="5000">
+            <div class="carousel-inner" id="carrusel">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="./img/building.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="./img/building4.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="./img/treebuilding.jpg" alt="Third slide">
+                </div>
+            </div>
         </div>
-    </div> 
+    </div>
 </div>
---}}
-<main class="inicio">
-    <header class="masthead d-flex">
+<div class="container p-4">
+    <div class="row align-items-start">
+        <div class="col-md-3 ml-auto">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fas fa-users"> Cliente</i>
+            </button>
 
-        <div class="container p-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="dropdown">
-                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Registro de Clientes
-                        </button>
-                        <div class="card-body dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <!-- Modal -->
+            <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header  bg-primary text-white">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Registrarse</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
                             <form action="/signup" method="POST">
                                 <div class="form-group">
                                     <input type="text" name="fullname" placeholder="Nombre Completo"
@@ -49,104 +74,117 @@
                                     </button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="dropdown">
-                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Registro de Inmobiliaria
-                        </button>
-                        <div class="card-body dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <form action="/" method="POST">
-                                <div class="form-group">
-                                    <input type="text" name="fullname" placeholder="Nombre Completo"
-                                        class="form-control" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" name="telefono" placeholder="Número de Telefono"
-                                        class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                                    <span class="note"> Formato: XXX-XXX-XXXX </span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" name="correo" placeholder="Correo Electrónico"
-                                        class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="direccion" placeholder="Dirección" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="sector" placeholder="Sector" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" name="Cedula" placeholder="Cedula" class="form-control" required
-                                        pattern="[0-9]{3}-[0-9]{7}-[0-9]{1}">
-                                    <span class="note"> Formato: XXX-XXXXXXX-X </span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" placeholder="Contraseña"
-                                        class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-block">
-                                        Registrarse
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="dropdown">
-                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Registro de Constructora
-                        </button>
-                        <div class="card-body dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <form action="/" method="POST">
-                                <div class="form-group">
-                                    <input type="text" name="fullname" placeholder="Nombre Completo"
-                                        class="form-control" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" name="telefono" placeholder="Número de Telefono"
-                                        class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                                    <span class="note"> Formato: XXX-XXX-XXXX </span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" name="correo" placeholder="Correo Electrónico"
-                                        class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="direccion" placeholder="Dirección" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="sector" placeholder="Sector" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" name="Cedula" placeholder="Cedula" class="form-control" required
-                                        pattern="[0-9]{3}-[0-9]{7}-[0-9]{1}">
-                                    <span class="note"> Formato: XXX-XXXXXXX-X </span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" placeholder="Contraseña"
-                                        class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-block">
-                                        Registrarse
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-
-
             </div>
         </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-md-3 ml-auto">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fas fa-hotel"> Inmobiliaria</i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header  bg-primary text-white">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Registrarse</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/signup" method="POST">
+                                <div class="form-group">
+                                    <input type="text" name="fullname" placeholder="Nombre Completo"
+                                        class="form-control" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="telefono" placeholder="Número de Telefono"
+                                        class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                    <span class="note"> Formato: XXX-XXX-XXXX </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="correo" placeholder="Correo Electrónico"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Contraseña"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">
+                                        Registrarse
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
-</main>
+    </div>
+    <div class="row align-items-end">
+        <div class="col-md-3 ml-auto">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fas fa-pencil-ruler"> Constructora</i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header  bg-primary text-white">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Registrarse</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/signup" method="POST">
+                                <div class="form-group">
+                                    <input type="text" name="fullname" placeholder="Nombre Completo"
+                                        class="form-control" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="telefono" placeholder="Número de Telefono"
+                                        class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                    <span class="note"> Formato: XXX-XXX-XXXX </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="correo" placeholder="Correo Electrónico"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Contraseña"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">
+                                        Registrarse
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

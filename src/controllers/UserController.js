@@ -19,4 +19,10 @@ ctrl.uploadPOST = async (req, res) => {
     res.redirect('/profile');
 };
 
+ctrl.updateUser = async (req, res) => {
+    await DB.updateUserInfo(req.body.fullname, req.body.descripcion, req.body.telefono, req.body.direccion, req.user.idEntidad);
+    res.redirect('/profile')
+    console.log(req.body)
+};
+
 module.exports = ctrl;

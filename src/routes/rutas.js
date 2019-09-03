@@ -18,6 +18,7 @@ router.get('/dashboard', user.dashboard);
 router.get('/contract', user.contract);
 router.get('/contract', user.signaturePad);
 router.post('/upload', user.uploadPOST);
+router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', user.signaturePad);
 
 
