@@ -17,11 +17,11 @@ ctrl.dashboard = (req, res) => {
 }
 
 ctrl.inmobiliariaOnly = (req, res) => {
-    if(req.user.idTipoEntidad == 2){
-        return res.send('AYEE');
-    }
-    res.status(403).send('Forbidden');
-    
+    // if(req.user.idTipoEntidad == 2){
+    //     return res.send('AYEE');
+    // }
+    // res.status(403).send('Forbidden');
+    return res.send('AYEE');
 }
 
 ctrl.contract = (req, res) => {
