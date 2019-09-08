@@ -1,3 +1,8 @@
+<style>
+    #card2 {
+        margin: 5%;
+    }
+</style>
 <div class="container p-4">
     <div class="row">
         <div class="col-md-4">
@@ -7,25 +12,33 @@
 
 
                     <div class="card-body">
-                        
-
-
-                    </div>
-
-                    <div class="nav-item dropdown active">
-                        <a class="navdivink dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Cambiar imagen
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <form action="/upload" method="POST" enctype="multipart/form-data">
-                                <input type="file" name="image">
-                                <button type="btn btn-success">
-                                    Upload
-                                </button>
-                            </form>
+                        <div class="nav-item dropdown active">
+                            <a class="navdivink dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cambiar imagen
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <form action="/upload" method="POST" enctype="multipart/form-data">
+                                    <input type="file" name="image">
+                                    <button type="btn btn-success">
+                                        Upload
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
+
+
+                </div>
+            </div>
+            <div class="card" id="card2">
+                <div class="card-header">
+                    <li>Empleos</li>
+                </div>
+            </div>
+            <div class="card" id="card2">
+                <div class="card-header">
+                    <li>Habilidades</li>
                 </div>
             </div>
         </div>
@@ -52,7 +65,7 @@
                     <h3 class="card-title text-white">
                         Informacion
 
-                        
+
 
                     </h3>
 
