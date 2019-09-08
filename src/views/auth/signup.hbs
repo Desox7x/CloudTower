@@ -33,13 +33,13 @@
     <div class="row align-items-start">
         <div class="col-md-3 ml-auto">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ClienteModal">
                 <i class="fas fa-users"> Cliente</i>
             </button>
 
             <!-- Modal -->
-            <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade " id="ClienteModal" tabindex="-1" role="dialog"
+                aria-labelledby="ClienteModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header  bg-primary text-white">
@@ -50,6 +50,7 @@
                         </div>
                         <div class="modal-body">
                             <form action="/signup" method="POST">
+                            <input type="hidden" name="entidad" value="1">
                                 <div class="form-group">
                                     <input type="text" name="fullname" placeholder="Nombre Completo"
                                         class="form-control" autofocus>
@@ -86,13 +87,13 @@
     <div class="row align-items-center">
         <div class="col-md-3 ml-auto">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#InmobiliariaModal">
                 <i class="fas fa-hotel"> Inmobiliaria</i>
             </button>
 
             <!-- Modal -->
-            <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade " id="InmobiliariaModal" tabindex="-1" role="dialog"
+                aria-labelledby="InmobiliariaModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header  bg-primary text-white">
@@ -103,6 +104,7 @@
                         </div>
                         <div class="modal-body">
                             <form action="/signup" method="POST">
+                            <input type="hidden" name="entidad" value="2">
                                 <div class="form-group">
                                     <input type="text" name="fullname" placeholder="Nombre Completo"
                                         class="form-control" autofocus>
@@ -139,13 +141,13 @@
     <div class="row align-items-end">
         <div class="col-md-3 ml-auto">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ConstructoraModal">
                 <i class="fas fa-pencil-ruler"> Constructora</i>
             </button>
 
             <!-- Modal -->
-            <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade " id="ConstructoraModal" tabindex="-1" role="dialog"
+                aria-labelledby="ConstructoraModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header  bg-primary text-white">
@@ -156,6 +158,7 @@
                         </div>
                         <div class="modal-body">
                             <form action="/signup" method="POST">
+                            <input type="hidden" name="entidad" value="3">
                                 <div class="form-group">
                                     <input type="text" name="fullname" placeholder="Nombre Completo"
                                         class="form-control" autofocus>
