@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const a = require('../lib/auth');
 
 const home = require('../controllers/HomeController');
 const user = require('../controllers/UserController');
@@ -10,16 +11,19 @@ const auth = require('../controllers/AuthController');
 router.get('/', home.index);
 router.get('/about', home.about);
 router.get('/contact', home.contact);
-router.get('/profile', home.profile);
+router.get('/profile', a.isLoggedIn, home.profile);
 
 
 // =========== USER ================
-router.get('/dashboard', user.dashboard);
+router.get('/dashboard', a.isLoggedIn, user.dashboard);
 router.get('/contract', user.contract);
-router.get('/contract', user.signaturePad);
+// router.get('/contract', user.signaturePad);
 router.post('/upload', user.uploadPOST);
 router.post('/updateuser', user.updateUser);
-router.get('/signature_pad', user.signaturePad);
+router.get('/signature_pad', a.isLoggedIn, user.signaturePad);
+
+
+router.get('/lmao', user.inmobiliariaOnly)
 
 
 // =========== AUTH =================
