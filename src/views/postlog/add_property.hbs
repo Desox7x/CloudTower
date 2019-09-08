@@ -1,0 +1,204 @@
+<style>
+    .btn{
+        background-color: #6495ed;
+        border:none;
+        border-radius: 4px;
+        color: #FFF;
+        width: 200px;
+        height: 50px;
+        padding: 15px 25px;
+        font-size: 16px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .btn:hover{
+        background-color: #4682b4;
+    }
+
+    h2, label, small, p{
+        font-family: "Book Antiqua";
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col">
+                <h2>Agregar un inmueble:</h2>
+                <form onsubmit="return submitResult()" class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control" id="name" placeholder="Ej. Las Damas II" required>
+                            <div class="invalid-feedback">Digite un nombre válido</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="desc">Descripción</label>
+                            <textarea name="desc" id="desc" class="form-control" rows="4" placeholder="Ej. Amarillo, cerca de tienda x, etc." required></textarea>
+                            <div class="invalid-feedback">Digite una descripción válida</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="location">Ubicación</label>
+                            <select name="location" id="location" class="custom-select" required>
+                                <option value="">Escoja...</option>
+                                <option value="1">Santo Domingo Este</option>
+                                <option value="2">Santo Domingo Norte</option>
+                                <option value="3">Santo Domingo Oeste</option>
+                                <option value="4">Distrito Nacional</option>
+                            </select>
+                            <small>Por cambiar</small>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="realtyType">Tipo de inmueble</label>
+                            <select name="realtyType" id="realtyType" class="custom-select" required>
+                                <option value="">Escoja...</option>
+                                <option value="1">Casa</option>
+                                <option value="2">Villa</option>
+                                <option value="3">Solar</option>
+                                <option value="4">Finca</option>
+                                <option value="5">Nave</option>
+                                <option value="6">Local comercial</option>
+                                <option value="7">Edificio</option>
+                                <option value="8">Apartamento</option>
+                                <option value="9">Penthouse</option>
+                                <option value="10">Local de oficina</option>
+                            </select>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="img">Seleccione una o más imagenes</label>
+                            <input id="img" type="file" multiple required>
+                            <div class="invalid-feedback">Seleccione un archivo válido</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <p>El inmueble está en:</p>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="radio1" name="radio-stacked" value="1" required>
+                                <label class="custom-control-label" for="radio1">Venta</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3">
+                                <input type="radio" class="custom-control-input" id="radio2" name="radio-stacked" value="2" required>
+                                <label class="custom-control-label" for="radio2">Alquiler</label>
+                                <div class="invalid-feedback">Selecione una opción válida</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="currency">Moneda utilizada</label>
+                            <select name="currency" id="currency" class="custom-select" required>
+                                <option value="">Escoja...</option>
+                                <option value="1">USD</option>
+                                <option value="2">DOP</option>
+                            </select>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="price">Precio</label>
+                            <input type="number" class="form-control" id="price" name="price" required="">
+                            <div class="invalid-feedback">Digite un precio válido</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="meters">Metraje</label>
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="append">m²</span>
+                                </div>
+                                <input type="number" class="form-control" id="meters" placeholder="número de metros cuadrados" required>
+                                <div class="invalid-feedback">Digite un número válido</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="room">Habitaciones</label>
+                            <input type="number" class="form-control" id="room" placeholder="número de habitaciones">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="bath">Baños</label>
+                            <input type="number" class="form-control" id="bath" placeholder="número de baños">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <p>Parqueo:</p>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="radio3" name="radio-stacked" value="3">
+                                <label class="custom-control-label" for="radio3">Sí</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3">
+                                <input type="radio" class="custom-control-input" id="radio4" name="radio-stacked" value="4">
+                                <label class="custom-control-label" for="radio4">No</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p>Línea blanca:</p>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="radio5" name="radio-stacked" value="5">
+                                <label class="custom-control-label" for="radio5">Sí</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3">
+                                <input type="radio" class="custom-control-input" id="radio6" name="radio-stacked" value="6">
+                                <label class="custom-control-label" for="radio6">No</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p>Amueblado:</p>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="radio7" name="radio-stacked" value="7">
+                                <label class="custom-control-label" for="radio7">Sí</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3">
+                                <input type="radio" class="custom-control-input" id="radio8" name="radio-stacked" value="8">
+                                <label class="custom-control-label" for="radio8">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+            });
+        }, false);
+    })();
+</script>
+<script>
+    function submitResult(){
+        if(confirm("¿Quiere proceder con los cambios?") == false){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+</script>

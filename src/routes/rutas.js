@@ -17,6 +17,7 @@ router.get('/profile', home.profile);
 router.get('/dashboard', user.dashboard);
 router.get('/contract', user.contract);
 router.get('/contract', user.signaturePad);
+router.get('/add_property', user.addProperty);
 router.post('/upload', user.uploadPOST);
 router.get('/signature_pad', user.signaturePad);
 
