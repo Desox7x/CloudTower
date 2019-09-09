@@ -1,4 +1,5 @@
 const passport = require('passport');
+const DB = require('../lib/DBData')
 
 const ctrl = {}
 
