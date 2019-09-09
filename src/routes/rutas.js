@@ -23,7 +23,8 @@ router.get('/profile', isLoggedIn, home.profile);
 // =========== USER ================
 router.get('/dashboard', isLoggedIn, user.dashboard);
 router.get('/contract', user.contract);
-// router.get('/contract', user.signaturePad);
+//router.get('/contract', user.signaturePad);
+router.get('/add_property', user.addProperty);
 router.post('/upload', user.uploadPOST);
 router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
