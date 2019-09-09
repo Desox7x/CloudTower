@@ -2,7 +2,26 @@ const DB = require('../lib/DBData')
 const ctrl = {}
 
 ctrl.dashboard = (req, res) => {
-    res.render('postlog/dashboard');
+
+    if (req.user.idTipoEntidad == 1) {
+        return res.render('postlog/dashboard/cliente');
+    }
+    if (req.user.idTipoEntidad == 2) {
+        return res.render('postlog/dashboard/inmobiliaria');
+    }
+    if (req.user.idTipoEntidad == 3) {
+        return res.render('postlog/dashboard/constructora');
+    }
+
+    res.status(403).send('Forbideen');
+}
+
+ctrl.inmobiliariaOnly = (req, res) => {
+    // if(req.user.idTipoEntidad == 2){
+    //     return res.send('AYEE');
+    // }
+    // res.status(403).send('Forbidden');
+    return res.send('AYEE');
 }
 
 ctrl.contract = (req, res) => {
@@ -13,9 +32,13 @@ ctrl.signaturePad = (req, res) => {
     res.render('postlog/signature_pad');
 }
 
+ctrl.addProperty = (req, res) => {
+    res.render('postlog/add_property');
+}
+
 ctrl.uploadPOST = async (req, res) => {
 
-    await DB.updateUserImg(req.file.filename, req.user.idEntidad );
+    await DB.updateUserImg(req.file.filename, req.user.idEntidad);
     res.redirect('/profile');
 };
 
