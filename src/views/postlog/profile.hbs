@@ -4,53 +4,62 @@
             <div class="card text-center">
                 <div class="card-header bg-light">
                     <img src="uploads/{{ user.idImg }}" alt="" class="w-100 h-100 img-thumbnail">
-                    
-                    
+
+
                     <div class="card-body">
                         
 
+
                     </div>
-                    
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+
+                    <div class="nav-item dropdown active">
+                        <a class="navdivink dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Cambiar imagen
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <form action="/upload" method="POST" enctype="multipart/form-data">
                                 <input type="file" name="image">
-                                <button type="Submit">
+                                <button type="btn btn-success">
                                     Upload
                                 </button>
                             </form>
                         </div>
-                    </li>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-dark">
+                <div class="card-header bg-info">
                     <h3 class="card-title text-white">
-                        {{user.fullname}} 
+                        {{user.fullname}}
+                        <button type="button" class="btn btn-secondary float-right" data-toggle="modal"
+                            data-target="#exampleModalCenter">Edit</button>
+                        {{> editwin}}
                     </h3>
-                    
+
                 </div>
                 <div class="card-body">
                     <h4 class="text-primary">
-                        ***Trabajo***
+                        <li>{{user.descripcion}}</li>
                     </h4>
                 </div>
             </div>
             <br>
             <div class="card">
-                <div class="card-header bg-dark">
+                <div class="card-header bg-info">
                     <h3 class="card-title text-white">
                         Informacion
+
+                        
+
                     </h3>
-                    
+
+
                 </div>
-                
+
+
                 <div class="card-body">
                     <h5 class="text-primary">
                         Telefono: {{user.telefono}}
@@ -58,13 +67,15 @@
                         Direccion: {{user.direccion}}
                         <br>
                         Correo: {{user.correo}}
-                        <br>
-                        Fecha de Nacimiento: 00/00/00
+
+
                     </h5>
+
                 </div>
+
             </div>
-            
-            
+
+
 
 
         </div>
