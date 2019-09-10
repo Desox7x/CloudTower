@@ -1,5 +1,6 @@
 const DB = require('../database');
 
+
 module.exports = {
 
     async getAllUsers() {
@@ -14,22 +15,53 @@ module.exports = {
         return data;
     },
 
-    async updateUserImg(img, id){
-        console.log(img,id)
-        let data = await DB.query("UPDATE entidad SET idImg = ? WHERE idEntidad = ? ", [img,id]);
+    async updateUserImg(img, id) {
+        console.log(img, id)
+        let data = await DB.query("UPDATE entidad SET idImg = ? WHERE idEntidad = ? ", [img, id]);
         console.log(data)
     },
 
-    async updateUserInfo(name,desc,tel, dir, id) {
-        console.log(name,desc,tel,dir,id);
-        let data = await DB.query("UPDATE entidad SET fullname = ?, descripcion = ?, telefono = ?, direccion = ? WHERE idEntidad = ? ", [name,desc,tel,dir,id]);
+    async updateUserInfo(name, desc, tel, dir, id) {
+        console.log(name, desc, tel, dir, id);
+        let data = await DB.query("UPDATE entidad SET fullname = ?, descripcion = ?, telefono = ?, direccion = ? WHERE idEntidad = ? ", [name, desc, tel, dir, id]);
         console.log(data);
     },
 
-    async getUserTipoEntidad(id){
-        let data = await DB.query('SELECT idTipoEntidad FROM entidad WHERE idEntidad = ?',[id]);
+    async getUserTipoEntidad(id) {
+        let data = await DB.query('SELECT idTipoEntidad FROM entidad WHERE idEntidad = ?', [id]);
         console.log(data);
         return data;
+    },
+
+    async getAllInmuebles() {
+        let data = await DB.query('SELECT * FROM addInmueble')
+        return data;
+    },
+
+    async addInmueble(name, desc, ubic, tipo, img, compra,
+     moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, id) {
+        const newInmo = {
+            name,
+            desc,
+            ubic,
+            tipo,
+            img,
+            compra,
+            moneda,
+            precio,
+            metro,
+            hab,
+            bath,
+            parqueo,
+            lblanca,
+            amueblado,
+            id
+     };
+        
+        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, img = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idInm = ?', [name, desc, ubic, tipo, img, compra,
+            moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, id]);
+        console.log(data);
+        
     }
 
 

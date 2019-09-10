@@ -1,0 +1,20 @@
+<div class="container p-4">
+    <div class="row">
+        {{#each data}}
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-head">
+                        {{!-- <img src={{img}} alt="" class="w-100 h-100 img-thumbnail"> --}}
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{nombre}}</h3>
+                        <p class="m-2">{{descr}}</p>
+                        <p class="m-2">
+                            <h4>Metros cuadrados: {{metro}}²</h4>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

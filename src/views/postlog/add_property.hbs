@@ -92,20 +92,20 @@
         <div class="row justify-content-md-center">
             <div class="col">
                 <h2>Agregar un inmueble:</h2>
-                <form onsubmit="return submitResult()" class="needs-validation" novalidate>
+                <form action="/add_property" method="POST">
                     <!-- Basic information -->
                     <div class="form-row align-items-center">
                         <!-- Name -->
                         <div class="form-group col-md-5">
                             <label for="name">Nombre</label>
-                            <input type="text" class="form-control" id="name" placeholder="Ej. Las Damas II" required>
+                            <input name="nombre" type="text" class="form-control" id="name" placeholder="Ej. Las Damas II" required>
                             <div class="invalid-feedback">Digite un nombre válido</div>
                         </div>
 
                         <!-- Description -->
                         <div class="form-group col-md-4">
                             <label for="desc">Descripción</label>
-                            <textarea name="desc" id="desc" class="form-control" rows="4" placeholder="Ej. Amarillo, cerca de tienda x, etc." required></textarea>
+                            <textarea name="descr" id="desc" class="form-control" rows="4" placeholder="Ej. Amarillo, cerca de tienda x, etc." required></textarea>
                             <div class="invalid-feedback">Digite una descripción válida</div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                         <!-- Location; subject to change -->
                         <div class="form-group col-md-3">
                             <label for="location">Ubicación</label>
-                            <select name="location" id="location" class="custom-select" required>
+                            <select name="ubic" id="location" class="custom-select" required>
                                 <option value="">Escoja...</option>
                                 <option value="1">Santo Domingo Este</option>
                                 <option value="2">Santo Domingo Norte</option>
@@ -129,7 +129,7 @@
                         <!-- Type of property -->
                         <div class="form-group col-md-3">
                             <label for="realtyType">Tipo de inmueble</label>
-                            <select name="realtyType" id="realtyType" class="custom-select" required>
+                            <select name="tipoInm" id="realtyType" class="custom-select" required>
                                 <option value="">Escoja...</option>
                                 <option value="1">Casa</option>
                                 <option value="2">Villa</option>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="img">Seleccione una o más imagenes</label>
-                            <input id="img" type="file" multiple required>
+                            <input name="img" id="img" type="file" multiple required>
                             <div class="invalid-feedback">Seleccione un archivo válido</div>
                         </div>
                     </div>
@@ -157,11 +157,11 @@
                         <div class="form-group col-md-3">
                             <p>El inmueble está en:</p>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="radio1" name="radio-stacked" value="1" required>
+                                <input type="radio" class="custom-control-input" id="radio1" name="compra" value="1" required>
                                 <label class="custom-control-label" for="radio1">Venta</label>
                             </div>
                             <div class="custom-control custom-radio mb-3">
-                                <input type="radio" class="custom-control-input" id="radio2" name="radio-stacked" value="2" required>
+                                <input type="radio" class="custom-control-input" id="radio2" name="compra" value="2" required>
                                 <label class="custom-control-label" for="radio2">Alquiler</label>
                                 <div class="invalid-feedback">Selecione una opción válida</div>
                             </div>
@@ -170,7 +170,7 @@
                         <!-- Currency type -->
                         <div class="form-group col-md-3">
                             <label for="currency">Moneda utilizada</label>
-                            <select name="currency" id="currency" class="custom-select" required>
+                            <select name="moneda" id="currency" class="custom-select" required>
                                 <option value="">Escoja...</option>
                                 <option value="1">USD</option>
                                 <option value="2">DOP</option>
@@ -181,7 +181,7 @@
                         <!-- Pricing -->
                         <div class="form-group col-md-3">
                             <label for="price">Precio</label>
-                            <input type="number" class="form-control" id="price" name="price" required="">
+                            <input type="number" class="form-control" id="price" name="precio" required="">
                             <div class="invalid-feedback">Digite un precio válido</div>
                         </div>
                     </div>
@@ -195,7 +195,7 @@
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="append">m²</span>
                                 </div>
-                                <input type="number" class="form-control" id="meters" placeholder="número de metros cuadrados" required>
+                                <input name="metro" type="number" class="form-control" id="meters" placeholder="número de metros cuadrados" required>
                                 <div class="invalid-feedback">Digite un número válido</div>
                             </div>
                         </div>
@@ -203,13 +203,13 @@
                         <!-- Number of rooms -->
                         <div class="form-group col-md-3">
                             <label for="room">Habitaciones</label>
-                            <input type="number" class="form-control" id="room" placeholder="número de habitaciones">
+                            <input name="hab" type="number" class="form-control" id="room" placeholder="número de habitaciones">
                         </div>
 
                         <!-- Number of bathrooms -->
                         <div class="form-group col-md-3">
                             <label for="bath">Baños</label>
-                            <input type="number" class="form-control" id="bath" placeholder="número de baños">
+                            <input name="bano" type="number" class="form-control" id="bath" placeholder="número de baños">
                         </div>
                     </div>
 
@@ -219,11 +219,11 @@
                         <div class="form-group col-md-3">
                             <p>Parqueo:</p>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="radio3" name="radio-stacked" value="3">
+                                <input type="radio" class="custom-control-input" id="radio3" name="parqueo" value="3">
                                 <label class="custom-control-label" for="radio3">Sí</label>
                             </div>
                             <div class="custom-control custom-radio mb-3">
-                                <input type="radio" class="custom-control-input" id="radio4" name="radio-stacked" value="4">
+                                <input type="radio" class="custom-control-input" id="radio4" name="parqueo" value="4">
                                 <label class="custom-control-label" for="radio4">No</label>
                             </div>
                         </div>
@@ -232,11 +232,11 @@
                         <div class="form-group col-md-3">
                             <p>Línea blanca:</p>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="radio5" name="radio-stacked" value="5">
+                                <input type="radio" class="custom-control-input" id="radio5" name="lBlanca" value="5">
                                 <label class="custom-control-label" for="radio5">Sí</label>
                             </div>
                             <div class="custom-control custom-radio mb-3">
-                                <input type="radio" class="custom-control-input" id="radio6" name="radio-stacked" value="6">
+                                <input type="radio" class="custom-control-input" id="radio6" name="lBlanca" value="6">
                                 <label class="custom-control-label" for="radio6">No</label>
                             </div>
                         </div>
@@ -245,18 +245,18 @@
                         <div class="form-group col-md-3">
                             <p>Amueblado:</p>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="radio7" name="radio-stacked" value="7">
+                                <input type="radio" class="custom-control-input" id="radio7" name="amueblado" value="7">
                                 <label class="custom-control-label" for="radio7">Sí</label>
                             </div>
                             <div class="custom-control custom-radio mb-3">
-                                <input type="radio" class="custom-control-input" id="radio8" name="radio-stacked" value="8">
+                                <input type="radio" class="custom-control-input" id="radio8" name="amueblado" value="8">
                                 <label class="custom-control-label" for="radio8">No</label>
                             </div>
                         </div>
                     </div>
 
                     <!-- Address -->
-                    <div class="form-row">
+                    {{!-- <div class="form-row">
                         <div class="form-group col-md-6">
                             <div id="locationField">
                                 <!-- search bar for address -->
@@ -286,7 +286,7 @@
                                 </tr>
                             </table>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- Button -->                    
                     <div id="button" class="form-group col align-self-center">
