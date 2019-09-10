@@ -36,6 +36,14 @@ ctrl.addProperty = (req, res) => {
     res.render('postlog/add_property');
 }
 
+ctrl.search = (req, res) => {
+    res.render('postlog/search');
+}
+
+ctrl.searchResult = (req, res) => {
+    res.render('postlog/searchResult');
+}
+
 ctrl.uploadPOST = async (req, res) => {
 
     await DB.updateUserImg(req.file.filename, req.user.idEntidad);

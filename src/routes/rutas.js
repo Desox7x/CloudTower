@@ -26,6 +26,8 @@ router.get('/contract', user.contract);
 //router.get('/contract', user.signaturePad);
 router.get('/add_property', user.addProperty);
 router.post('/upload', user.uploadPOST);
+router.get('/search', user.search);
+router.get('/searchResult', user.searchResult);
 router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
 
