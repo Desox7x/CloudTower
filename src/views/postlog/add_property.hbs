@@ -1,4 +1,11 @@
+<!-- CSS -->
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 <style>
+    .container-fluid{
+        padding-left: 20%;
+        padding-top: 1%;
+    }
+
     .btn{
         background-color: #6495ed;
         border:none;
@@ -19,29 +26,93 @@
     h2, label, small, p{
         font-family: "Book Antiqua";
     }
+
+    #button{
+        display: flex;
+        justify-content: center;
+        padding-right: 25%;
+    }
+
+    #map {
+        height: 100%;
+    }
+
+    #locationField, #controls {
+        position: relative;
+        width: 480px;
+    }
+
+    #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+    }
+    
+    .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+        font-family: "Roboto";
+    }
+    
+    #address {
+        border: 1px solid #000090;
+        background-color: #f0f9ff;
+        width: 480px;
+        padding-right: 2px;
+    }
+    
+    #address td {
+        font-size: 10pt;
+    }
+    
+    .field {
+        width: 99%;
+    }
+    
+    .slimField {
+        width: 80px;
+    }
+    
+    .wideField {
+        width: 200px;
+    }
+    
+    #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+    }
 </style>
 
+<!-- BODY -->
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-md-center">
             <div class="col">
                 <h2>Agregar un inmueble:</h2>
                 <form onsubmit="return submitResult()" class="needs-validation" novalidate>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                    <!-- Basic information -->
+                    <div class="form-row align-items-center">
+                        <!-- Name -->
+                        <div class="form-group col-md-5">
                             <label for="name">Nombre</label>
                             <input type="text" class="form-control" id="name" placeholder="Ej. Las Damas II" required>
                             <div class="invalid-feedback">Digite un nombre válido</div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+
+                        <!-- Description -->
+                        <div class="form-group col-md-4">
                             <label for="desc">Descripción</label>
                             <textarea name="desc" id="desc" class="form-control" rows="4" placeholder="Ej. Amarillo, cerca de tienda x, etc." required></textarea>
                             <div class="invalid-feedback">Digite una descripción válida</div>
                         </div>
                     </div>
+
+                    <!-- Location and type of property -->
                     <div class="form-row">
+                        <!-- Location; subject to change -->
                         <div class="form-group col-md-3">
                             <label for="location">Ubicación</label>
                             <select name="location" id="location" class="custom-select" required>
@@ -54,6 +125,8 @@
                             <small>Por cambiar</small>
                             <div class="invalid-feedback">Escoja una opción válida</div>
                         </div>
+
+                        <!-- Type of property -->
                         <div class="form-group col-md-3">
                             <label for="realtyType">Tipo de inmueble</label>
                             <select name="realtyType" id="realtyType" class="custom-select" required>
@@ -77,7 +150,10 @@
                             <div class="invalid-feedback">Seleccione un archivo válido</div>
                         </div>
                     </div>
+
+                    <!-- Type of sale and pricing -->
                     <div class="form-row">
+                        <!-- Type of sale; binary answer -->
                         <div class="form-group col-md-3">
                             <p>El inmueble está en:</p>
                             <div class="custom-control custom-radio">
@@ -90,6 +166,8 @@
                                 <div class="invalid-feedback">Selecione una opción válida</div>
                             </div>
                         </div>
+
+                        <!-- Currency type -->
                         <div class="form-group col-md-3">
                             <label for="currency">Moneda utilizada</label>
                             <select name="currency" id="currency" class="custom-select" required>
@@ -99,13 +177,18 @@
                             </select>
                             <div class="invalid-feedback">Escoja una opción válida</div>
                         </div>
+
+                        <!-- Pricing -->
                         <div class="form-group col-md-3">
                             <label for="price">Precio</label>
                             <input type="number" class="form-control" id="price" name="price" required="">
                             <div class="invalid-feedback">Digite un precio válido</div>
                         </div>
                     </div>
+
+                    <!-- Metrics and number of rooms -->
                     <div class="form-row">
+                        <!-- Metrics field -->
                         <div class="form-group col-md-3">
                             <label for="meters">Metraje</label>
                             <div class="input-group">
@@ -116,16 +199,23 @@
                                 <div class="invalid-feedback">Digite un número válido</div>
                             </div>
                         </div>
+
+                        <!-- Number of rooms -->
                         <div class="form-group col-md-3">
                             <label for="room">Habitaciones</label>
                             <input type="number" class="form-control" id="room" placeholder="número de habitaciones">
                         </div>
+
+                        <!-- Number of bathrooms -->
                         <div class="form-group col-md-3">
                             <label for="bath">Baños</label>
                             <input type="number" class="form-control" id="bath" placeholder="número de baños">
                         </div>
                     </div>
+
+                    <!-- Radio elements -->
                     <div class="form-row">
+                        <!-- Parking lots; binary answer -->
                         <div class="form-group col-md-3">
                             <p>Parqueo:</p>
                             <div class="custom-control custom-radio">
@@ -137,6 +227,8 @@
                                 <label class="custom-control-label" for="radio4">No</label>
                             </div>
                         </div>
+
+                        <!-- White goods; binary answer -->
                         <div class="form-group col-md-3">
                             <p>Línea blanca:</p>
                             <div class="custom-control custom-radio">
@@ -148,6 +240,8 @@
                                 <label class="custom-control-label" for="radio6">No</label>
                             </div>
                         </div>
+
+                        <!-- Furniture; binary answer -->
                         <div class="form-group col-md-3">
                             <p>Amueblado:</p>
                             <div class="custom-control custom-radio">
@@ -161,10 +255,44 @@
                         </div>
                     </div>
 
-                    <!-- Button -->
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <!-- Address -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div id="locationField">
+                                <!-- search bar for address -->
+                                <input type="text" id="autocomplete" onfocus="geolocate()" placeholder="Digite la ubicación" required>
+                                <div class="invalid-feedback">Digite una ubicación válida</div>                                
+                            </div>
+                            <!-- address information table -->
+                            <table id="address" class="table">
+                                <tr>
+                                    <td class="label">Street address</td>
+                                    <td class="slimField"><input class="field" id="street_number" disabled="true"/></td>
+                                    <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="label">City</td>
+                                    <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="label">State</td>
+                                    <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"/></td>
+                                    <td class="label">Zip code</td>
+                                    <td class="wideField"><input class="field" id="postal_code" disabled="true"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Country</td>
+                                    <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
 
-                    
+                    <!-- Button -->                    
+                    <div id="button" class="form-group col align-self-center">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                                                            
                 </form>
             </div>
         </div>
@@ -172,6 +300,77 @@
 
 </body>
 
+
+<!-- SCRIPTS -->
+
+<!-- scripts for google maps api and location field -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSPhVtHOiuDE7eYZbF8zj22WAjHai4qM8&libraries=places&callback=initAutocomplete" async defer></script>
+
+<script>
+    var placeSearch, autocomplete;
+
+    var componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+    };
+
+    function initAutocomplete() {
+    // Create the autocomplete object, restricting the search predictions to
+    // geographical location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('autocomplete'), {types: ['geocode']});
+
+    // Avoid paying for data that you don't need by restricting the set of
+    // place fields that are returned to just the address components.
+    autocomplete.setFields(['address_component']);
+
+    // When the user selects an address from the drop-down, populate the
+    // address fields in the form.
+    autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+
+    for (var component in componentForm) {
+        document.getElementById(component).value = '';
+        document.getElementById(component).disabled = false;
+    }
+
+    // Get each component of the address from the place details,
+    // and then fill-in the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++) {
+        var addressType = place.address_components[i].types[0];
+        if (componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
+        }
+    }
+    }
+
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    function geolocate() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle(
+            {center: geolocation, radius: position.coords.accuracy});
+        autocomplete.setBounds(circle.getBounds());
+        });
+    }
+    }
+</script>
+
+<!-- script for validation of data -->
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
@@ -192,7 +391,10 @@
         }, false);
     })();
 </script>
+
+<!-- script for submit button -->
 <script>
+    //Validation function activates when clicking on save button
     function submitResult(){
         if(confirm("¿Quiere proceder con los cambios?") == false){
             return false;
