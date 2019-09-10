@@ -28,6 +28,8 @@ router.get('/contract', user.contract);
 router.get('/add_property', requireRole(InmobiliariaRole), user.addProperty);
 router.post('/add_property', user.addPropertyPOST);
 router.post('/upload', user.uploadPOST);
+router.get('/search', user.search);
+router.get('/searchResult', user.searchResult);
 router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
 
