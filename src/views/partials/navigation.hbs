@@ -1,16 +1,25 @@
 <style>
-  .navbar {
-    background: #00B4DB;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #0083B0, #00B4DB);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #0083B0, #00B4DB);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  .rounded-circle {
+    border-radius: 50% !important;
   }
+
+  .img-profile {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .navbar-search {
+    width: 25rem;
+  }
+
+  .navbar-search input {
+    font-size: 0.85rem;
+  }
+
+  #topheader {}
 </style>
 <div id="topheader">
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2980b9;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="/"><i class="fas fa-building"></i> CloudTower</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -21,6 +30,7 @@
       <li class="nav-item active">
         <a href="/about" class="nav-link"><i class="fas fa-child"></i> ¿Quienes somos?</a>
       </li>
+
     </ul>
 
 
@@ -30,26 +40,60 @@
       <ul class="navbar-nav ml-auto">
 
         {{#if user}}
-        <li class="nav-item active">
-          <a class="nav-link" href="/profile"><i class="fas fa-user-circle"></i> Perfil<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/contact"><i class="fas fa-envelope-open"></i> Contacto</a>
-        </li>
-        <li class="nav-item dropdown active">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+          <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+              aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button">
+                <i class="fas fa-search fa-sm"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="topbar-divider d-none d-sm-block"></div>
+        <li class="nav-item dropdown no-arrow active">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Acciones
+            <span class="mr-2 d-none d-lg-inline">{{user.fullname}}</span>
+            <img class="img-profile rounded-circle" src="uploads/{{user.idImg}}">
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/signature_pad">Registrar Firma</a>
-            <a class="dropdown-item" href="#">TBA</a>
-            <a class="dropdown-item" href="#">TBA</a>
+          <!-- Dropdown - User Information -->
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="/profile">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              Perfil
+            </a>
+            <a class="dropdown-item" href="/contact">
+              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+              Contacto
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              Desconectar
+            </a>
           </div>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesion</a>
-        </li>
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/logout">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         {{else}}
         <li class="nav-item active">
           <a href="/signup" class="nav-link"><i class="far fa-arrow-alt-circle-up"></i> Registro</a>
@@ -64,7 +108,8 @@
     </div>
 
   </nav>
+
 </div>
 <script>
-  
+
 </script>

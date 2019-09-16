@@ -21,11 +21,11 @@ router.get('/profile', isLoggedIn, home.profile);
 
 
 // =========== USER ================
-router.get('/dashboard', isLoggedIn, user.dashboard);
-router.get('/inmuebles', user.getProperty);
+router.get('/dashboard', isLoggedIn, user.dashboard, user.getProperty);
+router.get('/dashboardin', user.getProperty);
 router.get('/contract', user.contract);
 //router.get('/contract', user.signaturePad);
-router.get('/add_property', requireRole(InmobiliariaRole), user.addProperty);
+router.get('/add_property', requireRole(ClientRole), user.addProperty);
 router.post('/add_property', user.addPropertyPOST);
 router.post('/upload', user.uploadPOST);
 router.get('/search', user.search);

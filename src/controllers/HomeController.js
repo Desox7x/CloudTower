@@ -18,7 +18,18 @@ ctrl.contact = (req, res) => {
 }
 
 ctrl.profile = (req, res) => {
-    res.render('./postlog/profile');
+
+    if (req.user.idTipoEntidad == 1) {
+        return res.render('postlog/profile');
+    }
+    if (req.user.idTipoEntidad == 2) {
+        return res.render('postlog/contact');
+    }
+    if (req.user.idTipoEntidad == 3) {
+        return res.render('postlog/dashboard/constructora');
+    }
+
+    res.status(403).send('Forbideen');
 }
 
 module.exports = ctrl;

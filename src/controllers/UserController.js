@@ -17,6 +17,7 @@ ctrl.dashboard = (req, res) => {
     res.status(403).send('Forbideen');
 }
 
+
 ctrl.inmobiliariaOnly = (req, res) => {
     // if(req.user.idTipoEntidad == 2){
     //     return res.send('AYEE');
@@ -45,13 +46,13 @@ ctrl.addPropertyPOST = async (req, res) => {
         req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro, 
         req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado);
     console.log(req.body);
-    res.redirect('/inmuebles');
+    res.redirect('/cliente');
     
 }
 ctrl.getProperty = async (req, res) => {
     const inmueble = await DB.getAllInmuebles();  
     console.log(inmueble);
-    res.render('postlog/inmuebles', {data: inmueble})
+    res.render('postlog/dashboard/cliente', {data: inmueble})
 }
 ctrl.search = (req, res) => {
     res.render('postlog/search');
