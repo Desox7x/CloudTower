@@ -17,13 +17,14 @@ ctrl.contact = (req, res) => {
     res.render('./postlog/contact');
 }
 
-ctrl.profile = (req, res) => {
+ctrl.profile = async (req, res) => {
 
     if (req.user.idTipoEntidad == 1) {
         return res.render('postlog/profile');
     }
     if (req.user.idTipoEntidad == 2) {
-        return res.render('postlog/contact');
+        const inmueble = await db.getAllInmuebles(); 
+        return res.render('postlog/inmoprofile', {data: inmueble});
     }
     if (req.user.idTipoEntidad == 3) {
         return res.render('postlog/dashboard/constructora');

@@ -54,6 +54,11 @@ ctrl.getProperty = async (req, res) => {
     console.log(inmueble);
     res.render('postlog/dashboard/cliente', {data: inmueble})
 }
+ctrl.deleteProperty = async (req, res) => {
+    await DB.deleteProperty(req.params.id);
+    console.log(req.params);
+    res.redirect('/profile');
+}
 ctrl.search = (req, res) => {
     res.render('postlog/search');
 }

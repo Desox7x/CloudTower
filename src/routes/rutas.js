@@ -25,13 +25,14 @@ router.get('/dashboard', isLoggedIn, user.dashboard, user.getProperty);
 router.get('/dashboardin', user.getProperty);
 router.get('/contract', user.contract);
 //router.get('/contract', user.signaturePad);
-router.get('/add_property', requireRole(ClientRole), user.addProperty);
+router.get('/add_property', requireRole(InmobiliariaRole), user.addProperty);
 router.post('/add_property', user.addPropertyPOST);
 router.post('/upload', user.uploadPOST);
 router.get('/search', user.search);
 router.get('/searchResult', user.searchResult);
 router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
+router.get('/delete/:id', user.deleteProperty);
 
 
 router.get('/lmao', requireRole(ClientRole), user.inmobiliariaOnly)

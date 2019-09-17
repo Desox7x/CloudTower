@@ -62,7 +62,13 @@ module.exports = {
             moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, id]);
         console.log(data);
         
+    },
+    
+    async deleteProperty(id) {
+        let data = await DB.query('DELETE FROM addInmueble WHERE idInm = ?', [id]);
+        console.log(data);
     }
+
 
 
 }
