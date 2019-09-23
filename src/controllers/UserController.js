@@ -79,4 +79,29 @@ ctrl.updateUser = async (req, res) => {
     console.log(req.body)
 };
 
+
+ctrl.userProfile = async(req, res) =>{
+    let user = await DB.getUserById(req.params.id);
+    console.log(user.length);
+
+    if(user.length > 0 ){
+        console.log("a");
+        let isUser = (user[0].idEntidad == req.user.idEntidad);
+        if(isUser){
+           return res.redirect('/profile')
+        }
+
+        if(user[0].idTipoEntidad == 2){
+            return res.render('postlog/inmoprofile')
+        }
+
+        return res.render('postlog/profile', {data:  user[0], isUser});
+    }
+   
+    return res.status(404).send('Not Found');
+
+
+
+}
+
 module.exports = ctrl;

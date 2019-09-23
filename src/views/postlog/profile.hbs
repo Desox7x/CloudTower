@@ -8,9 +8,9 @@
         <div class="col-md-4">
             <div class="card text-center">
                 <div class="card-header bg-light">
-                    <img src="uploads/{{ user.idImg }}" alt="" class="w-100 h-100 img-thumbnail">
+                    <img src="uploads/{{ data.idImg }}" alt="" class="w-100 h-100 img-thumbnail">
 
-
+                    {{#if isUser}}
                     <div class="card-body">
                         <div class="nav-item dropdown active">
                             <a class="navdivink dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -27,6 +27,7 @@
                             </div>
                         </div>
                     </div>
+                    {{/if}}
 
 
                 </div>
@@ -46,16 +47,18 @@
             <div class="card">
                 <div class="card-header bg-primary">
                     <h3 class="card-title text-white">
-                        {{user.fullname}}
-                        <button type="button" class="btn btn-secondary float-right" data-toggle="modal"
-                            data-target="#exampleModalCenter">Edit</button>
+                        {{data.fullname}}
+                            {{#if isUser}}
+                            <button type="button" class="btn btn-secondary float-right" data-toggle="modal"
+                                data-target="#exampleModalCenter">Edit</button>
+                            {{/if}}
                         {{> editwin}}
                     </h3>
 
                 </div>
                 <div class="card-body">
                     <h4 class="text-primary">
-                        <li>{{user.descripcion}}</li>
+                        <li>{{data.descripcion}}</li>
                     </h4>
                 </div>
             </div>
@@ -75,11 +78,11 @@
 
                 <div class="card-body">
                     <h5 class="text-primary">
-                        Telefono: {{user.telefono}}
+                        Telefono: {{data.telefono}}
                         <br>
-                        Direccion: {{user.direccion}}
+                        Direccion: {{data.direccion}}
                         <br>
-                        Correo: {{user.correo}}
+                        Correo: {{data.correo}}
 
 
                     </h5>

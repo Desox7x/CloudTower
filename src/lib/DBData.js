@@ -67,6 +67,11 @@ module.exports = {
     async deleteProperty(id) {
         let data = await DB.query('DELETE FROM addInmueble WHERE idInm = ?', [id]);
         console.log(data);
+    },
+
+    async searchInmueble(nombre){
+        let data = await DB.query("Select * from addInmueble WHERE nombre LIKE CONCAT('%', ?,  '%')",[nombre]);
+        return data;
     }
 
 

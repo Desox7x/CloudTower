@@ -19,6 +19,10 @@ router.get('/about', home.about);
 router.get('/contact', home.contact);
 router.get('/profile', isLoggedIn, home.profile);
 
+router.get('/user/:id', user.userProfile);
+
+router.get('/search', home.search)
+
 
 // =========== USER ================
 router.get('/dashboard', isLoggedIn, user.dashboard, user.getProperty);
@@ -28,7 +32,7 @@ router.get('/contract', user.contract);
 router.get('/add_property', requireRole(InmobiliariaRole), user.addProperty);
 router.post('/add_property', user.addPropertyPOST);
 router.post('/upload', user.uploadPOST);
-router.get('/search', user.search);
+//router.get('/search', user.search);
 router.get('/searchResult', user.searchResult);
 router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);

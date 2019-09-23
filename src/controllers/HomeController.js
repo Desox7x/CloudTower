@@ -20,17 +20,24 @@ ctrl.contact = (req, res) => {
 ctrl.profile = async (req, res) => {
 
     if (req.user.idTipoEntidad == 1) {
-        return res.render('postlog/profile');
+        return res.render('postlog/profile', {data: req.user});
     }
     if (req.user.idTipoEntidad == 2) {
         const inmueble = await db.getAllInmuebles(); 
-        return res.render('postlog/inmoprofile', {data: inmueble});
+        return res.render('postlog/inmoprofile', {inmuebles: inmueble});
     }
     if (req.user.idTipoEntidad == 3) {
         return res.render('postlog/dashboard/constructora');
     }
 
     res.status(403).send('Forbideen');
+}
+
+ctrl.search = async(req,res) => {
+    let data = await db.searchInmueble(req.query.nombre);
+    
+    return res.render('postlog/search', {data})
+
 }
 
 module.exports = ctrl;
