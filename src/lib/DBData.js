@@ -56,12 +56,33 @@ module.exports = {
             lblanca,
             amueblado,
             id
-     };
+        };
         
         let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, img = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idInm = ?', [name, desc, ubic, tipo, img, compra,
             moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, id]);
         console.log(data);
         
+    },
+
+    async addContract(dir, typeP, dateCon, price, cur, nameC, mailC, telC, nameR, mailR, telR) {
+        const newCon = {
+            dir,
+            typeP,
+            dateCon,
+            price,
+            cur,
+            nameC,
+            mailC,
+            telC,
+            nameR,
+            mailR,
+            telR
+        };
+           
+        let data = await DB.query('INSERT INTO addContract SET dir = ?, typeP = ?, dateCon = ?, price = ?, cur = ?, nameC = ?, mailC = ?, telC = ?, nameR = ?, mailR = ?, telR = ?', [dir, typeP, dateCon, price, cur, nameC,
+            mailC, telC, nameR, mailR, telR]);
+        console.log(data);
+           
     },
     
     async deleteProperty(id) {
