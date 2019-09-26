@@ -1,0 +1,224 @@
+<div class="modal fade" id="addPropertyModal" tabindex="-1" role="dialog" aria-labelledby="addPropertyModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edita tu informacion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-primary">
+                <form action="/add_property" method="POST">
+                    <!-- Basic information -->
+                    <div class="form-row align-items-center">
+                        <!-- Name -->
+                        <div class="form-group col-md-5">
+                            <label for="name">Nombre</label>
+                            <input name="nombre" type="text" class="form-control" id="name"
+                                placeholder="Ej. Las Damas II" required>
+                            <div class="invalid-feedback">Digite un nombre válido</div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="form-group col-md-4">
+                            <label for="desc">Descripción</label>
+                            <textarea name="descr" id="desc" class="form-control" rows="4"
+                                placeholder="Ej. Amarillo, cerca de tienda x, etc." required></textarea>
+                            <div class="invalid-feedback">Digite una descripción válida</div>
+                        </div>
+                    </div>
+
+                    <!-- Location and type of property -->
+                    <div class="form-row">
+                        <!-- Location; subject to change -->
+                        <div class="form-group col-md-3">
+                            <label for="location">Ubicación</label>
+                            <select name="ubic" id="location" class="custom-select" required>
+                                <option value="">Escoja...</option>
+                                <option value="Santo Domingo Este">Santo Domingo Este</option>
+                                <option value="Santo Domingo Norte">Santo Domingo Norte</option>
+                                <option value="Santo Domingo Oeste">Santo Domingo Oeste</option>
+                                <option value="Distrito Nacional">Distrito Nacional</option>
+                            </select>
+                            <small>Por cambiar</small>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
+                        </div>
+
+                        <!-- Type of property -->
+                        <div class="form-group col-md-3">
+                            <label for="realtyType">Tipo de inmueble</label>
+                            <select name="tipoInm" id="realtyType" class="custom-select" required>
+                                <option value="">Escoja...</option>
+                                <option value="Casa">Casa</option>
+                                <option value="Villa">Villa</option>
+                                <option value="Solar">Solar</option>
+                                <option value="Finca">Finca</option>
+                                <option value="Nave">Nave</option>
+                                <option value="Local Comercial">Local comercial</option>
+                                <option value="Edificio">Edificio</option>
+                                <option value="Apartamento">Apartamento</option>
+                                <option value="Penthouse">Penthouse</option>
+                                <option value="Local oficina">Local de oficina</option>
+                            </select>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="img">Seleccione una o más imagenes</label>
+                            <input name="img" id="img" type="file" multiple required>
+                            <div class="invalid-feedback">Seleccione un archivo válido</div>
+                        </div>
+                    </div>
+
+                    <!-- Type of sale and pricing -->
+                    <div class="form-row">
+                        <!-- Type of sale; binary answer -->
+                        <div class="form-group col-md-3">
+                            <p>El inmueble está en:</p>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="radio1" name="compra" value="1"
+                                    required>
+                                <label class="custom-control-label" for="radio1">Venta</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3">
+                                <input type="radio" class="custom-control-input" id="radio2" name="compra" value="2"
+                                    required>
+                                <label class="custom-control-label" for="radio2">Alquiler</label>
+                                <div class="invalid-feedback">Selecione una opción válida</div>
+                            </div>
+                        </div>
+
+                        <!-- Currency type -->
+                        <div class="form-group col-md-3">
+                            <label for="currency">Moneda utilizada</label>
+                            <select name="moneda" id="currency" class="custom-select" required>
+                                <option value="">Escoja...</option>
+                                <option value="USD">USD</option>
+                                <option value="DOP">DOP</option>
+                            </select>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
+                        </div>
+
+                        <!-- Pricing -->
+                        <div class="form-group col-md-3">
+                            <label for="price">Precio</label>
+                            <input type="number" class="form-control" id="price" name="precio" required="">
+                            <div class="invalid-feedback">Digite un precio válido</div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics and number of rooms -->
+                    <div class="form-row">
+                        <!-- Metrics field -->
+                        <div class="form-group col-md-3">
+                            <label for="meters">Metraje</label>
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="append">m²</span>
+                                </div>
+                                <input name="metro" type="number" class="form-control" id="meters"
+                                    placeholder="número de metros cuadrados" required>
+                                <div class="invalid-feedback">Digite un número válido</div>
+                            </div>
+                        </div>
+
+                        <!-- Number of rooms -->
+                        <div class="form-group col-md-3">
+                            <label for="room">Habitaciones</label>
+                            <input name="hab" type="number" class="form-control" id="room"
+                                placeholder="número de habitaciones">
+                        </div>
+
+                        <!-- Number of bathrooms -->
+                        <div class="form-group col-md-3">
+                            <label for="bath">Baños</label>
+                            <input name="bano" type="number" class="form-control" id="bath"
+                                placeholder="número de baños">
+                        </div>
+                    </div>
+
+                    <!-- Radio elements -->
+                    <div class="form-row">
+                        <!-- Parking lots; binary answer -->
+                        <div class="form-group col-md-3">
+                            <p>Parqueo:</p>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="radio3" name="parqueo" value="3">
+                                <label class="custom-control-label" for="radio3">Sí</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3">
+                                <input type="radio" class="custom-control-input" id="radio4" name="parqueo" value="4">
+                                <label class="custom-control-label" for="radio4">No</label>
+                            </div>
+                        </div>
+
+                        <!-- White goods; binary answer -->
+                        <div class="form-group col-md-3">
+                            <p>Línea blanca:</p>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="radio5" name="lBlanca" value="5">
+                                <label class="custom-control-label" for="radio5">Sí</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3">
+                                <input type="radio" class="custom-control-input" id="radio6" name="lBlanca" value="6">
+                                <label class="custom-control-label" for="radio6">No</label>
+                            </div>
+                        </div>
+
+                        <!-- Furniture; binary answer -->
+                        <div class="form-group col-md-3">
+                            <p>Amueblado:</p>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="radio7" name="amueblado" value="7">
+                                <label class="custom-control-label" for="radio7">Sí</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3">
+                                <input type="radio" class="custom-control-input" id="radio8" name="amueblado" value="8">
+                                <label class="custom-control-label" for="radio8">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    {{!-- <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div id="locationField">
+                                <!-- search bar for address -->
+                                <input type="text" id="autocomplete" onfocus="geolocate()" placeholder="Digite la ubicación" required>
+                                <div class="invalid-feedback">Digite una ubicación válida</div>                                
+                            </div>
+                            <!-- address information table -->
+                            <table id="address" class="table">
+                                <tr>
+                                    <td class="label">Street address</td>
+                                    <td class="slimField"><input class="field" id="street_number" disabled="true"/></td>
+                                    <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="label">City</td>
+                                    <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="label">State</td>
+                                    <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"/></td>
+                                    <td class="label">Zip code</td>
+                                    <td class="wideField"><input class="field" id="postal_code" disabled="true"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Country</td>
+                                    <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div> --}}
+
+                    <!-- Button -->
+                    <div id="button" class="form-group col align-self-center">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -143,15 +143,16 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generar Reportes</a>
-            <a href="/add_Property" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</a>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50" data-toggle="modal"
-                data-target="#EditProfileModal"></i> Editar perfil</a>
+            <button type="button" class="btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generar Reportes</button>
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+            data-target="#addPropertyModal"><i
+                class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                data-target="#EditProfileModal"><i
+                class="fas fa-download fa-sm text-white-50"></i> Editar perfil</button>
           </div>
-
+          {{> addpropertyWin}}
           <!-- Content Row -->
           <div class="row">
 
@@ -268,6 +269,9 @@
             {{#each inmuebles}}
             <div class="col-md-3">
               <div class="card text-center">
+                <div class="card-header">
+                  <img src="img/{{img}}" alt="" class="w-100 h-100 img-thumbnail">
+                </div>
                 <div class="card-body">
                   <h3 class="card-title">{{nombre}}</h3>
                   <a href="/delete/{{idInm}}" class="btn btn-danger">Delete</a>
