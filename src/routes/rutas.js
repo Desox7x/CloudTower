@@ -37,7 +37,7 @@ router.get('/searchResult', user.searchResult);
 router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
 router.get('/delete/:id', user.deleteProperty);
-
+router.post('/contract', user.addContractPOST);
 
 router.get('/lmao', requireRole(ClientRole), user.inmobiliariaOnly)
 
