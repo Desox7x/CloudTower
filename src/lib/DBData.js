@@ -72,7 +72,7 @@ module.exports = {
     async searchInmueble(nombre){
         let data = await DB.query("Select * from addInmueble WHERE nombre LIKE CONCAT('%', ?,  '%')",[nombre]);
         return data;
-    }
+    },
 
 
 

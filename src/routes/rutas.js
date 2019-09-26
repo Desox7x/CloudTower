@@ -19,7 +19,7 @@ router.get('/about', home.about);
 router.get('/contact', home.contact);
 router.get('/profile', isLoggedIn, home.profile);
 
-router.get('/user/:id', user.userProfile);
+router.get('/profile/:id', isLoggedIn, user.userProfile);
 
 router.get('/search', home.search)
 

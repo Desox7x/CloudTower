@@ -659,7 +659,7 @@
                         <td>
                               
                           <button class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target="#infomodal">Info</button>
+                            data-target="#infomodal{{@index}}">Info</button>
         
                         </td>
                       </tr>
@@ -720,54 +720,7 @@
     </div>
   </div> --}}
   {{!-- Info Modal --}}
-  {{#each data}}
-  <div class="modal fade" id="infomodal" tabindex="-1" role="dialog" aria-labelledby="ClienteModalTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      
-      <div class="modal-content">
-        <div class="modal-header  bg-primary text-white">
-
-          <h5 class="modal-title" id="exampleModalLongTitle">Informacion {{nombre}}</h5>
-
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <div class="row">
-
-            <div class="col-md-6">
-
-              <li><strong>Descripcion</strong></li>
-              <h6 class="text-justified">{{descr}}</h6>
-              <li><strong>Ubicacion</strong></li>
-              <h6 class="text-justified">{{ubic}}</h6>
-              <li><strong>Tipo de inmueble</strong></li>
-              <h6 class="text-justified">{{tipoInm}}</h6>
-              <br>
-              <b>Datos</b>
-              <li>{{hab}} Habitacion/es</li>
-              <li>{{bano}} Bano/s</li>
-              <li>{{metro}} m²</li>
-              <br>
-              <h6 class="text-justified"><strong>Precio: </strong>{{precio}}${{moneda}}</h6>
-
-              <button class="btn btn-success btn-sm">Contacto</button>
-            </div>
-
-            <div class="col-md-6 ml-auto">
-              <img src="./img/building4.jpg" alt="" class="w-100 h-100 img-thumbnail">
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-  {{/each}}
+  {{> infowin}}
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -46,7 +46,7 @@ ctrl.addPropertyPOST = async (req, res) => {
         req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro, 
         req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado);
     console.log(req.body);
-    res.redirect('/cliente');
+    res.redirect('/profile');
     
 }
 ctrl.getProperty = async (req, res) => {

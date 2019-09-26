@@ -1,185 +1,237 @@
 <!-- CSS -->
 <style>
-    .btn-default{
+    .btn-default {
         background-color: #87cefa;
     }
-    .btn-primary{
+
+    .btn-primary {
         background-color: #6495ed;
-        border:none;
+        border: none;
         color: #FFF;
         font-size: 16px;
         cursor: pointer;
     }
 
-    .btn-primary:hover{
+    .btn-primary:hover {
         background-color: #4682b4;
     }
 
-    .btn-secondary{
+    .btn-secondary {
         background-color: #c0c0c0;
-        border:none;
+        border: none;
         color: #FFF;
         font-size: 16px;
         cursor: pointer;
     }
 
-    .btn-secondary:hover{
+    .btn-secondary:hover {
         background-color: #a6a6a6;
     }
 
-    .container-fluid{
+    .container-fluid {
         padding-top: 10px;
     }
 
-    .dropdown.dropdown-lg .dropdown-menu{
+    .dropdown.dropdown-lg .dropdown-menu {
         margin-top: -1px;
         padding: 4px 15px;
     }
 
-    .btn-group, .btn{
+    .btn-group,
+    .btn {
         border-radius: 4px;
         margin-left: -1px;
     }
 
-    .px-4 .py-3 .form-group{
+    .px-4 .py-3 .form-group {
         margin-left: 0;
         margin-right: 0;
     }
 
-    @media screen and (min-width: 768px){
-        #boot-search-box{
-            width: 500px;            
+    @media screen and (min-width: 768px) {
+        #boot-search-box {
+            width: 500px;
             margin: 5px auto;
         }
-        .dropdown.dropdown-lg{
+
+        .dropdown.dropdown-lg {
             position: static !important;
         }
-        .dropdown.dropdown-lg .dropdown-menu{
+
+        .dropdown.dropdown-lg .dropdown-menu {
             min-width: 500px;
         }
     }
 </style>
 
 <!-- BODY -->
+
 <body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="input-group" id="boot-search-box">
-                    <input type="text" class="form-control" placeholder="Búsqueda">
-                    <div class="input-group-btn">
-                        <div class="btn-group" role="group">
-                            <div class="dropdown dropdown-lg">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
-                                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <form class="px-4 py-3" role="form" action="/searchResult">
-                                        <div class="form-group">
-                                            <label for="keyword">Descripción de la propiedad...</label>
-                                            <input type="text" id="keyword" class="form-control">
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <div class="form-group">
-                                            <label for="offer">Oferta</label>
-                                            <select id="offer" class="form-control">
-                                                <option value="">Oferta</option>
-                                                <option value="1">Venta</option>
-                                                <option value="2">Alquiler</option>
-                                            </select>
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <div class="form-group">
-                                            <label for="currency">Moneda</label>
-                                            <select id="currency">
-                                                <option value="1" selected>DOP</option>
-                                                <option value="2">USD</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-row">
-                                            <label for class>Precio</label>
-                                            <div class="col-sm-3">
-                                                <input class="form-control" id="min" type="number" placeholder="Min">
+                <form action="/search" method="GET">
+                    <div class="input-group" id="boot-search-box">
+                        <input type="text" class="form-control" placeholder="Búsqueda" name="nombre">
+                        <div class="input-group-btn">
+                            <div class="btn-group" role="group">
+                                <div class="dropdown dropdown-lg">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <form class="px-4 py-3" role="form" action="/searchResult" method="GET">
+                                            <div class="form-group">
+                                                <label for="keyword">Descripción de la propiedad...</label>
+                                                <input type="text" id="keyword" class="form-control">
                                             </div>
-                                            <div class="col-sm-3">
-                                                <input class="form-control" id="max" type="number" placeholder="Max">
+                                            <div class="dropdown-divider"></div>
+                                            <div class="form-group">
+                                                <label for="offer">Oferta</label>
+                                                <select id="offer" class="form-control">
+                                                    <option value="">Oferta</option>
+                                                    <option value="1">Venta</option>
+                                                    <option value="2">Alquiler</option>
+                                                </select>
                                             </div>
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <div class="form-group">
-                                            <label for="city">Ciudad:</label>
-                                            <input type="text" id="city" placeholder="Ej. Santo Domingo">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="address">Sector:</label>
-                                            <input type="text" id="address" placeholder="Ej. Los Mameyes">
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <div class="form-group">
-                                            <label for="category">Categoría</label>
-                                            <select id="category" class="form-control">
-                                                <option value="">Tipo de propiedad</option>
-                                                <option value="1">Casa</option>
-                                                <option value="2">Villa</option>
-                                                <option value="3">Solar</option>
-                                                <option value="4">Finca</option>
-                                                <option value="5">Nave</option>
-                                                <option value="6">Local comercial</option>
-                                                <option value="7">Edificio</option>
-                                                <option value="8">Apartamento</option>
-                                                <option value="9">Penthouse</option>
-                                                <option value="10">Local de oficina</option>
-                                            </select>
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <div class="form-group">
-                                            <label for="meter">Metros</label>
-                                            <input class="form-control" type="number" id="meter" placeholder="Número de metros">
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <div class="form-row">                                            
-                                            <div class="col-sm-4">
-                                                <label for="room">Habitación(es)</label>
-                                                <input class="form-control" id="room" type="number" placeholder="Número">
-                                            </div>                                            
-                                            <div class="col-sm-3">
-                                                <label for="bath">Baño(s)</label>
-                                                <input class="form-control" id="bath" type="number" placeholder="Número">
+                                            <div class="dropdown-divider"></div>
+                                            <div class="form-group">
+                                                <label for="currency">Moneda</label>
+                                                <select id="currency">
+                                                    <option value="1" selected>DOP</option>
+                                                    <option value="2">USD</option>
+                                                </select>
                                             </div>
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <div class="form-group">
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="furniture">
-                                                <label for="furniture" class="form-check-label">Amueblado</label>
+                                            <div class="form-row">
+                                                <label for class>Precio</label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control" id="min" type="number"
+                                                        placeholder="Min">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control" id="max" type="number"
+                                                        placeholder="Max">
+                                                </div>
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="wGoods">
-                                                <label for="wGoods" class="form-check-label">Línea Blanca</label>
+                                            <div class="dropdown-divider"></div>
+                                            <div class="form-group">
+                                                <label for="city">Ciudad:</label>
+                                                <input type="text" id="city" placeholder="Ej. Santo Domingo">
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="parking">
-                                                <label for="parking" class="form-check-label">Parqueo</label>
+                                            <div class="form-group">
+                                                <label for="address">Sector:</label>
+                                                <input type="text" id="address" placeholder="Ej. Los Mameyes">
                                             </div>
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i></span></button>
-                                        <button type="reset" class="btn btn-secondary btn-block"><i class="fa fa-refresh" aria-hidden="true"></i></button>                                       
-                                    </form>
+                                            <div class="dropdown-divider"></div>
+                                            <div class="form-group">
+                                                <label for="category">Categoría</label>
+                                                <select id="category" class="form-control">
+                                                    <option value="">Tipo de propiedad</option>
+                                                    <option value="1">Casa</option>
+                                                    <option value="2">Villa</option>
+                                                    <option value="3">Solar</option>
+                                                    <option value="4">Finca</option>
+                                                    <option value="5">Nave</option>
+                                                    <option value="6">Local comercial</option>
+                                                    <option value="7">Edificio</option>
+                                                    <option value="8">Apartamento</option>
+                                                    <option value="9">Penthouse</option>
+                                                    <option value="10">Local de oficina</option>
+                                                </select>
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                                            <div class="form-group">
+                                                <label for="meter">Metros</label>
+                                                <input class="form-control" type="number" id="meter"
+                                                    placeholder="Número de metros">
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                                            <div class="form-row">
+                                                <div class="col-sm-4">
+                                                    <label for="room">Habitación(es)</label>
+                                                    <input class="form-control" id="room" type="number"
+                                                        placeholder="Número">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="bath">Baño(s)</label>
+                                                    <input class="form-control" id="bath" type="number"
+                                                        placeholder="Número">
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                                            <div class="form-group">
+                                                <div class="form-check form-check-inline">
+                                                    <input type="checkbox" class="form-check-input" id="furniture">
+                                                    <label for="furniture" class="form-check-label">Amueblado</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input type="checkbox" class="form-check-input" id="wGoods">
+                                                    <label for="wGoods" class="form-check-label">Línea Blanca</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input type="checkbox" class="form-check-input" id="parking">
+                                                    <label for="parking" class="form-check-label">Parqueo</label>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                                            <button type="submit" class="btn btn-primary btn-block"><i
+                                                    class="fa fa-search" aria-hidden="true"></i></span></button>
+                                            <button type="reset" class="btn btn-secondary btn-block"><i
+                                                    class="fa fa-refresh" aria-hidden="true"></i></button>
+                                        </form>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <button type="submit">GG</button>
+                    </div>
+                </form>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i>
+                        Motor de busqueda</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Proyecto</th>
+                                        <th>Sector</th>
+                                        <th>Tipo</th>
+                                        <th>Precio</th>
+                                        <th>Metros</th>
+                                        <th>Salary</th>
+                                    </tr>
+                                </thead>
+                                {{#each data}}
+                                <tbody>
+                                    <tr>
+                                        <td>{{nombre}}</td>
+                                        <td>{{ubic}}</td>
+                                        <td>{{tipoInm}}</td>
+                                        <td>{{precio}}${{moneda}}</td>
+                                        <td>{{metro}}m²</td>
+                                        <td>
+
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                                data-target="#infomodal{{@index}}">Info</button>
+
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                                {{/each}}
+                                {{> infowin}}
+                        </div>
+
+                        </table>
                     </div>
                 </div>
+                <div class="card-footer small text-muted">Powered by Desox</div>
+
             </div>
         </div>
     </div>
-
-    <form action="/search" method="get">
-        <input type="text" name="nombre">
-        <button type="submit"> eah diablo puñeta</button>
-    </form>
-    {{#each data}}
-        {{nombre}}
-    {{/each}}
 </body>
 
 <!-- SCRIPTS -->
