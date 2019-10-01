@@ -40,7 +40,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/profile">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Perfil de {{user.fullname}}</span></a>
       </li>
@@ -55,7 +55,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="#" aria-labelledby="true">
+        <a class="nav-link" href="/profile/propertylist" aria-labelledby="true">
           <i class="fas fa-th-list"></i>
           <span>Lista de inmuebles</span>
         </a>
@@ -143,7 +143,7 @@
                 <div class="card-body">
                     <h4>{{nombre}}</h4>
                     <a href="/delete/{{idInm}}" class="btn btn-danger">Delete</a>
-                    <button class="btn btn-primary" data-toggle="modal"
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
                             data-target="#infomodal{{@index}}">Datos</button>
                 </div>
               </div>
