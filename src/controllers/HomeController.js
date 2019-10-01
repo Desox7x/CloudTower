@@ -32,6 +32,10 @@ ctrl.profile = async (req, res) => {
 
     res.status(403).send('Forbideen');
 }
+ctrl.propertyList = async (req, res) => {
+    const inmueble = await db.getAllInmuebles(); 
+    res.render('postlog/propertyList', {inmuebles: inmueble});
+}
 
 ctrl.search = async(req,res) => {
     let data = await db.searchInmueble(req.query.nombre);

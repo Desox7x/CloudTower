@@ -84,6 +84,7 @@ app.use(require('./routes/rutas.js'))
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 //Iniciar Server
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));

@@ -39,6 +39,7 @@ ctrl.inmueble = (req, res) => {
     res.render('postlog/inmueble');
 }
 
+
 ctrl.addPropertyPOST = async (req, res) => {
     await DB.addInmueble(req.body.nombre, req.body.descr, req.body.ubic, req.body.tipoInm,
         req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro, 
@@ -64,7 +65,7 @@ ctrl.getProperty = async (req, res) => {
 ctrl.deleteProperty = async (req, res) => {
     await DB.deleteProperty(req.params.id);
     console.log(req.params);
-    res.redirect('/profile');
+    res.redirect('/profile/propertylist');
 }
 
 ctrl.search = (req, res) => {

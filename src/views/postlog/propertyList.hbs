@@ -1,13 +1,13 @@
 <title>Perfil</title>
 
 <!-- Custom fonts for this template-->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link
   href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
   rel="stylesheet">
 
 <!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
 <style>
   .card-title, .card-text {
@@ -30,7 +30,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
         <div>
-          <img class="img-profile rounded-circle" src="uploads/{{ user.idImg }}" width="50" height="50">
+          <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
         </div>
         <div class="sidebar-brand-text mx-3">{{user.fullname}} </div>
       </a>
@@ -121,126 +121,30 @@
           <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ganancias (Mes)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$0</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Ganancias (Anuales)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$0</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Inmuebles en proceso</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%</div>
-                        </div>
-                        <div class="col">
-                          <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10"
-                              aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Citas pendientes</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
 
           <!-- Content Row -->
-          <div class="row">
-
-            <!-- Area Chart -->
-            <div class="col-xl-12 col-lg-8 ">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between bg-primary">
-                  <h6 class="m-0 font-weight-bold text-white">Perfil de Inmobiliaria</h6>
-
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area" style="height: 8rem;">
-                    <ul>
-                      <h4>{{user.direccion}}</h4>
-                    </ul>
-                    <ul>
-                      <h5>{{user.telefono}}</h5>
-                    </ul>
-                    <ul>
-                      <h5>{{user.correo}}</h5>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <!-- Content Row -->
           <div class="row">
             {{#each inmuebles}}
             <div class="col-md-3">
               <div class="card text-center mx-auto">
+                <div class="card-header">
+                    <img src="/img/{{img}}" alt="" class="img-thumbnail">
+                </div>
                 <div class="card-body">
-                  <img src="img/{{img}}" alt="" class="img-thumbnail card-img" data-toggle="modal" 
-                  data-target="#infomodal{{@index}}">
-                  <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                    <h5 class="card-title">{{nombre}}</h5>
-                    <p class="card-text">{{ubic}}</p>
-                    
-                  </div>
+                    <h4>{{nombre}}</h4>
+                    <a href="/delete/{{idInm}}" class="btn btn-danger">Delete</a>
+                    <button class="btn btn-primary" data-toggle="modal"
+                            data-target="#infomodal{{@index}}">Datos</button>
                 </div>
               </div>
             </div>
@@ -302,7 +206,7 @@
     </div>
   </div>
 
-
+{{> infowin}}
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
