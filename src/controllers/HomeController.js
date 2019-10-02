@@ -18,9 +18,8 @@ ctrl.contact = (req, res) => {
 }
 
 ctrl.profile = async (req, res) => {
-
     if (req.user.idTipoEntidad == 1) {
-        return res.render('postlog/profile', {data: req.user});
+        return res.render('postlog/profile', {data: req.user, isUser: true});
     }
     if (req.user.idTipoEntidad == 2) {
         const inmueble = await db.getAllInmuebles(); 

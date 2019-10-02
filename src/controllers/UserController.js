@@ -59,7 +59,7 @@ ctrl.addContractPOST = async (req, res) => {
 ctrl.getProperty = async (req, res) => {
     const inmueble = await DB.getAllInmuebles();  
     console.log(inmueble);
-    res.render('postlog/dashboard/cliente', {data: inmueble})
+    res.render('postlog/dashboard/cliente', {inmuebles: inmueble})
 }
 
 ctrl.deleteProperty = async (req, res) => {
@@ -90,6 +90,7 @@ ctrl.updateUser = async (req, res) => {
 
 ctrl.userProfile = async(req, res) =>{
     let user = await DB.getUserById(req.params.id);
+    const inmueble = await DB.getAllInmuebles();  
     console.log(user.length);
 
     if(user.length > 0 ){
@@ -100,7 +101,8 @@ ctrl.userProfile = async(req, res) =>{
         }
 
         if(user[0].idTipoEntidad == 2){
-            return res.render('postlog/inmoprofile')
+
+            return res.render('postlog/publicinmo', {data: user[0], inmuebles: inmueble})
         }
 
         return res.render('postlog/profile', {data:  user[0], isUser});

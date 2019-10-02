@@ -30,7 +30,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
         <div>
-          <img class="img-profile rounded-circle" src="uploads/{{ user.idImg }}" width="50" height="50">
+          <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
         </div>
         <div class="sidebar-brand-text mx-3">{{user.fullname}} </div>
       </a>
@@ -54,13 +54,14 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
+     
       <li class="nav-item">
         <a class="nav-link" href="/profile/propertylist" aria-labelledby="true">
           <i class="fas fa-th-list"></i>
           <span>Lista de inmuebles</span>
         </a>
       </li>
-
+     
       <!-- Nav Item - Charts -->
       <li class="nav-item">
         <a class="nav-link" href="/search">
@@ -69,18 +70,19 @@
       </li>
 
       <!-- Nav Item - Tables -->
+      
       <li class="nav-item">
         <a class="nav-link" href="/contract">
           <i class="fas fa-file-signature"></i>
           <span>Llenar contrato</span></a>
       </li>
-
+      
       <li class="nav-item">
         <a class="nav-link" href="/dashboardin">
           <i class="fas fa-chart-area"></i>
           <span>Dashboard</span></a>
       </li>
-
+      
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="modal" data-target="#modalImage" aria-expanded="true"
           aria-controls="modalImage">
@@ -88,6 +90,7 @@
           <span>Cambiar imagen</span>
         </a>
       </li>
+      
       {{> editImg}}
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -108,6 +111,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
+         
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <button type="button" class="btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50"></i> Generar Reportes</button>
@@ -116,6 +120,7 @@
             <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
               data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar perfil</button>
           </div>
+          
           {{> addproperty}}
           <!-- Content Row -->
           <div class="row">
@@ -234,11 +239,11 @@
             <div class="col-md-3">
               <div class="card text-center mx-auto">
                 <div class="card-body">
-                  <img src="img/{{img}}" alt="" class="img-thumbnail card-img" data-toggle="modal" 
+                  <img src="img/{{img}}" alt="" class="w-100 h-100 img-thumbnail card-img" data-toggle="modal" 
                   data-target="#infomodal{{@index}}">
                   <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
                     <h5 class="card-title">{{nombre}}</h5>
-                    <p class="card-text">{{ubic}}</p>
+                    {{!-- <p class="card-text">{{ubic}}</p> --}}
                   </div>
                 </div>
               </div>
