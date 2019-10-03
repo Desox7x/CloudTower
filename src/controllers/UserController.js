@@ -1,5 +1,6 @@
 const DB = require('../lib/DBData')
 const pool = require('../database');
+const nodemailer = require('nodemailer');
 const ctrl = {}
 
 ctrl.dashboard = (req, res) => {
@@ -70,6 +71,38 @@ ctrl.deleteProperty = async (req, res) => {
 
 ctrl.search = (req, res) => {
     res.render('postlog/search');
+};
+
+ctrl.sendEmail = async (req, res) => {
+    const { Correo, text } = req.body;
+    contentHTML = `
+        <h1>User Information</h1>
+        <ul>
+            <li>Para: ${Correo}</li>
+        </ul>
+        <p>${text}</p>
+    `;
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.live.com',
+        port: 25,
+        secure: false,
+        auth: {
+            user: '',
+            pass: ''
+        }
+    });
+
+    const info = await transporter.sendMail({
+        from: "",
+        to: '',
+        subject: 'Pruebita',
+        html: contentHTML
+
+    });
+
+    console.log('Message sent', info.messageId);
+
+    res.send('recibido');
 }
 
 ctrl.searchResult = (req, res) => {

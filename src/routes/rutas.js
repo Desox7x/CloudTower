@@ -17,6 +17,7 @@ console.log(ClientRole);
 router.get('/', home.index);
 router.get('/about', home.about);
 router.get('/contact', home.contact);
+router.post('/sendemail', user.sendEmail);
 router.get('/profile', isLoggedIn, home.profile);
 
 router.get('/user/:id', isLoggedIn, user.userProfile);
