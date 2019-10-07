@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="modal fade" id="editInmobiliaria" tabindex="-1" role="dialog" aria-labelledby="editInmobiliariaTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edita tu informacion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-primary">
+                    <form action="/updateInmo" method="POST">
+                        <div class="form-group col-md-12">
+                            <label for="nombre">Nombre</label>
+                            <input name="nombre" type="text" class="form-control" placeholder="Ej. Las Damas II"
+                                required>
+                            <div class="invalid-feedback">Digite un nombre válido</div>
+                        </div>
+                </div>
+                <div class="form-row">
+                    <!-- Description -->
+                    <div class="form-group col-md-12">
+                        <label for="descr">Descripción</label>
+                        <textarea name="descr" class="form-control" rows="4"
+                            placeholder="Ej. Amarillo, cerca de tienda x, etc." required></textarea>
+                        <div class="invalid-feedback">Digite una descripción válida</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <!-- Location; subject to change -->
+                    <div class="form-group col-md-12">
+                        <label for="ubic">Ubicación</label>
+                        <select name="ubic" class="custom-select" required>
+                            <option value="">Escoja...</option>
+                            <option value="Santo Domingo Este">Santo Domingo Este</option>
+                            <option value="Santo Domingo Norte">Santo Domingo Norte</option>
+                            <option value="Santo Domingo Oeste">Santo Domingo Oeste</option>
+                            <option value="Distrito Nacional">Distrito Nacional</option>
+                        </select>
+                        <small>Por cambiar</small>
+                        <div class="invalid-feedback">Escoja una opción válida</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="price">Precio</label>
+                    <input type="number" class="form-control" id="price" name="precio" required="">
+                    <div class="invalid-feedback">Digite un precio válido</div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary">Editar info</button>
+
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

@@ -64,6 +64,12 @@ module.exports = {
         
     },
 
+    async updateInmo(nombre, descr, ubic, precio, id) {
+        console.log(nombre, descr, ubic, precio, id);
+        let data = await DB.query('UPDATE addInmueble SET nombre = ?, descr = ?, ubic = ?, precio = ? WHERE idInm = ? ', [nombre, descr, ubic, precio, id]);
+        console.log(data);
+    },
+
     async addContract(dir, typeP, dateCon, price, cur, nameC, mailC, telC, nameR, mailR, telR) {
         const newCon = {
             dir,

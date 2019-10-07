@@ -38,6 +38,12 @@ ctrl.addProperty = (req, res) => {
 }
 ctrl.inmueble = (req, res) => {
     res.render('postlog/inmueble');
+};
+ctrl.scheduleReunion = (req, res) => {
+    res.render('postlog/schedulePage');
+}
+ctrl.conteoplox = (req, res) => {
+    res.render('postlog/conteoplox');
 }
 
 
@@ -47,6 +53,11 @@ ctrl.addPropertyPOST = async (req, res) => {
         req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado);
     console.log(req.body);
     res.redirect('/profile');
+}
+ctrl.updateInmoPOST = async (req, res) => {
+    await DB.updateInmo(req.body.nombre, req.body.descr, req.body.ubic, req.body.precio, req.body.idInm);
+    console.log(req.body);
+    res.redirect('/profile/propertyList', {inmuebles: inmueble});
 }
 
 ctrl.addContractPOST = async (req, res) => {

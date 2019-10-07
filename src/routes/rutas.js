@@ -33,6 +33,7 @@ router.get('/contract', user.contract);
 //router.get('/contract', user.signaturePad);
 router.get('/add_property', requireRole(InmobiliariaRole), user.addProperty);
 router.post('/add_property', user.addPropertyPOST);
+router.post('/updateInmo', user.updateInmoPOST);
 router.post('/upload', user.uploadPOST);
 //router.get('/search', user.search);
 router.get('/searchResult', user.searchResult);
@@ -40,9 +41,8 @@ router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
 router.get('/delete/:id', user.deleteProperty);
 router.post('/contract', user.addContractPOST);
-
-router.get('/lmao', requireRole(ClientRole), user.inmobiliariaOnly)
-
+router.get('/schedule', user.scheduleReunion);
+router.get('/conteoplox', user.conteoplox);
 
 // =========== AUTH =================
 router.get('/signup', auth.signup);
