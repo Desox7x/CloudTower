@@ -70,7 +70,8 @@ ctrl.addContractPOST = async (req, res) => {
 }
 
 ctrl.getProperty = async (req, res) => {
-    const inmueble = await DB.getAllInmuebles();  
+    const inmueble = await DB.getAllInmuebles(); 
+    
     console.log(inmueble);
     res.render('postlog/dashboard/cliente', {inmuebles: inmueble})
 }
