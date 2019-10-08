@@ -34,7 +34,7 @@ ctrl.profile = async (req, res) => {
     res.status(403).send('Forbideen');
 }
 ctrl.propertyList = async (req, res) => {
-    const inmueble = await db.getAllInmuebles(); 
+    const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
     res.render('postlog/propertyList', {inmuebles: inmueble});
 }
 

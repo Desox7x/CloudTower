@@ -3,9 +3,9 @@ ctrl = {}
 const DB = require('../lib/DBData');
 
 ctrl.index = async (req, res) => {
-    let inm = await DB.getInmueble(1);
-    res.render('postlog/reserva/index', {
-        data: inm[0]
+    let inm = await DB.getInmueble(req.params.id);
+    res.render('postlog/reserva/schedule', {
+        inmo: inm[0]
     });
 }
 
@@ -18,7 +18,7 @@ ctrl.add = async (req, res) => {
 
     
     let data = await DB.addReunion(fecha, tiempo, idInm, idEntidad);
-    req.flash('success', 'hue');
+    // req.flash('success', 'hue');
     res.redirect('/inmueble/'+req.params.id);
 }
 

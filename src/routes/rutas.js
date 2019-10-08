@@ -48,7 +48,7 @@ router.get('/conteoplox', user.conteoplox);
 
 // =========== Inmuebles ============
 
-router.get('/inmueble/:id', inmueble.index );
+router.get('/inmueble/:id', inmueble.index);
 
 // =========== Reservas ============
 router.post('/reservar/:id/add', reserva.add);

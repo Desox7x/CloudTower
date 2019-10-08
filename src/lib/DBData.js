@@ -44,33 +44,16 @@ module.exports = {
     },
 
     async getInmueble(id){
-        let data = await DB.query('SELECT * FROM addInmueble WHERE idInm = ?', [id]);
+        let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE idInm = ?', [id]);
         //console.log(data);
         return data;
     },
 
     async addInmueble(name, desc, ubic, tipo, img, compra,
-     moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, id) {
-        const newInmo = {
-            name,
-            desc,
-            ubic,
-            tipo,
-            img,
-            compra,
-            moneda,
-            precio,
-            metro,
-            hab,
-            bath,
-            parqueo,
-            lblanca,
-            amueblado,
-            id
-        };
+     moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad) {
         
-        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, img = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idInm = ?', [name, desc, ubic, tipo, img, compra,
-            moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, id]);
+        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, img = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, desc, ubic, tipo, img, compra,
+            moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad]);
         console.log(data);
         
     },
