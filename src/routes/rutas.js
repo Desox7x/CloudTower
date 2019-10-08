@@ -24,6 +24,7 @@ router.get('/profile', isLoggedIn, home.profile);
 
 router.get('/user/:id', isLoggedIn, user.userProfile);
 router.get ('/profile/propertylist', home.propertyList);
+router.get('/profile/reunionlist', home.reunionList);
 
 router.get('/search', home.search)
 

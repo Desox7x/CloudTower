@@ -36,6 +36,10 @@ ctrl.profile = async (req, res) => {
 ctrl.propertyList = async (req, res) => {
     const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
     res.render('postlog/propertyList', {inmuebles: inmueble});
+};
+ctrl.reunionList = async (req, res) => {
+    const reuniones = await db.getAllReunionesEntidad(req.user.idEntidad);
+    res.render('postlog/reunionList', {reunion: reuniones});
 }
 
 ctrl.search = async(req,res) => {

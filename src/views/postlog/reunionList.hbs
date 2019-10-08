@@ -1,0 +1,227 @@
+<title>Perfil</title>
+
+<!-- Custom fonts for this template-->
+<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+<style>
+    .card-title,
+    .card-text {
+
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+
+
+    }
+</style>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
+                <div>
+                    <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
+                </div>
+                <div class="sidebar-brand-text mx-3">{{user.fullname}} </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/profile">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Perfil de {{user.fullname}}</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/propertylist" aria-labelledby="true">
+                    <i class="fas fa-th-list"></i>
+                    <span>Lista de inmuebles</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/reunionlist" aria-labelledby="true">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Reuniones pendientes</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="/search">
+                    <i class="fas fa-search"></i>
+                    <span>Buscador</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="/contract">
+                    <i class="fas fa-file-signature"></i>
+                    <span>Llenar contrato</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboardin">
+                    <i class="fas fa-chart-area"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="modal" data-target="#modalImage"
+                    aria-expanded="true" aria-controls="modalImage">
+                    <i class="fas fa-file-image"></i>
+                    <span>Cambiar imagen</span>
+                </a>
+            </li>
+            {{> editImg}}
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div class="p-4" id="content">
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generar Reportes</button>
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                            data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo
+                            Proyecto</button>
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                            data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar
+                            perfil</button>
+                    </div>
+                    {{> addproperty}}
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+
+                        <!-- Earnings (Monthly) Card Example -->
+
+                        <!-- Earnings (Monthly) Card Example -->
+
+                        <!-- Pending Requests Card Example -->
+
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-table"></i>
+                                Ultimas inmobiliarias</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Imagen</th>
+                                                <th>Usuario</th>
+                                                <th>Inmueble</th>
+                                                <th>Fecha</th>
+                                                <th>Dia</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Imagen</th>
+                                                <th>Usuario</th>
+                                                <th>Inmueble</th>
+                                                <th>Fecha</th>
+                                                <th>Dia</th>
+
+                                            </tr>
+                                        </tfoot>
+                                        {{#each reunion}}
+                                        <tbody>
+                                            <tr>
+                                                <td><img class="img-profile rounded-circle" src="/uploads/{{idImg}}"
+                                                        alt="">
+                                                </td>
+                                                <td>{{fullname}}</td>
+
+                                                <td>{{nombre}}</td>
+                                                <td>{{fecha}}</td>
+
+                                                <td>{{tiempo}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                        {{/each}}
+                                </div>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+    {{> infowin}}
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+</body>

@@ -104,6 +104,11 @@ module.exports = {
     async getReunionesEntidad(id){
         let data = await DB.query('SELECT * FROM reunion r JOIN addinmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
         return data;
+    },
+
+    async getAllReunionesEntidad(id) {
+        let data = await DB.query('SELECT * FROM reunion r JOIN Entidad e ON r.idEntidad = e.idEntidad JOIN addInmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
+        return data;
     }
 
 
