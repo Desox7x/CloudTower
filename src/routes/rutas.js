@@ -23,8 +23,8 @@ router.post('/sendemail', user.sendEmail);
 router.get('/profile', isLoggedIn, home.profile);
 
 router.get('/user/:id', isLoggedIn, user.userProfile);
-router.get ('/profile/propertylist', home.propertyList);
-router.get('/profile/reunionlist', home.reunionList);
+router.get ('/profile/propertylist', isLoggedIn, requireRole(InmobiliariaRole), home.propertyList);
+router.get('/profile/reunionlist', isLoggedIn, requireRole(InmobiliariaRole), home.reunionList);
 
 router.get('/search', home.search)
 
@@ -32,7 +32,7 @@ router.get('/search', home.search)
 // =========== USER ================
 router.get('/dashboard', isLoggedIn, user.dashboard, user.getProperty);
 router.get('/dashboardin', user.getProperty);
-router.get('/contract', user.contract);
+router.get('/contract', isLoggedIn, requireRole(InmobiliariaRole), user.contract);
 //router.get('/contract', user.signaturePad);
 router.get('/add_property', requireRole(InmobiliariaRole), user.addProperty);
 router.post('/add_property', user.addPropertyPOST);
@@ -43,9 +43,8 @@ router.get('/searchResult', user.searchResult);
 router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
 router.get('/delete/:id', user.deleteProperty);
-router.post('/contract', user.addContractPOST);
-router.get('/schedule', user.scheduleReunion);
-router.get('/conteoplox', user.conteoplox);
+router.post('/contract', requireRole(InmobiliariaRole), user.addContractPOST);
+
 
 // =========== Inmuebles ============
 
