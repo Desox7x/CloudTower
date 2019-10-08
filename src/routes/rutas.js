@@ -5,6 +5,8 @@ const {requireRole, isLoggedIn} = require('../lib/auth');
 const home = require('../controllers/HomeController');
 const user = require('../controllers/UserController');
 const auth = require('../controllers/AuthController');
+const inmueble = require('../controllers/InmuebleController');
+const reserva = require('../controllers/ReservaController');
 
 const ClientRole = 1;
 const InmobiliariaRole = 2;
@@ -43,6 +45,14 @@ router.get('/delete/:id', user.deleteProperty);
 router.post('/contract', user.addContractPOST);
 router.get('/schedule', user.scheduleReunion);
 router.get('/conteoplox', user.conteoplox);
+
+// =========== Inmuebles ============
+
+router.get('/inmueble/:id', inmueble.index );
+
+// =========== Reservas ============
+router.post('/reservar/:id/add', reserva.add);
+router.get('/reservar/:id', reserva.index );
 
 // =========== AUTH =================
 router.get('/signup', auth.signup);

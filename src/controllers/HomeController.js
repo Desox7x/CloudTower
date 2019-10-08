@@ -22,8 +22,10 @@ ctrl.profile = async (req, res) => {
         return res.render('postlog/profile', {data: req.user, isUser: true});
     }
     if (req.user.idTipoEntidad == 2) {
-        const inmueble = await db.getAllInmuebles(); 
-        return res.render('postlog/inmoprofile', {inmuebles: inmueble});
+        const reuniones = await db.getReunionesEntidad(req.user.idEntidad);
+        console.log('id'+req.user.idEntidad,reuniones);
+        const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
+        return res.render('postlog/inmoprofile', {inmuebles: inmueble, totalReuniones: reuniones.length});
     }
     if (req.user.idTipoEntidad == 3) {
         return res.render('postlog/dashboard/constructora');

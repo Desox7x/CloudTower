@@ -134,7 +134,7 @@ ctrl.updateUser = async (req, res) => {
 
 ctrl.userProfile = async(req, res) =>{
     let user = await DB.getUserById(req.params.id);
-    const inmueble = await DB.getAllInmuebles();  
+    const inmueble = await DB.getAllInmueblesEntidad(req.params.id);  
     console.log(user.length);
 
     if(user.length > 0 ){

@@ -34,7 +34,18 @@ module.exports = {
     },
 
     async getAllInmuebles() {
-        let data = await DB.query('SELECT * FROM addInmueble')
+        let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad')
+        return data;
+    },
+    async getAllInmueblesEntidad(id) {
+        let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE i.idEntidad = ?',[id])
+        console.log(data);
+        return data;
+    },
+
+    async getInmueble(id){
+        let data = await DB.query('SELECT * FROM addInmueble WHERE idInm = ?', [id]);
+        //console.log(data);
         return data;
     },
 
@@ -100,6 +111,17 @@ module.exports = {
         let data = await DB.query("Select * from addInmueble WHERE nombre LIKE CONCAT('%', ?,  '%')",[nombre]);
         return data;
     },
+
+    async addReunion(fecha, tiempo, idInm, idEntidad){
+        console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
+        let data = await DB.query("INSERT INTO reunion SET fecha = ?, tiempo = ?, idInm = ?, idEntidad = ?", [fecha, tiempo, idInm, idEntidad])
+        return data;
+    },
+
+    async getReunionesEntidad(id){
+        let data = await DB.query('SELECT * FROM reunion r JOIN addinmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
+        return data;
+    }
 
 
 

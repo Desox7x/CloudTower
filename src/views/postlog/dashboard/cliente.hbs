@@ -586,6 +586,7 @@
                         <th>Precio</th>
                         <th>Metros</th>
                         <th>Info</th>
+                        <th>User</th>
                       </tr>
                     </thead>
                     <tfoot>
@@ -597,6 +598,7 @@
                         <th>Precio</th>
                         <th>Metros</th>
                         <th>Info</th>
+                        <th>User</th>
                       </tr>
                     </tfoot>
                     {{#each inmuebles}}
@@ -614,6 +616,7 @@
                             data-target="#infomodal{{@index}}">Info</button>
         
                         </td>
+                        <td>{{fullname}}</td>
                       </tr>
                     </tbody>
                     {{/each}}
