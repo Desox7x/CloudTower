@@ -150,19 +150,21 @@
                 <div class="card-body">
                     <h5>{{nombre}}</h5>
                     <a href="/delete/{{idInm}}" class="btn btn-danger">Delete</a>
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#infomodal{{@index}}">Datos</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editInmobiliaria"{{@index}}>Datos</button>
                 </div>
+                
               </div>
             </div>
             {{/each}}
           </div>
-
+          
         </div>
       </div>
     </div>
   </div>
   
+  
+
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
@@ -170,7 +172,7 @@
 
  
 
-{{> infowin}}
+  {{> editInmo}}
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
