@@ -95,6 +95,11 @@ module.exports = {
         return data;
     },
 
+    async searchUser(nombre){
+        let data = await DB.query("SELECT * from Entidad WHERE fullname LIKE CONCAT('%', ?,  '%')",[nombre]);
+        return data;
+    },
+
     async addReunion(fecha, tiempo, idInm, idEntidad){
         console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
         let data = await DB.query("INSERT INTO reunion SET fecha = ?, tiempo = ?, idInm = ?, idEntidad = ?", [fecha, tiempo, idInm, idEntidad])
@@ -108,6 +113,16 @@ module.exports = {
 
     async getAllReunionesEntidad(id) {
         let data = await DB.query('SELECT * FROM reunion r JOIN Entidad e ON r.idEntidad = e.idEntidad JOIN addInmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
+        return data;
+    },
+
+    async deleteReunion(id) {
+        let data = await DB.query('DELETE FROM reunion WHERE id = ?', [id]);
+        console.log(data);
+    },
+    
+    async getRepresentantesFromEntidad(id) {
+        let data = await DB.query('SELECT * FROM Entidad e JOIN Representantes r ON e.idEntidad = r.idEntidad WHERE e.idEntidad = ?', [id]);
         return data;
     }
 

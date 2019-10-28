@@ -22,4 +22,10 @@ ctrl.add = async (req, res) => {
     res.redirect('/inmueble/'+req.params.id);
 }
 
+ctrl.deleteReunion = async (req, res) => {
+    await DB.deleteReunion(req.params.id);
+    console.log(req.params)
+    res.redirect('/profile/reunionlist');
+}
+
 module.exports = ctrl;

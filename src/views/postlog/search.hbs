@@ -186,45 +186,48 @@
                         <button type="submit">GG</button>
                     </div>
                 </form>
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <i class="fas fa-table"></i>
-                        Motor de busqueda</div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Proyecto</th>
-                                        <th>Sector</th>
-                                        <th>Tipo</th>
-                                        <th>Precio</th>
-                                        <th>Metros</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </thead>
-                                {{#each data}}
-                                <tbody>
-                                    <tr>
-                                        <td>{{nombre}}</td>
-                                        <td>{{ubic}}</td>
-                                        <td>{{tipoInm}}</td>
-                                        <td>{{precio}}${{moneda}}</td>
-                                        <td>{{metro}}m²</td>
-                                        <td>
+                <div class="container">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            Motor de busqueda</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Imagen</th>
+                                            <th>Proyecto</th>
+                                            <th>Sector</th>
+                                            <th>Tipo</th>
+                                            <th>Precio</th>
+                                            <th>Metros</th>
 
-                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                                data-target="#infomodal{{@index}}">Info</button>
+                                        </tr>
+                                    </thead>
+                                    {{#each data}}
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="/inmueble/{{idInm}}">
+                                                    <img class="img-profile rounded-circle" src="img/{{img}}" alt="">
+                                                </a>
+                                            </td>
+                                            <td>{{nombre}}</td>
+                                            <td>{{ubic}}</td>
+                                            <td>{{tipoInm}}</td>
+                                            <td>{{precio}}${{moneda}}</td>
+                                            <td>{{metro}}m²</td>
 
-                                        </td>
-                                    </tr>
-                                    
-                                </tbody>
-                                {{/each}}
-                                {{> infowin}}
+                                        </tr>
+
+                                    </tbody>
+                                    {{/each}}
+
+                            </div>
+
+                            </table>
                         </div>
-
-                        </table>
                     </div>
                 </div>
                 <div class="card-footer small text-muted">Powered by Desox</div>
@@ -232,12 +235,9 @@
             </div>
         </div>
     </div>
+    {{> infowin}}
 </body>
 
 <!-- SCRIPTS -->
-<<<<<<< Updated upstream
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-=======
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
->>>>>>> Stashed changes

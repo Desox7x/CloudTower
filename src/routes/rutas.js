@@ -25,6 +25,8 @@ router.get('/profile', isLoggedIn, home.profile);
 router.get('/user/:id', isLoggedIn, user.userProfile);
 router.get ('/profile/propertylist', isLoggedIn, requireRole(InmobiliariaRole), home.propertyList);
 router.get('/profile/reunionlist', isLoggedIn, requireRole(InmobiliariaRole), home.reunionList);
+router.get('/profile/representantes', isLoggedIn, requireRole(InmobiliariaRole), home.representantes);
+
 
 router.get('/search', home.search)
 
@@ -53,6 +55,7 @@ router.get('/inmueble/:id', inmueble.index);
 // =========== Reservas ============
 router.post('/reservar/:id/add', reserva.add);
 router.get('/reservar/:id', reserva.index );
+router.get('/borrar/:id', reserva.deleteReunion);
 
 // =========== AUTH =================
 router.get('/signup', auth.signup);

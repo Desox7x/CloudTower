@@ -83,6 +83,12 @@
           <i class="fas fa-file-signature"></i>
           <span>Llenar contrato</span></a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/profile/representantes">
+          <i class="fas fa-file-signature"></i>
+          <span>Representantes</span></a>
+      </li>
       
       <li class="nav-item">
         <a class="nav-link" href="/dashboardin">
@@ -120,8 +126,8 @@
           <!-- Page Heading -->
          
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <button type="button" class="btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generar Reportes</button>
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+              data-target="#Representante"><i class="fas fa-download fa-sm text-white-50"></i> Añadir Representante</button>
             <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
               data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
             <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
@@ -129,6 +135,7 @@
           </div>
           
           {{> addproperty}}
+          {{> addrepre}}
           <!-- Content Row -->
           <div class="row">
 
@@ -175,11 +182,11 @@
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Inmuebles en proceso</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{totalReservas}}%</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10"
+                            <div class="progress-bar bg-info" role="progressbar" style="width: {{totalReservas}}%" aria-valuenow="10"
                               aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>

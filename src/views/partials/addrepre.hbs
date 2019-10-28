@@ -1,0 +1,44 @@
+<div class="modal fade " id="Representante" tabindex="-1" role="dialog" aria-labelledby="RepresentanteTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header  bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLongTitle">Registrar Representante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/signup" method="POST">
+                    <input type="hidden" name="entidad" value="4">
+                    <div class="form-group">
+                        <input type="text" name="fullname" placeholder="Nombre Completo" class="form-control" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="telefono" placeholder="Número de Telefono" class="form-control" required
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <span class="note"> Formato: XXX-XXX-XXXX </span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="correo" placeholder="Correo Electrónico" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Contraseña" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">
+                            Registrarse
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

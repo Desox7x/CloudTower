@@ -14,8 +14,8 @@
                         <div class="form-group col-md-12">
                             <!-- Name -->
                             <label for="nombre">Nombre</label>
-                            <input name="nombre" type="text" class="form-control" placeholder="Ej. Las Damas II"
-                                required>
+                            <input name="nombre" type="text" class="form-control" value="{{nombre}}" placeholder="Ej. Las Damas II"
+                                >
                             <div class="invalid-feedback">Digite un nombre válido</div>
                         </div>
 
@@ -23,8 +23,8 @@
                             <!-- Description -->
                             <div class="form-group col-md-12">
                                 <label for="descr">Descripción</label>
-                                <textarea name="descr" class="form-control" rows="4"
-                                    placeholder="Ej. Amarillo, cerca de tienda x, etc." required></textarea>
+                                <textarea name="descr" class="form-control" rows="4" value="{{descr}}"
+                                    placeholder="Ej. Amarillo, cerca de tienda x, etc." ></textarea>
                                 <div class="invalid-feedback">Digite una descripción válida</div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                             <!-- Location; subject to change -->
                             <div class="form-group col-md-12">
                                 <label for="ubic">Ubicación</label>
-                                <select name="ubic" class="custom-select" required>
+                                <select name="ubic" class="custom-select" >
                                     <option value="">Escoja...</option>
                                     <option value="Santo Domingo Este">Santo Domingo Este</option>
                                     <option value="Santo Domingo Norte">Santo Domingo Norte</option>
@@ -47,8 +47,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="price">Precio</label>
-                            <input type="number" class="form-control" id="price" name="precio" required="">
-                            <div class="invalid-feedback">Digite un precio válido</div>
+                            <input type="number" class="form-control" id="price" name="precio" >                            <div class="invalid-feedback">Digite un precio válido</div>
                         </div>
 
                         <div class="form-group">
