@@ -27,25 +27,15 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #65cafe;">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center text-white nav-link" href="/profile">
         <div>
           <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
         </div>
         <div class="sidebar-brand-text mx-3">{{user.fullname}} </div>
       </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="/profile">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Perfil de {{user.fullname}}</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -87,7 +77,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/dashboardin">
           <i class="fas fa-chart-area"></i>
-          <span>Dashboard</span></a>
+          <span>Tablero</span></a>
       </li>
 
       <li class="nav-item">
@@ -118,11 +108,11 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <button type="button" class="btn btn-sm btn-primary shadow-sm"><i
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;"><i
                 class="fas fa-download fa-sm text-white-50"></i> Añadir Representante</button>
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
               data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
               data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar perfil</button>
           </div>
           {{> addproperty}}

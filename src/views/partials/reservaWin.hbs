@@ -2,7 +2,7 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-center" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header text-white" style="background-color: #1bb2fe;">
                 <h5 class="modal-title" id="exampleModalLongTitle">Reserva este inmueble</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <form action="/reservar/{{inmo.idInm}}/add" method="POST">
                     <div class="form-group">
-                        <h5>Programe el dia</h5>
+                        <h5>Programe el día</h5>
                         <input type="date" name="fecha">
                     </div>
                     <hr>
@@ -42,11 +42,11 @@
                     </div>
                     <hr>
                     <div class="form-group">
-                        <h5>Ubicacion</h5>
+                        <h5>Ubicación</h5>
                         <input type="text" value="{{inmo.ubic}}" disabled>
                     </div>
                     <div class="form-group">
-                        <button type="submit">Reservar</button>
+                        <button type="submit" style="background-color: #1bb2fe; border-color: #1eb2fc;">Reservar</button>
                     </div>
 
                 </form>
