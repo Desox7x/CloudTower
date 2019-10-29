@@ -45,7 +45,9 @@ router.get('/searchResult', user.searchResult);
 router.post('/updateuser', user.updateUser);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
 router.get('/delete/:id', user.deleteProperty);
-router.post('/contract', requireRole(InmobiliariaRole), user.addContractPOST);
+router.post('/contract', user.addContractPOST);
+router.get('/schedule', user.scheduleReunion);
+router.post('/add_property', user.addPropertyCPOST);
 
 
 // =========== Inmuebles ============

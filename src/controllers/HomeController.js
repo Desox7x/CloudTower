@@ -31,18 +31,23 @@ ctrl.profile = async (req, res) => {
         return res.render('postlog/inmoprofile', {repre: rep, inmuebles: inmueble, totalReuniones: reuniones.length, totalReservas: reservas.length});
     }
     if (req.user.idTipoEntidad == 3) {
-        return res.render('postlog/dashboard/constructora');
+        const reuniones = await db.getReunionesEntidad(req.user.idEntidad);
+        console.log('id'+req.user.idEntidad,reuniones);
+        const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
+        return res.render('postlog/dashboard/constructora', {inmuebles: inmueble, totalReuniones: reuniones.length});
     }
     
 
     res.status(403).send('Forbideen');
 }
+
 ctrl.propertyList = async (req, res) => {
     const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
     const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
     // const img = await db.getImagenInmuebleEntidad(req.user.idEntidad);
     res.render('postlog/propertyList', {repre: rep, inmuebles: inmueble});
 };
+
 ctrl.reunionList = async (req, res) => {
     const reuniones = await db.getAllReunionesEntidad(req.user.idEntidad);
     const rep = await db.getRepresentantesEntidad(req.user.idEntidad);

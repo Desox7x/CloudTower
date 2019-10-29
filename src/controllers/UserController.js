@@ -42,9 +42,7 @@ ctrl.inmueble = (req, res) => {
 ctrl.scheduleReunion = (req, res) => {
     res.render('postlog/schedulePage');
 }
-ctrl.conteoplox = (req, res) => {
-    res.render('postlog/conteoplox');
-}
+
 
 
 ctrl.addPropertyPOST = async (req, res) => {
@@ -65,6 +63,16 @@ ctrl.addPropertyPOST = async (req, res) => {
     }
     
 }
+
+ctrl.addPropertyCPOST = async (req, res) => {
+    await DB.addInmueble(req.body.nombre, req.body.descr, req.body.ubic, req.body.tipoInm,
+        req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro, 
+        req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado, 
+        req.user.idEntidad, req.body.estado);
+    console.log(req.body);
+    res.redirect('/profile');
+}
+
 ctrl.updateInmoPOST = async (req, res) => {
     const inmue = await DB.updateInmo(req.body.nombre, req.body.descr, req.body.ubic, req.body.precio, req.body.idInm);
     console.log(req.body);
@@ -161,7 +169,12 @@ ctrl.userProfile = async (req, res) => {
             return res.render('postlog/publicinmo', { data: user[0], inmuebles: inmueble })
         }
 
-        return res.render('postlog/profile', { data: user[0], isUser });
+        if(user[0].idTipoEntidad == 3){
+
+            return res.render('postlog/publiccons', {data: user[0], inmuebles: inmueble})
+        }
+
+        return res.render('postlog/profile', {data:  user[0], isUser});
     }
 
     return res.status(404).send('Not Found');

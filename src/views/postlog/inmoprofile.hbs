@@ -26,7 +26,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #65cafe;">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
@@ -37,21 +37,11 @@
       </a>
 
       <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="/profile">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Perfil de {{user.fullname}}</span></a>
-      </li>
-
-      <!-- Divider -->
       <hr class="sidebar-divider">
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Interface
+        Interfaz
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
@@ -66,7 +56,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/profile/reunionlist" aria-labelledby="true">
           <i class="fas fa-calendar-check"></i>
-          <span>Reuniones pendientes</span>
+          <span>Citas pendientes</span>
         </a>
       </li>
 
@@ -94,7 +84,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/dashboardin">
           <i class="fas fa-chart-area"></i>
-          <span>Dashboard</span></a>
+          <span>Tablero</span></a>
       </li>
 
       <li class="nav-item">
@@ -132,7 +122,7 @@
               Representante</button>
             <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
               data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
               data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar perfil</button>
           </div>
 
@@ -227,7 +217,7 @@
             <div class="col-xl-12 col-lg-8 ">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between bg-primary">
+                <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between" style="background-color: #1bb2fe;">
                   <h6 class="m-0 font-weight-bold text-white">Perfil de Inmobiliaria</h6>
 
                 </div>
@@ -294,13 +284,13 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="exampleModalLongTitle">Edita tu informacion</h5>
+        <div class="modal-header text-white" style="background-color: #1bb2fe;">
+          <h5 class="modal-title" id="exampleModalLongTitle">Edita tu información</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body text-primary">
+        <div class="modal-body text-dark">
           <form action="/updateuser" method="POST">
             <div class="form-group">
               <h5>Nombre</h5>
@@ -313,18 +303,18 @@
                 class="form-control">
             </div>
             <div class="form-group">
-              <h5>Direccion</h5>
+              <h5>Dirección</h5>
               <input type="text" name="direccion" value="{{user.direccion}}" placeholder="Direccion"
                 class="form-control">
             </div>
             <div class="form-group">
-              <h5>Telefono</h5>
+              <h5>Teléfono</h5>
               <input type="tel" name="telefono" value="{{user.telefono}}" placeholder="Número de Telefono"
                 class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
               <span class="note"> Formato: XXX-XXX-XXXX </span>
             </div>
             <div class="form-group">
-              <button class="btn btn-primary">Editar info</button>
+              <button class="btn btn-primary" style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar info</button>
 
             </div>
           </form>

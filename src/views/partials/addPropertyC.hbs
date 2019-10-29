@@ -1,5 +1,5 @@
-<!-- cuenta: lainmobiliaria@gmail.com; contraseña: 252627 -->
-<div class="modal fade" id="newProyect" tabindex="-1" role="dialog" aria-labelledby="newProyectTitle"
+<!-- cuenta: poderdelpueblo@leonel2020.com; contraseña: lupitaladelbarrio -->
+<div class="modal fade" id="newProyectC" tabindex="-1" role="dialog" aria-labelledby="newProyectTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-center" role="document">
         <div class="modal-content">
@@ -23,9 +23,10 @@
 
                         <!-- State of project -->
                         <div class="form-group col-md-6">
-                            <label for="estado">Estado del inmueble</label>
+                            <label for="estado">Estado del proyecto</label>
                             <select name="estado" class="custom-select" required>
                                 <option value="">Escoja...</option>
+                                <option value="planos">Planos</option>
                                 <option value="en proceso">En proceso</option>
                                 <option value="completado">Completado</option>
                             </select>
@@ -46,7 +47,7 @@
                     <!-- Adress goes here ↓ -->
                     <div class="form-row">
                         <!-- Location; subject to change -->
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label for="ubic">Ubicación</label>
                             <select name="ubic" class="custom-select" required>
                                 <option value="">Escoja...</option>
@@ -57,15 +58,6 @@
                             </select>
                             <small>Por cambiar</small>
                             <div class="invalid-feedback">Escoja una opción válida</div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="idRep">Representante</label>
-                            <select name="idRep" class="custom-select" required>
-                                <option value="">Escoja...</option>
-                                {{#each repre}}
-                                <option value="{{idRep}}">{{fullname}}</option>
-                                {{/each}}
-                            </select>
                         </div>
                     </div>
 
@@ -181,7 +173,7 @@
 
                         <!-- Furniture; binary answer -->
                         <div class="form-group col-md-4">
-                            <label for="amueblado">Parqueo</label>
+                            <label for="amueblado">Amueblado</label>
                             <select name="amueblado" class="custom-select" required>
                                 <option value="si">Sí</option>
                                 <option value="no">No</option>
@@ -325,16 +317,3 @@
         }, false);
     })();
 </script>
-
-<!-- script for submit button -->
-{{!-- <script>
-    //Validation function activates when clicking on save button
-    function submitResult() {
-        if (confirm("¿Quiere proceder con los cambios?") == false) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-</script> --}}
