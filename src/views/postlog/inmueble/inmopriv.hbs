@@ -27,10 +27,10 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #65cafe;">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white nav-link" href="/profile">
                 <div>
                     <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
                 </div>
@@ -38,21 +38,11 @@
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/profile">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Perfil de {{user.fullname}}</span></a>
-            </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Interfaz
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -67,7 +57,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/profile/reunionlist" aria-labelledby="true">
                     <i class="fas fa-calendar-check"></i>
-                    <span>Reuniones pendientes</span>
+                    <span>Citas pendientes</span>
                 </a>
             </li>
 
@@ -95,7 +85,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/dashboardin">
                     <i class="fas fa-chart-area"></i>
-                    <span>Dashboard</span></a>
+                    <span>Tablero</span></a>
             </li>
 
             <li class="nav-item">
@@ -125,13 +115,13 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
                             data-target="#Representante"><i class="fas fa-download fa-sm text-white-50"></i> Añadir
                             Representante</button>
-                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
                             data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo
                             Proyecto</button>
-                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
                             data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar
                             perfil</button>
                     </div>
@@ -197,7 +187,7 @@
                         <div class="col-md-4">
                             <div class="card text-justified">
                             <div class="card-header">
-                                Descripcion
+                                Descripción
                             </div>
                             <div class="card-body">
                                 <p>{{inmo.descr}}</p>
@@ -209,7 +199,7 @@
                         <div class="col-md-7">
                             <div class="card text-justified">
                                 <div class="card-header">
-                                    <h3>Informacion de {{inmo.nombre}}</h3>
+                                    <h3>Información de {{inmo.nombre}}</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">

@@ -23,7 +23,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #65cafe;">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center text-white nav-link" href="/profile">
@@ -53,7 +53,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/profile/reunionlist" aria-labelledby="true">
           <i class="fas fa-calendar-check"></i>
-          <span>Reuniones pendientes</span>
+          <span>Citas pendientes</span>
         </a>
       </li>
      
@@ -70,6 +70,12 @@
         <a class="nav-link" href="/contract">
           <i class="fas fa-file-signature"></i>
           <span>Llenar contrato</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/profile/representantes">
+          <i class="fas fa-file-signature"></i>
+          <span>Representantes</span></a>
       </li>
       
       <li class="nav-item">
@@ -207,7 +213,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between" style="background-color: #1bb2fe;">
-                  <h6 class="m-0 font-weight-bold text-white">Perfil de Inmobiliaria</h6>
+                  <h6 class="m-0 font-weight-bold text-white">Perfil de Constructora</h6>
 
                 </div>
                 <!-- Card Body -->
@@ -229,17 +235,29 @@
           </div>
 
           <!-- Content Row -->
-          <div class="row">
+          <div class="row" id="ads">
             {{#each inmuebles}}
-            <div class="col-md-3">
-              <div class="card text-center mx-auto">
-                <div class="card-body">
-                  <img src="img/{{img}}" alt="" class="w-100 h-100 img-thumbnail card-img" data-toggle="modal" 
-                  data-target="#infomodal{{@index}}">
-                  <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                    <h5 class="card-title">{{nombre}}</h5>
-                    {{!-- <p class="card-text">{{ubic}}</p> --}}
+            <div class="col-md-4">
+              <div class="card rounded">
+                <div class="card-image">
+                  <span class="card-notify-badge">{{nombre}}</span>
+                  <a href="/profile/inmueble/{{idInm}}"><span class="card-notify-year">Ver</span></a>
+                  
+                  <img class="img-thumbnail w-100 h-100 card-img"
+                    src="img/{{img}}"
+                    alt="Alternate Text" />
+                </div>
+                <br>
+                <div class="card-image-overlay m-auto">
+                  <span class="card-detail-badge">{{compra}}</span>
+                  <span class="card-detail-badge">{{precio}}</span>
+                  <span class="card-detail-badge">{{moneda}}$</span>
+                </div>
+                <div class="card-body text-center">
+                  <div class="ad-title m-auto">
+                    <h5>Honda Accord LX</h5>
                   </div>
+                  <a class="ad-btn" href="#">View</a>
                 </div>
               </div>
             </div>

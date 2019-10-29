@@ -31,10 +31,13 @@ ctrl.profile = async (req, res) => {
         return res.render('postlog/inmoprofile', {repre: rep, inmuebles: inmueble, totalReuniones: reuniones.length, totalReservas: reservas.length});
     }
     if (req.user.idTipoEntidad == 3) {
+        const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
         const reuniones = await db.getReunionesEntidad(req.user.idEntidad);
         console.log('id'+req.user.idEntidad,reuniones);
         const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
-        return res.render('postlog/dashboard/constructora', {inmuebles: inmueble, totalReuniones: reuniones.length});
+        const reservas = await db.getAllReunionesEntidad(req.user.idEntidad);
+        
+        return res.render('postlog/dashboard/constructora', {repre: rep, inmuebles: inmueble, totalReuniones: reuniones.length, totalReservas: reservas.length});
     }
     
 

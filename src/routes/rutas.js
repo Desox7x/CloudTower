@@ -24,8 +24,11 @@ router.get('/profile', isLoggedIn, home.profile);
 
 router.get('/user/:id', isLoggedIn, user.userProfile);
 router.get ('/profile/propertylist', isLoggedIn, requireRole(InmobiliariaRole), home.propertyList);
+router.get ('/profile/propertylist', isLoggedIn, requireRole(ConstructoraRole), home.propertyList);
 router.get('/profile/reunionlist', isLoggedIn, requireRole(InmobiliariaRole), home.reunionList);
+router.get('/profile/reunionlist', isLoggedIn, requireRole(ConstructoraRole), home.reunionList);
 router.get('/profile/representantes', isLoggedIn, requireRole(InmobiliariaRole), home.representantes);
+router.get('/profile/representantes', isLoggedIn, requireRole(ConstructoraRole), home.representantes);
 
 
 router.get('/search', home.search)
@@ -35,8 +38,10 @@ router.get('/search', home.search)
 router.get('/dashboard', isLoggedIn, user.dashboard, user.getProperty);
 router.get('/dashboardin', user.getProperty);
 router.get('/contract', isLoggedIn, requireRole(InmobiliariaRole), user.contract);
+router.get('/contract', isLoggedIn, requireRole(ConstructoraRole), user.contract);
 //router.get('/contract', user.signaturePad);
 router.get('/add_property', requireRole(InmobiliariaRole), user.addProperty);
+router.get('/add_property', requireRole(ConstructoraRole), user.addProperty);
 router.post('/add_property', user.addPropertyPOST);
 router.post('/updateInmo', user.updateInmoPOST);
 router.post('/upload', user.uploadPOST);
