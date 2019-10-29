@@ -46,6 +46,7 @@ router.get('/delete/:id', user.deleteProperty);
 router.post('/contract', user.addContractPOST);
 router.get('/schedule', user.scheduleReunion);
 router.get('/conteoplox', user.conteoplox);
+router.post('/add_property', user.addPropertyCPOST);
 
 // =========== Inmuebles ============
 

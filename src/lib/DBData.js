@@ -50,10 +50,10 @@ module.exports = {
     },
 
     async addInmueble(name, desc, ubic, tipo, img, compra,
-     moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad) {
+     moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad, estado) {
         
-        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, img = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, desc, ubic, tipo, img, compra,
-            moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad]);
+        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, img = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?, estado = ?', [name, desc, ubic, tipo, img, compra,
+            moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad, estado]);
         console.log(data);
         
     },

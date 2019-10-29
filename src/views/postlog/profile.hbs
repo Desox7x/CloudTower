@@ -21,7 +21,7 @@
                                 <form action="/upload" method="POST" enctype="multipart/form-data">
                                     <input type="file" name="image">
                                     <button type="btn btn-success">
-                                        Upload
+                                        Subir
                                     </button>
                                 </form>
                             </div>
@@ -45,12 +45,12 @@
         </div>
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-primary">
+                <div class="card-header" style="background-color: #1bb2fe;">
                     <h3 class="card-title text-white">
                         {{data.fullname}}
                             {{#if isUser}}
                             <button type="button" class="btn btn-secondary float-right" data-toggle="modal"
-                                data-target="#exampleModalCenter">Edit</button>
+                                data-target="#exampleModalCenter">Editar</button>
                             {{/if}}
                         {{> editwin}}
                     </h3>
@@ -64,9 +64,9 @@
             </div>
             <br>
             <div class="card">
-                <div class="card-header bg-primary">
+                <div class="card-header" style="background-color: #1bb2fe;">
                     <h3 class="card-title text-white">
-                        Informacion
+                        Información
 
 
 
@@ -78,9 +78,9 @@
 
                 <div class="card-body">
                     <h5 class="text-primary">
-                        Telefono: {{data.telefono}}
+                        Teléfono: {{data.telefono}}
                         <br>
-                        Direccion: {{data.direccion}}
+                        Dirección: {{data.direccion}}
                         <br>
                         Correo: {{data.correo}}
 

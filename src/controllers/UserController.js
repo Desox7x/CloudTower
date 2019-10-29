@@ -51,10 +51,20 @@ ctrl.addPropertyPOST = async (req, res) => {
     await DB.addInmueble(req.body.nombre, req.body.descr, req.body.ubic, req.body.tipoInm,
         req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro, 
         req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado, 
-        req.user.idEntidad);
+        req.user.idEntidad, req.body.estado);
     console.log(req.body);
     res.redirect('/profile');
 }
+
+ctrl.addPropertyCPOST = async (req, res) => {
+    await DB.addInmueble(req.body.nombre, req.body.descr, req.body.ubic, req.body.tipoInm,
+        req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro, 
+        req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado, 
+        req.user.idEntidad, req.body.estado);
+    console.log(req.body);
+    res.redirect('/profile');
+}
+
 ctrl.updateInmoPOST = async (req, res) => {
     await DB.updateInmo(req.body.nombre, req.body.descr, req.body.ubic, req.body.precio, req.body.idInm);
     console.log(req.body);
@@ -149,6 +159,11 @@ ctrl.userProfile = async(req, res) =>{
         if(user[0].idTipoEntidad == 2){
 
             return res.render('postlog/publicinmo', {data: user[0], inmuebles: inmueble})
+        }
+
+        if(user[0].idTipoEntidad == 3){
+
+            return res.render('postlog/publiccons', {data: user[0], inmuebles: inmueble})
         }
 
         return res.render('postlog/profile', {data:  user[0], isUser});

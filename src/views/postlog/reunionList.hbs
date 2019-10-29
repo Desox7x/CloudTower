@@ -26,7 +26,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #65cafe;">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
@@ -37,21 +37,11 @@
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/profile">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Perfil de {{user.fullname}}</span></a>
-            </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Interfaz
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -65,7 +55,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/profile/reunionlist" aria-labelledby="true">
                     <i class="fas fa-calendar-check"></i>
-                    <span>Reuniones pendientes</span>
+                    <span>Citas pendientes</span>
                 </a>
             </li>
 
@@ -86,7 +76,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/dashboardin">
                     <i class="fas fa-chart-area"></i>
-                    <span>Dashboard</span></a>
+                    <span>Tablero</span></a>
             </li>
 
             <li class="nav-item">
@@ -117,13 +107,13 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <button type="button" class="btn btn-sm btn-primary shadow-sm"><i
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generar Reportes</button>
-                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
-                            data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" 
+                            data-toggle="modal" data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo
                             Proyecto</button>
-                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
-                            data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" 
+                            data-toggle="modal" data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar
                             perfil</button>
                     </div>
                     {{> addproperty}}
@@ -145,9 +135,9 @@
                     <!-- Content Row -->
                     <div class="row">
                         <div class="card mb-3">
-                            <div class="card-header">
+                            <div class="card-header" style="background-color: #1bb2fe; color: #fff;">
                                 <i class="fas fa-table"></i>
-                                Ultimas inmobiliarias</div>
+                                Últimas inmobiliarias</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -157,7 +147,7 @@
                                                 <th>Usuario</th>
                                                 <th>Inmueble</th>
                                                 <th>Fecha</th>
-                                                <th>Dia</th>
+                                                <th>Día</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -166,7 +156,7 @@
                                                 <th>Usuario</th>
                                                 <th>Inmueble</th>
                                                 <th>Fecha</th>
-                                                <th>Dia</th>
+                                                <th>Día</th>
 
                                             </tr>
                                         </tfoot>
