@@ -22,11 +22,12 @@ ctrl.profile = async (req, res) => {
         return res.render('postlog/profile', {data: req.user, isUser: true});
     }
     if (req.user.idTipoEntidad == 2) {
+        const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
         const reuniones = await db.getReunionesEntidad(req.user.idEntidad);
         console.log('id'+req.user.idEntidad,reuniones);
         const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
-        const reservas = await db.getAllReunionesEntidad(req.user.idEntidad)
-        return res.render('postlog/inmoprofile', {inmuebles: inmueble, totalReuniones: reuniones.length, totalReservas: reservas.length});
+        const reservas = await db.getAllReunionesEntidad(req.user.idEntidad);
+        return res.render('postlog/inmoprofile', {repre: rep, inmuebles: inmueble, totalReuniones: reuniones.length, totalReservas: reservas.length});
     }
     if (req.user.idTipoEntidad == 3) {
         return res.render('postlog/dashboard/constructora');
@@ -37,18 +38,19 @@ ctrl.profile = async (req, res) => {
 }
 ctrl.propertyList = async (req, res) => {
     const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
-    res.render('postlog/propertyList', {inmuebles: inmueble});
+    const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
+    res.render('postlog/propertyList', {repre: rep, inmuebles: inmueble});
 };
 ctrl.reunionList = async (req, res) => {
     const reuniones = await db.getAllReunionesEntidad(req.user.idEntidad);
-    res.render('postlog/reunionList', {reunion: reuniones});
+    const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
+    res.render('postlog/reunionList', {repre: rep, reunion: reuniones});
 }
-ctrl.representantes = (req, res) => {
-    res.render('postlog/representantes');
+ctrl.representantes = async (req, res) => {
+    const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
+    res.render('postlog/representantes', {repre: rep});
 }
-ctrl.representantesPOST = async (req, res) => {
-    await db.getRepresentantesFromEntidad(req.user.idEntidad);
-}
+
     
 
 ctrl.search = async(req,res) => {

@@ -1,5 +1,6 @@
 const passport = require('passport');
 const DB = require('../lib/DBData')
+const helpers = require('../lib/helpers')
 
 const ctrl = {}
 
@@ -29,6 +30,13 @@ ctrl.loginPOST = (req, res, next) => {
         failureRedirect: '/login',
         failureFlash: true
     })(req, res, next);
+};
+
+ctrl.signupRepPOST = async (req, res) => {
+    let password = await helpers.encryptPassword(req.body.password)
+    await DB.createRep(req.body.fullname, password, req.body.telefono,
+        req.body.correo, req.body.direccion, 4, req.user.idEntidad);
+    res.send('usuario registrado')
 };
 
 module.exports = ctrl;

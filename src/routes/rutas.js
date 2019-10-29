@@ -60,6 +60,7 @@ router.get('/borrar/:id', reserva.deleteReunion);
 // =========== AUTH =================
 router.get('/signup', auth.signup);
 router.post('/signup', auth.signupPOST);
+router.post('/signuprep', auth.signupRepPOST);
 
 router.get('/login', auth.login)
 router.post('/login', auth.loginPOST);

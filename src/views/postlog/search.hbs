@@ -186,51 +186,43 @@
                         <button type="submit">GG</button>
                     </div>
                 </form>
-                <div class="container">
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <i class="fas fa-table"></i>
-                            Motor de busqueda</div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Imagen</th>
-                                            <th>Proyecto</th>
-                                            <th>Sector</th>
-                                            <th>Tipo</th>
-                                            <th>Precio</th>
-                                            <th>Metros</th>
-
-                                        </tr>
-                                    </thead>
-                                    {{#each data}}
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="/inmueble/{{idInm}}">
-                                                    <img class="img-profile rounded-circle" src="img/{{img}}" alt="">
-                                                </a>
-                                            </td>
-                                            <td>{{nombre}}</td>
-                                            <td>{{ubic}}</td>
-                                            <td>{{tipoInm}}</td>
-                                            <td>{{precio}}${{moneda}}</td>
-                                            <td>{{metro}}m²</td>
-
-                                        </tr>
-
-                                    </tbody>
-                                    {{/each}}
-
+                <div class="container p-4 ">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="align-text-left">
+                                <h3>Busqueda avanzada</h3>
                             </div>
+                        </div>
+                        
+                    </div>
+                    {{#each data}}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="img/{{img}}" class="img-thumbnail float-left mr-2" style="width: 10rem; margin-bottom: 8px;">
+                            <b><p>{{nombre}}</p></b>
+                            <p>{{tipoInm}}</p>
+                            <p>Metros: {{metro}}2</p>
+                            
 
-                            </table>
+                       </div>
+
+                       <div class="col-md-4">
+                           <b><p><i class="fas fa-map-marker"> {{ubic}}</i></p></b>
+                           <p>{{compra}}</p>
+                           <p>Habitación: {{hab}} Bano/s: {{bano}}</p>
+
+                       </div>
+                        
+                        <div class="col-md-4">
+                            <b><p>{{moneda}}${{precio}}</p></b>
+                            <br>
+                            <a href="/inmueble/{{idInm}}" class="btn btn-info">Detalles <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
+                    {{/each}}
+                    
                 </div>
-                <div class="card-footer small text-muted">Powered by Desox</div>
+                
 
             </div>
         </div>

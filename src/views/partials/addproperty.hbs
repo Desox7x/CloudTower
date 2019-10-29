@@ -35,7 +35,7 @@
                     <!-- Adress goes here ↓ -->
                     <div class="form-row">
                         <!-- Location; subject to change -->
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <label for="ubic">Ubicación</label>
                             <select name="ubic" class="custom-select" required>
                                 <option value="">Escoja...</option>
@@ -46,6 +46,15 @@
                             </select>
                             <small>Por cambiar</small>
                             <div class="invalid-feedback">Escoja una opción válida</div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="idRep">Representante</label>
+                            <select name="idRep" class="custom-select" required>
+                                <option value="">Escoja...</option>
+                                {{#each repre}}
+                                <option value="{{idRep}}">{{fullname}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                     </div>
 

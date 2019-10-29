@@ -252,14 +252,17 @@
             {{#each inmuebles}}
             <div class="col-md-3">
               <div class="card text-center mx-auto">
+                <a href="/inmueble/{{idInm}}">
                 <div class="card-body">
-                  <img src="img/{{img}}" alt="" class="w-100 h-100 img-thumbnail card-img" data-toggle="modal" 
-                  data-target="#infomodal{{@index}}">
+                  
+                  <img src="img/{{img}}" alt="" class="w-100 h-100 img-thumbnail card-img">
+                  
                   <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
                     <h5 class="card-title">{{nombre}}</h5>
                     {{!-- <p class="card-text">{{ubic}}</p> --}}
                   </div>
                 </div>
+                </a>
               </div>
             </div>
             {{/each}}

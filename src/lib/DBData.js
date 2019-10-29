@@ -38,24 +38,24 @@ module.exports = {
         return data;
     },
     async getAllInmueblesEntidad(id) {
-        let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE i.idEntidad = ?',[id])
+        let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE i.idEntidad = ?', [id])
         console.log(data);
         return data;
     },
 
-    async getInmueble(id){
+    async getInmueble(id) {
         let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE idInm = ?', [id]);
         //console.log(data);
         return data;
     },
 
     async addInmueble(name, desc, ubic, tipo, img, compra,
-     moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad) {
-        
+        moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad) {
+
         let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, img = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, desc, ubic, tipo, img, compra,
             moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad]);
-        console.log(data);
-        
+        return data;
+
     },
 
     async updateInmo(nombre, descr, ubic, precio, id) {
@@ -78,35 +78,35 @@ module.exports = {
             mailR,
             telR
         };
-           
+
         let data = await DB.query('INSERT INTO addContract SET dir = ?, typeP = ?, dateCon = ?, price = ?, cur = ?, nameC = ?, mailC = ?, telC = ?, nameR = ?, mailR = ?, telR = ?', [dir, typeP, dateCon, price, cur, nameC,
             mailC, telC, nameR, mailR, telR]);
         console.log(data);
-           
+
     },
-    
+
     async deleteProperty(id) {
         let data = await DB.query('DELETE FROM addInmueble WHERE idInm = ?', [id]);
         console.log(data);
     },
 
-    async searchInmueble(nombre){
-        let data = await DB.query("Select * from addInmueble WHERE nombre LIKE CONCAT('%', ?,  '%')",[nombre]);
+    async searchInmueble(nombre) {
+        let data = await DB.query("Select * from addInmueble WHERE nombre LIKE CONCAT('%', ?,  '%')", [nombre]);
         return data;
     },
 
-    async searchUser(nombre){
-        let data = await DB.query("SELECT * from Entidad WHERE fullname LIKE CONCAT('%', ?,  '%')",[nombre]);
+    async searchUser(nombre) {
+        let data = await DB.query("SELECT * from Entidad WHERE fullname LIKE CONCAT('%', ?,  '%')", [nombre]);
         return data;
     },
 
-    async addReunion(fecha, tiempo, idInm, idEntidad){
+    async addReunion(fecha, tiempo, idInm, idEntidad) {
         console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
         let data = await DB.query("INSERT INTO reunion SET fecha = ?, tiempo = ?, idInm = ?, idEntidad = ?", [fecha, tiempo, idInm, idEntidad])
         return data;
     },
 
-    async getReunionesEntidad(id){
+    async getReunionesEntidad(id) {
         let data = await DB.query('SELECT * FROM reunion r JOIN addinmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
         return data;
     },
@@ -120,9 +120,38 @@ module.exports = {
         let data = await DB.query('DELETE FROM reunion WHERE id = ?', [id]);
         console.log(data);
     },
-    
-    async getRepresentantesFromEntidad(id) {
-        let data = await DB.query('SELECT * FROM Entidad e JOIN Representantes r ON e.idEntidad = r.idEntidad WHERE e.idEntidad = ?', [id]);
+
+    async getRepresentantesFromInmueble(id) {
+        let data = await DB.query('SELECT * FROM RepInmueble WHERE idInm = ?', [id]);
+        return data;
+    },
+
+    async getRepresentantesEntidad(id){
+        let data = await DB.query('SELECT * FROM Representantes r JOIN Entidad e ON r.idEntidad = e.idEntidad WHERE r.idInm = ?', [id]);
+        return data;
+    },
+
+    async repBelongInmobiliaria(idEntidad, idInm) {
+        let data = await DB.query("SELECT * FROM Representantes WHERE idEntidad = ? AND idInm = ?", [idEntidad, idInm]);
+        console.log(data);
+        console.log(data!=null);
+        return data!=null;    
+    },
+
+    async createRep(fullname, password, telefono, correo, direccion, idTipoEntidad, idInm) {
+        let data = await DB.query('INSERT INTO Entidad SET fullname = ?, password = ?, telefono = ?, correo = ?, direccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad, idInm]);
+        await DB.query('INSERT INTO Representantes SET idEntidad = ?, idInm = ?', [data.insertId, idInm])
+        console.log(data)
+    },
+
+    async addRepInmueble(idRep, idInm) {
+        let data = await DB.query('INSERT INTO RepInmueble SET idRep = ?, idInm = ?', [idRep, idInm]);
+        console.log(data);
+    },
+
+  
+    async getRepInmuebleEntidad(id) {
+        let data = await DB.query('SELECT * FROM RepInmueble ri JOIN Representantes r ON ri.idRep = r.idRep JOIN Entidad e ON r.idEntidad = e.idEntidad WHERE ri.id = ?', [id]);
         return data;
     }
 

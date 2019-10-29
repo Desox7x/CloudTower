@@ -48,32 +48,41 @@ ctrl.conteoplox = (req, res) => {
 
 
 ctrl.addPropertyPOST = async (req, res) => {
-    await DB.addInmueble(req.body.nombre, req.body.descr, req.body.ubic, req.body.tipoInm,
-        req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro, 
-        req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado, 
-        req.user.idEntidad);
-    console.log(req.body);
-    res.redirect('/profile');
+    const validate = await DB.repBelongInmobiliaria(req.body.idRep, req.user.idEntidad)
+    if (validate) {
+        const nuevo = await DB.addInmueble(req.body.nombre, req.body.descr, req.body.ubic, req.body.tipoInm,
+            req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro,
+            req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado,
+            req.user.idEntidad);
+        const rep = await DB.getRepresentantesEntidad(req.user.idEntidad);
+        await DB.addRepInmueble(req.body.idRep, nuevo.insertId);
+        console.log(req.body);
+        res.redirect('/profile');
+    } else {
+        res.flash("Error");
+        
+    }
+    
 }
 ctrl.updateInmoPOST = async (req, res) => {
-    await DB.updateInmo(req.body.nombre, req.body.descr, req.body.ubic, req.body.precio, req.body.idInm);
+    const inmue = await DB.updateInmo(req.body.nombre, req.body.descr, req.body.ubic, req.body.precio, req.body.idInm);
     console.log(req.body);
-    res.redirect('/profile/propertyList', {inmuebles: inmueble});
+    res.redirect('/profile/propertyList');
 }
 
 ctrl.addContractPOST = async (req, res) => {
     await DB.addContract(req.body.dir, req.body.typeP, req.body.dateCon, req.body.price,
-        req.body.cur, req.body.nameC, req.body.mailC, req.body.telC, req.body.nameR, 
+        req.body.cur, req.body.nameC, req.body.mailC, req.body.telC, req.body.nameR,
         req.body.mailR, req.body.telR);
     console.log(req.body);
     res.redirect('/profile');
 }
 
 ctrl.getProperty = async (req, res) => {
-    const inmueble = await DB.getAllInmuebles(); 
-    
+    const inmueble = await DB.getAllInmuebles();
+
     console.log(inmueble);
-    res.render('postlog/dashboard/cliente', {inmuebles: inmueble})
+    res.render('postlog/dashboard/cliente', { inmuebles: inmueble })
 }
 
 ctrl.deleteProperty = async (req, res) => {
@@ -134,26 +143,26 @@ ctrl.updateUser = async (req, res) => {
     console.log(req.body)
 };
 
-ctrl.userProfile = async(req, res) =>{
+ctrl.userProfile = async (req, res) => {
     let user = await DB.getUserById(req.params.id);
-    const inmueble = await DB.getAllInmueblesEntidad(req.params.id);  
+    const inmueble = await DB.getAllInmueblesEntidad(req.params.id);
     console.log(user.length);
 
-    if(user.length > 0 ){
+    if (user.length > 0) {
         console.log("a");
         let isUser = (user[0].idEntidad == req.user.idEntidad);
-        if(isUser){
-           return res.redirect('/profile')
+        if (isUser) {
+            return res.redirect('/profile')
         }
 
-        if(user[0].idTipoEntidad == 2){
+        if (user[0].idTipoEntidad == 2) {
 
-            return res.render('postlog/publicinmo', {data: user[0], inmuebles: inmueble})
+            return res.render('postlog/publicinmo', { data: user[0], inmuebles: inmueble })
         }
 
-        return res.render('postlog/profile', {data:  user[0], isUser});
+        return res.render('postlog/profile', { data: user[0], isUser });
     }
-   
+
     return res.status(404).send('Not Found');
 }
 

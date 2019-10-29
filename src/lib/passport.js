@@ -34,7 +34,7 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, fullname, password, done) => {
-    const { telefono, correo, direccion, entidad } = req.body;
+    const { telefono, correo, direccion, entidad, isRep } = req.body;
     console.log(req.body)
     const newUser = {
         fullname,
@@ -48,6 +48,7 @@ passport.use('local.signup', new LocalStrategy({
     const result = await pool.query('INSERT INTO Entidad SET ?', [newUser]);
     
     console.log(result);
+    
     newUser.idEntidad = result.insertId;
     return done(null, newUser);
 }));

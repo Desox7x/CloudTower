@@ -8,14 +8,16 @@
 
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/profile.css">
 
 <style>
-  .card-title, .card-text {
-  
+  .card-title,
+  .card-text {
+
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
 
-    
+
   }
 </style>
 
@@ -128,33 +130,71 @@
           <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            
+
             <!-- Earnings (Monthly) Card Example -->
-            
+
             <!-- Earnings (Monthly) Card Example -->
 
             <!-- Pending Requests Card Example -->
-           
+
           </div>
 
           <!-- Content Row -->
-
+          <div class="row justify-content-center align-items-center"
+          {{#each repre}}>
+            <div class="col-md-3">
+                
+                
+                <div class="profile-card py-3 card text-center">
+                   
+                    <div class="card-body py-4">
+                        <img class="profile-picture rounded-circle" src="/uploads/{{idImg}}" />
+                        <h2 class="text-dark h5 font-weight-bold mt-4 mb-1">
+                            {{fullname}}
+                        </h2>
+                        <p class="text-muted font-weight-bold small">
+                            <i class="fa fa-map-marker"></i>
+                             {{direccion}}
+                        </p>
+                        <p class="text-muted font-weight-bold small">
+                            <i class="fas fa-mobile-alt"></i>
+                             {{telefono}}
+                        </p>
+                        <p class="px-1 mt-4 mb-4 text-muted quote-text">
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature.
+                        </p>
+                        <form action="/user/{{idEntidad}}">
+                          <button class="btn btn-sm btn-outline-success">Ver perfil</button>
+                        </form>
+                        <div class="d-flex social-section justify-content-center">
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+   
+            </div>
+            {{/each}}
+        </div>
+ 
           <!-- Content Row -->
-          
-          
+
+
         </div>
       </div>
     </div>
   </div>
-  
-  
+
+
 
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
 
- 
+
 
   {{> editInmo}}
   <!-- Bootstrap core JavaScript-->
