@@ -49,11 +49,11 @@ module.exports = {
         return data;
     },
 
-    async addInmueble(name, desc, ubic, tipo, compra,
+    async addInmueble(name, estado, desc, ubic, tipo, compra, img,
         moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad) {
 
-        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, desc, ubic, tipo, compra,
-            moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad]);
+        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, estado = ?, descr = ?, ubic = ?, tipoInm = ?, compra = ?, img = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, estado, desc, ubic, tipo, compra,
+            img, moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad]);
         return data;
 
     },

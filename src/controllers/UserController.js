@@ -48,26 +48,30 @@ ctrl.scheduleReunion = (req, res) => {
 ctrl.addPropertyPOST = async (req, res) => {
     const validate = await DB.repBelongInmobiliaria(req.body.idRep, req.user.idEntidad)
     if (validate) {
-        const nuevo = await DB.addInmueble(req.body.nombre, req.body.descr, req.body.ubic, req.body.tipoInm,
-            req.body.compra, req.body.moneda, req.body.precio, req.body.metro,
+        const nuevo = await DB.addInmueble(req.body.nombre, req.body.estado, req.body.descr, req.body.ubic, req.body.tipoInm,
+            req.body.compra, req.body.img, req.body.moneda, req.body.precio, req.body.metro,
             req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado,
             req.user.idEntidad);
         await DB.getRepresentantesEntidad(req.user.idEntidad);
         await DB.addRepInmueble(req.body.idRep, nuevo.insertId);
-        // await DB.addImagesInmueble(req.body.img, nuevo.insertId);
+
+        // req.body.img.forEach(async img => {
+        //     await DB.addImagesInmueble(img, nuevo.insertId);
+        // });
+
         console.log(req.body);
         res.redirect('/profile');
     } else {
         res.flash("Error");
-        
+
     }
-    
+
 }
 
 ctrl.addPropertyCPOST = async (req, res) => {
     await DB.addInmueble(req.body.nombre, req.body.descr, req.body.ubic, req.body.tipoInm,
-        req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro, 
-        req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado, 
+        req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro,
+        req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado,
         req.user.idEntidad, req.body.estado);
     console.log(req.body);
     res.redirect('/profile');
@@ -169,12 +173,12 @@ ctrl.userProfile = async (req, res) => {
             return res.render('postlog/publicinmo', { data: user[0], inmuebles: inmueble })
         }
 
-        if(user[0].idTipoEntidad == 3){
+        if (user[0].idTipoEntidad == 3) {
 
-            return res.render('postlog/publiccons', {data: user[0], inmuebles: inmueble})
+            return res.render('postlog/publiccons', { data: user[0], inmuebles: inmueble })
         }
 
-        return res.render('postlog/profile', {data:  user[0], isUser});
+        return res.render('postlog/profile', { data: user[0], isUser });
     }
 
     return res.status(404).send('Not Found');

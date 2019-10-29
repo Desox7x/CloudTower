@@ -30,22 +30,12 @@
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center text-white nav-link" href="/profile">
         <div>
           <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
         </div>
         <div class="sidebar-brand-text mx-3">{{user.fullname}} </div>
       </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="/profile">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Perfil de {{user.fullname}}</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
