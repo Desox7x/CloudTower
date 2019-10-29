@@ -51,11 +51,12 @@ ctrl.addPropertyPOST = async (req, res) => {
     const validate = await DB.repBelongInmobiliaria(req.body.idRep, req.user.idEntidad)
     if (validate) {
         const nuevo = await DB.addInmueble(req.body.nombre, req.body.descr, req.body.ubic, req.body.tipoInm,
-            req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro,
+            req.body.compra, req.body.moneda, req.body.precio, req.body.metro,
             req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado,
             req.user.idEntidad);
-        const rep = await DB.getRepresentantesEntidad(req.user.idEntidad);
+        await DB.getRepresentantesEntidad(req.user.idEntidad);
         await DB.addRepInmueble(req.body.idRep, nuevo.insertId);
+        // await DB.addImagesInmueble(req.body.img, nuevo.insertId);
         console.log(req.body);
         res.redirect('/profile');
     } else {

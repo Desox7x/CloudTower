@@ -49,10 +49,10 @@ module.exports = {
         return data;
     },
 
-    async addInmueble(name, desc, ubic, tipo, img, compra,
+    async addInmueble(name, desc, ubic, tipo, compra,
         moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad) {
 
-        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, img = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, desc, ubic, tipo, img, compra,
+        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, descr = ?, ubic = ?, tipoInm = ?, compra = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, desc, ubic, tipo, compra,
             moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad]);
         return data;
 
@@ -122,7 +122,8 @@ module.exports = {
     },
 
     async getRepresentantesFromInmueble(id) {
-        let data = await DB.query('SELECT * FROM RepInmueble WHERE idInm = ?', [id]);
+        let data = await DB.query('SELECT * FROM RepInmueble ri JOIN Representantes r ON ri.idRep = r.idRep JOIN Entidad e ON r.idEntidad = e.idEntidad WHERE ri.idInm = ?', [id]);
+        console.log(data)
         return data;
     },
 
@@ -153,7 +154,18 @@ module.exports = {
     async getRepInmuebleEntidad(id) {
         let data = await DB.query('SELECT * FROM RepInmueble ri JOIN Representantes r ON ri.idRep = r.idRep JOIN Entidad e ON r.idEntidad = e.idEntidad WHERE ri.id = ?', [id]);
         return data;
+    },
+
+    async addImagesInmueble(img, idInm){
+        let data = await DB.query('INSERT INTO imagen SET img = ?, idInm = ?', [img, idInm]);
+        return data;
+    },
+
+    async getImagenInmuebleEntidad(id){
+        let data = await DB.query('SELECT * FROM imagen i JOIN addInmueble e ON i.idInm = e.idInm WHERE i.idInm = ?', [id]);
+        return data;
     }
+
 
 
 

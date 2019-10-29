@@ -49,8 +49,8 @@ router.post('/contract', requireRole(InmobiliariaRole), user.addContractPOST);
 
 
 // =========== Inmuebles ============
-
-router.get('/inmueble/:id', inmueble.index);
+router.get('/profile/inmueble/:id', inmueble.privateInmueble);
+router.get('/inmueble/:id', inmueble.publicInmueble);
 
 // =========== Reservas ============
 router.post('/reservar/:id/add', reserva.add);
