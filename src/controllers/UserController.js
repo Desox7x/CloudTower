@@ -96,11 +96,10 @@ ctrl.addContractPOST = async (req, res) => {
 
 ctrl.getProperty = async (req, res) => {
     const inmueble = await DB.getAllInmuebles();
-    const inmo = await DB.getAllInmueblesEntidad(req.user.idEntidad);
-
-
+    
+    
     console.log(inmueble);
-    res.render('postlog/dashboard/cliente', { inmuebles: inmueble, totalInmuebles: inmo.length })
+    res.render('postlog/dashboard/cliente', { totalInmuebles: inmueble.length, inmuebles: inmueble })
 }
 
 ctrl.deleteProperty = async (req, res) => {

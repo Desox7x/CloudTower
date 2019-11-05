@@ -28,13 +28,13 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
-            
+
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white nav-link" href="/profile">
                 <div>
-                    <img class="img-profile rounded-circle" src="/uploads/{{ inmo.idImg }}" width="50" height="50">
+                    <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
                 </div>
-                <div class="sidebar-brand-text mx-3">{{inmo.fullname}} </div>
+                <div class="sidebar-brand-text mx-3">{{user.fullname}} </div>
             </a>
 
             <!-- Divider -->
@@ -47,6 +47,19 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
 
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/proyectlist" aria-labelledby="true">
+                    <i class="fas fa-th-list"></i>
+                    <span>Lista de inmuebles</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/datelist" aria-labelledby="true">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Reuniones pendientes</span>
+                </a>
+            </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -55,13 +68,29 @@
                     <span>Buscador</span></a>
             </li>
 
+            <!-- Nav Item - Tables -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="/contrato">
+                    <i class="fas fa-file-signature"></i>
+                    <span>Llenar contrato</span></a>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="/dashboardin">
                     <i class="fas fa-chart-area"></i>
                     <span>Tablero</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="modal" data-target="#modalImage"
+                    aria-expanded="true" aria-controls="modalImage">
+                    <i class="fas fa-file-image"></i>
+                    <span>Cambiar imagen</span>
+                </a>
+            </li>
 
+            {{> editImg}}
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -79,6 +108,20 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal" style="background-color: #1bb2fe; border-color: #1eb2fc;"
+                            data-target="#Representante"><i class="fas fa-download fa-sm text-white-50"></i> Añadir
+                            Representante</button>
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal" style="background-color: #1bb2fe; border-color: #1eb2fc;"
+                            data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo
+                            Proyecto</button>
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal" style="background-color: #1bb2fe; border-color: #1eb2fc;"
+                            data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar
+                            perfil</button>
+                    </div>
+
+                    {{> addproperty}}
+                    {{> addrepre}}
 
                     <div class="row">
                         <div class="col-sm-8">
@@ -90,9 +133,9 @@
                             </div>
                         </div>
 
-                        
+                        {{#each repre}}
                         <div class="col-md-4 ml-auto">
-                            {{#each repre}}
+
                             <div class="profile-card py-3 card text-center">
 
                                 <div class="card-body py-4">
@@ -123,22 +166,12 @@
                                     </div>
                                 </div>
                             </div>
-                            {{/each}}
-                            <br>
-                            
-                            <div class="text-center" data-toggle="modal"
-                                data-target="#reservaModal{{@index}}">
-                                <button class="btn btn-info">
-                                    Reservar
-                                </button>
-                            </div>
-                            {{> reservaWin}}
 
 
 
 
                         </div>
-                        
+                        {{/each}}
 
 
 
@@ -147,36 +180,36 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card text-justified">
-                                <div class="card-header">
-                                    Descripción
-                                </div>
-                                <div class="card-body">
-                                    <p>{{inmo.descr}}</p>
-
-                                </div>
+                            <div class="card-header">
+                                Descripcion
                             </div>
+                            <div class="card-body">
+                                <p>{{inmo.descr}}</p>
+
+                            </div>
+                        </div>
 
                         </div>
                         <div class="col-md-7">
                             <div class="card text-justified">
                                 <div class="card-header">
-                                    <h3>Información de {{inmo.nombre}}</h3>
+                                    <h3>Informacion de {{inmo.nombre}}</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <h5><b>Localización:</b> {{inmo.ubic}}</h5>
+                                        <p><b>Localizacion:</b> {{inmo.ubic}}</p>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5">
                                             <ul>
                                                 <li>
-                                                    <h5>Construcción: {{inmo.metro}} mt²</h5>
+                                                    <p><b>Construccion:</b> {{inmo.metro}} mt²</p>
                                                 </li>
                                                 <li>
-                                                    <p>Habitaciones: {{inmo.hab}}</p>
+                                                    <p><b>Habitaciones:</b> {{inmo.hab}}</p>
                                                 </li>
                                                 <li>
-                                                    <h5>Baños: {{inmo.bano}}</h5>
+                                                    <p><b>Banos:</b> {{inmo.bano}}</p>
                                                 </li>
                                             </ul>
                                         </div>
@@ -197,9 +230,10 @@
                                 </div>
                             </div>
                         </div>
-
+                        
 
                     </div>
+
                     <br>
                     <div class="row">
 
@@ -208,7 +242,7 @@
                     {{#if expressFlash }}
                     {{expressFlash}}
                     {{/if}}
-                   
+
                 </div>
             </div>
         </div>

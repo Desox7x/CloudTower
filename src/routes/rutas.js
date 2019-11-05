@@ -57,6 +57,9 @@ router.post('/add_property', user.addPropertyCPOST);
 router.get('/profile/inmueble/:id', inmueble.privateInmueble);
 router.get('/inmueble/:id', inmueble.publicInmueble);
 
+// =========== Proyectos ============
+router.get('/profile/proyectos/:id', inmueble.privateProyect);
+router.get('/proyectos/:id', inmueble.publicProyect);
 // =========== Reservas ============
 router.post('/reservar/:id/add', reserva.add);
 router.get('/reservar/:id', reserva.index );

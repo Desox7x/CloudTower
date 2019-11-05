@@ -42,7 +42,11 @@ module.exports = {
         console.log(data);
         return data;
     },
-
+    async getPropertyById(id){
+        let data = await DB.query('SELECT * FROM addInmueble WHERE idInm = ?', [id]);
+        console.log(data);
+        return data;
+    },
     async getInmueble(id) {
         let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE idInm = ?', [id]);
         //console.log(data);
@@ -159,6 +163,10 @@ module.exports = {
 
     async getRepresentantesEntidad(id){
         let data = await DB.query('SELECT * FROM Representantes r JOIN Entidad e ON r.idEntidad = e.idEntidad WHERE r.idInm = ?', [id]);
+        return data;
+    },
+    async getRepresentantes(id){
+        let data = await DB.query('SELECT * FROM Representantes WHERE idEntidad = ?', [id])
         return data;
     },
 
