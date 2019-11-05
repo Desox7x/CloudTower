@@ -95,6 +95,36 @@ module.exports = {
         return data;
     },
 
+    async searchFilter(nombre, ubic, tipoInm, estado, compra) {
+        console.log(nombre, ubic, tipoInm, estado, compra);
+        let query = "SELECT * FROM addInmueble WHERE";
+        if(nombre != undefined){
+            query+=" nombre LIKE '%"+nombre+"%'"; 
+        }
+        if(ubic != undefined){
+            if(nombre != undefined){query+=" AND "}
+            query+=" ubic LIKE '%"+ubic+"%'"; 
+        }
+        if(tipoInm != undefined){
+            if(nombre != undefined || ubic != undefined){query+=" AND "}
+            query+=" tipoInm LIKE '%"+tipoInm+"%'"; 
+        }
+        if(estado != undefined){
+            if(nombre != undefined || ubic != undefined || tipoInm != undefined){query+=" AND "}
+            query+=" estado LIKE '%"+estado+"%'"; 
+        }
+        if(compra != undefined){
+            if(nombre != undefined || ubic != undefined || tipoInm != undefined || estado != undefined){query+=" AND "}
+            query+=" compra LIKE '%"+compra+"%'"; 
+        }
+        // let data = await DB.query("SELECT * FROM addInmueble WHERE nombre LIKE CONCAT('%', ?,  '%') AND ubic LIKE CONCAT('%', ?,  '%') AND tipoInm LIKE CONCAT('%', ?,  '%') AND estado LIKE CONCAT('%', ?,  '%') AND compra LIKE CONCAT('%', ?,  '%')", [nombre, ubic, tipoInm,
+        // estado, compra]);
+        let data = await DB.query(query);
+        console.log(nombre, ubic, tipoInm, estado, compra);
+        return data;
+        
+    },
+
     async searchUser(nombre) {
         let data = await DB.query("SELECT * from Entidad WHERE fullname LIKE CONCAT('%', ?,  '%')", [nombre]);
         return data;

@@ -33,8 +33,9 @@ ctrl.profile = async (req, res) => {
     if (req.user.idTipoEntidad == 3) {
         const reuniones = await db.getReunionesEntidad(req.user.idEntidad);
         console.log('id'+req.user.idEntidad,reuniones);
-        const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
-        return res.render('postlog/dashboard/constructora', {inmuebles: inmueble, totalReuniones: reuniones.length});
+        const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad);
+        const rep = await db.getRepresentantesEntidad(req.user.idEntidad); 
+        return res.render('postlog/constructprofile', {inmuebles: inmueble, totalReuniones: reuniones.length});
     }
     
 
@@ -61,11 +62,28 @@ ctrl.representantes = async (req, res) => {
     
 
 ctrl.search = async(req,res) => {
-    let data = await db.searchInmueble(req.query.nombre);
-    await db.getRepresentantesEntidad(req.user.idEntidad);
+    let data, rep;
+    if(req.query.nombre != undefined) {
+         data = await db.searchInmueble(req.query.nombre);
+         rep = await db.getRepresentantesFromInmueble(req.params.id);
+    }
     
-    return res.render('postlog/search', {data})
+    
+    
+    return res.render('postlog/search', {rep, data})
 
+}
+
+ctrl.searchFilter = async(req, res) => {
+    let data;
+    if(req.query.nombre != undefined || req.query.ubic != undefined || req.query.tipoInm != undefined || 
+        req.query.estado != undefined || req.query.compra != undefined) {
+            data = await db.searchFilter(req.query.nombre, req.query.ubic, req.query.tipoInm, 
+                req.query.estado, req.query.compra);
+         }
+    // let data = await db.searchFilter(req.query.nombre, req.query.ubic, req.query.tipoInm,
+    //     req.query.estado, req.query.compra);
+    return res.render('postlog/searchfilter', {data})
 }
 
 module.exports = ctrl;

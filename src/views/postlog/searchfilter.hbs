@@ -1,0 +1,215 @@
+<!-- CSS -->
+<style>
+    .btn-default {
+        background-color: #87cefa;
+    }
+
+    .btn-primary {
+        background-color: #6495ed;
+        border: none;
+        color: #FFF;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #4682b4;
+    }
+
+    .btn-secondary {
+        background-color: #c0c0c0;
+        border: none;
+        color: #FFF;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+        background-color: #a6a6a6;
+    }
+
+    .container-fluid {
+        padding-top: 10px;
+    }
+
+    .dropdown.dropdown-lg .dropdown-menu {
+        margin-top: -1px;
+        padding: 4px 15px;
+    }
+
+    .btn-group,
+    .btn {
+        border-radius: 4px;
+        margin-left: -1px;
+    }
+
+    .px-4 .py-3 .form-group {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    @media screen and (min-width: 768px) {
+        #boot-search-box {
+            width: 500px;
+            margin: 5px auto;
+        }
+
+        .dropdown.dropdown-lg {
+            position: static !important;
+        }
+
+        .dropdown.dropdown-lg .dropdown-menu {
+            min-width: 500px;
+        }
+    }
+</style>
+<script>
+    $('#Dropdown .dropdown-menu').on({
+        "click": function (e) {
+            e.stopPropagation();
+        }
+    });
+
+</script>
+
+<!-- BODY -->
+
+<body>
+    <div class="container p-4">
+
+        <form action="/busquedaAvanzada" method="GET">
+            <div class="form-row">
+                <div class="form-group col-md-8">
+
+                    <label for="nombre">Buscar</label>
+                    <input type="text" class="form-control" placeholder="Búsqueda" name="nombre">
+
+
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="ubic">Ubicación</label>
+                    <select name="ubic" class="form-control" >
+                        <option value="" disabled selected>Escoja...</option>
+                        <option value="Santo Domingo Este">Santo Domingo Este</option>
+                        <option value="Santo Domingo Norte">Santo Domingo Norte</option>
+                        <option value="Santo Domingo Oeste">Santo Domingo Oeste</option>
+                        <option value="Distrito Nacional">Distrito Nacional</option>
+                    </select>
+
+                </div>
+
+                
+
+
+
+            </div>
+            <div class="form-row align-items-center justify-content-between mb-4">
+                <div class="form-group col-md-4">
+
+                    <label for="tipoInm">Categoría</label>
+                    <select name="tipoInm" class="form-control">
+                        <option value="" disabled selected>Tipo de propiedad</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Solar">Solar</option>
+                        <option value="Finca">Finca</option>
+                        <option value="Nave">Nave</option>
+                        <option value="Local Comercial">Local comercial</option>
+                        <option value="Edificio">Edificio</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Penthouse">Penthouse</option>
+                        <option value="Local de Oficina">Local de oficina</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group col-md-4">
+
+                    <label for="estado">Estado del inmueble</label>
+                    <select name="estado" class="form-control">
+                        <option value="" disabled selected>Estado</option>
+                        <option value="En proceso">En proceso</option>
+                        <option value="completado">Completado</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group col-md-4">
+
+                    <label for="compra">Oferta del inmueble</label>
+                    <select name="compra" class="form-control">
+                        <option value="" disabled selected>Oferta</option>
+                        <option value="Venta">Venta</option>
+                        <option value="Alquiler">Alquiler</option>
+                    </select>
+
+                </div>
+
+                
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2 ml-auto">
+                    
+                    <button type="submit" class="btn btn-success"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+            </div>
+
+        </form>
+
+
+
+        <div class="container p-4 ">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="align-text-left">
+                        <h3>Búsqueda Avanzada</h3>
+                    </div>
+                </div>
+
+            </div>
+            {{#each data}}
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="img/{{img}}" class="img-thumbnail float-left mr-2"
+                        style="width: 10rem; margin-bottom: 8px;">
+                    <b>
+                        <p>{{nombre}}</p>
+                    </b>
+                    <p>{{tipoInm}}</p>
+                    <p>Metros: {{metro}}2</p>
+
+
+
+                </div>
+
+                <div class="col-md-4">
+                    <b>
+                        <p><i class="fas fa-map-marker"> {{ubic}}</i></p>
+                    </b>
+                    <p>{{compra}}</p>
+                    <p>Habitación: {{hab}} Baño/s: {{bano}}</p>
+
+                </div>
+
+                <div class="col-md-4">
+                    <b>
+                        <p>{{moneda}}${{precio}}</p>
+                    </b>
+
+
+
+                    <a href="/inmueble/{{idInm}}" class="btn btn-info">Detalles <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+            {{/each}}
+
+
+        </div>
+    
+    </div>
+    {{> infowin}}
+</body>
+
+<!-- SCRIPTS -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

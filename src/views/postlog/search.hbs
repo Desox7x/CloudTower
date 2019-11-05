@@ -63,6 +63,14 @@
         }
     }
 </style>
+<script>
+    $('#Dropdown .dropdown-menu').on({
+        "click": function (e) {
+            e.stopPropagation();
+        }
+    });
+
+</script>
 
 <!-- BODY -->
 
@@ -73,18 +81,16 @@
                 <form action="/search" method="GET">
                     <div class="input-group" id="boot-search-box">
                         <input type="text" class="form-control" placeholder="Búsqueda" name="nombre">
-                        <div class="input-group-btn">
+
+                        {{!-- <div class="input-group-btn">
                             <div class="btn-group" role="group">
                                 <div class="dropdown dropdown-lg">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
-                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <button type="button" onclick="btnToggle()" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                                            class="caret"></span></button>
+                                    <div class="dropdown-menu dropdown-menu-right" id="Dropdown" role="menu">
                                         <form class="px-4 py-3" role="form" action="/searchResult" method="GET">
-                                            <div class="form-group">
-                                                <label for="keyword">Descripción de la propiedad...</label>
-                                                <input type="text" id="keyword" class="form-control">
-                                            </div>
-                                            <div class="dropdown-divider"></div>
+
                                             <div class="form-group">
                                                 <label for="offer">Oferta</label>
                                                 <select id="offer" class="form-control">
@@ -173,7 +179,7 @@
                                                 </div>
                                             </div>
                                             <div class="dropdown-divider"></div>
-                                            <button type="submit" class="btn btn-primary btn-block" 
+                                            <button type="submit" class="btn btn-primary btn-block"
                                                 style="background-color: #1bb2fe; border-color: #1eb2fc;"><i
                                                     class="fa fa-search" aria-hidden="true"></i></span></button>
                                             <button type="reset" class="btn btn-secondary btn-block"><i
@@ -183,48 +189,68 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <button type="submit">Aceptar</button>
+                        </div> --}}
+                        <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+
                     </div>
+
                 </form>
-                <div class="container p-4 ">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="align-text-left">
-                                <h3>Búsqueda avanzada</h3>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    {{#each data}}
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="img/{{img}}" class="img-thumbnail float-left mr-2" style="width: 10rem; margin-bottom: 8px;">
-                            <b><p>{{nombre}}</p></b>
-                            <p>{{tipoInm}}</p>
-                            <p>Metros: {{metro}}2</p>
-                            <p><i class="fas fa-user-tie">{{fullname}}</i></p>
-                            
+                <a href="/busquedaAvanzada">
+                    <button class="btn btn-info"><i class="fas fa-tools"></i> Busqueda avanzada</button>
+                </a>
 
-                       </div>
 
-                       <div class="col-md-4">
-                           <b><p><i class="fas fa-map-marker"> {{ubic}}</i></p></b>
-                           <p>{{compra}}</p>
-                           <p>Habitación: {{hab}} Baño/s: {{bano}}</p>
 
-                       </div>
-                        
-                        <div class="col-md-4">
-                            <b><p>{{moneda}}${{precio}}</p></b>
-                            <br>
-                            <a href="/inmueble/{{idInm}}" class="btn btn-info">Detalles <i class="fas fa-chevron-right"></i></a>
+            </div>
+            
+
+
+            <div class="container p-4 ">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="align-text-left">
+                            <h3>Búsqueda</h3>
                         </div>
                     </div>
-                    {{/each}}
-                    
+
                 </div>
-                
+                {{#each data}}
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="img/{{img}}" class="img-thumbnail float-left mr-2"
+                            style="width: 10rem; margin-bottom: 8px;">
+                        <b>
+                            <p>{{nombre}}</p>
+                        </b>
+                        <p>{{tipoInm}}</p>
+                        <p>Metros: {{metro}}2</p>
+
+
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <b>
+                            <p><i class="fas fa-map-marker"> {{ubic}}</i></p>
+                        </b>
+                        <p>{{compra}}</p>
+                        <p>Habitación: {{hab}} Baño/s: {{bano}}</p>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <b>
+                            <p>{{moneda}}${{precio}}</p>
+                        </b>
+
+
+
+                        <a href="/inmueble/{{idInm}}" class="btn btn-info">Detalles <i
+                                class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                {{/each}}
+
 
             </div>
         </div>

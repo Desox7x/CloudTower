@@ -1,0 +1,337 @@
+<title>Perfil</title>
+
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<style>
+    .card-title,
+    .card-text {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+    }
+</style>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white nav-link"
+                href="/profile">
+                <div>
+                    <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
+                </div>
+                <div class="sidebar-brand-text mx-3">{{user.fullname}} </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interfaz
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/proyectlist" aria-labelledby="true">
+                    <i class="fas fa-th-list"></i>
+                    <span>Lista de inmuebles</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/datelist" aria-labelledby="true">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Reuniones pendientes</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="/search">
+                    <i class="fas fa-search"></i>
+                    <span>Buscador</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="/contrato">
+                    <i class="fas fa-file-signature"></i>
+                    <span>Llenar contrato</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboardin">
+                    <i class="fas fa-chart-area"></i>
+                    <span>Tablero</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="modal" data-target="#modalImage"
+                    aria-expanded="true" aria-controls="modalImage">
+                    <i class="fas fa-file-image"></i>
+                    <span>Cambiar imagen</span>
+                </a>
+            </li>
+
+            {{> editImg}}
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div class="p-4" id="content">
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm"
+                            style="background-color: #1bb2fe; border-color: #1eb2fc;"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generar Reportes</button>
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm"
+                            style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
+                            data-target="#newProyectC"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo
+                            Proyecto</button>
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm"
+                            style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
+                            data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar
+                            perfil</button>
+                    </div>
+
+                    {{> addPropertyC}}
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Ganancias (Mes)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Ganancias (Anuales)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Inmuebles en proceso</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%</div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                            style="width: 10%" aria-valuenow="10" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Citas
+                                                pendientes</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalReuniones}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Area Chart -->
+                        <div class="col-xl-12 col-lg-8 ">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between"
+                                    style="background-color: #1bb2fe;">
+                                    <h6 class="m-0 font-weight-bold text-white">Perfil de Inmobiliaria</h6>
+
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area" style="height: 8rem;">
+                                        <ul>
+                                            <h4>{{user.direccion}}</h4>
+                                        </ul>
+                                        <ul>
+                                            <h5>{{user.telefono}}</h5>
+                                        </ul>
+                                        <ul>
+                                            <h5>{{user.correo}}</h5>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        {{#each inmuebles}}
+                        <div class="col-md-3">
+                            <div class="card text-center mx-auto">
+                                <a href="/profile/inmueble/{{idInm}}">
+                                    <div class="card-body">
+                                        <img src="img/{{img}}" alt="" class="w-100 h-100 img-thumbnail card-img"
+                                            data-toggle="modal" data-target="#infomodal{{@index}}">
+                                        <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
+                                            <h5 class="card-title">{{nombre}}</h5>
+                                            {{!-- <p class="card-text">{{ubic}}</p> --}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <link rel="stylesheet" href="/css/tel.css">
+    <div class="modal fade" id="EditProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: #1bb2fe;">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edita tu información</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <form action="/updateuser" method="POST">
+                        <div class="form-group">
+                            <h5>Nombre</h5>
+                            <input type="text" name="fullname" value="{{user.fullname}}" placeholder="Nombre completo"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <h5>Descripcion</h5>
+                            <input type="text" name="descripcion" value="{{user.descripcion}}" placeholder="Trabajo"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <h5>Dirección</h5>
+                            <input type="text" name="direccion" value="{{user.direccion}}" placeholder="Direccion"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <h5>Teléfono</h5>
+                            <input type="tel" name="telefono" value="{{user.telefono}}" placeholder="Número de Telefono"
+                                class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                            <span class="note"> Formato: XXX-XXX-XXXX </span>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary"
+                                style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar info</button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+</body>
