@@ -25,7 +25,7 @@ ctrl.add = async (req, res) => {
 ctrl.deleteReunion = async (req, res) => {
     await DB.deleteReunion(req.params.id);
     console.log(req.params)
-    res.redirect('/profile/reunionlist');
+    res.redirect('/profile');
 }
 
 module.exports = ctrl;

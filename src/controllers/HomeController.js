@@ -35,7 +35,7 @@ ctrl.profile = async (req, res) => {
         console.log('id'+req.user.idEntidad,reuniones);
         const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad);
         const rep = await db.getRepresentantesEntidad(req.user.idEntidad); 
-        return res.render('postlog/constructprofile', {inmuebles: inmueble, totalReuniones: reuniones.length});
+        return res.render('postlog/constructprofile', {repre: rep, inmuebles: inmueble, totalReuniones: reuniones.length});
     }
     
 
@@ -48,16 +48,33 @@ ctrl.propertyList = async (req, res) => {
     // const img = await db.getImagenInmuebleEntidad(req.user.idEntidad);
     res.render('postlog/propertyList', {repre: rep, inmuebles: inmueble});
 };
+ctrl.proyectList = async (req, res) => {
+    const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
+    const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
+    // const img = await db.getImagenInmuebleEntidad(req.user.idEntidad);
+    res.render('postlog/proyectList', {repre: rep, inmuebles: inmueble});
+};
+
 
 ctrl.reunionList = async (req, res) => {
     const reuniones = await db.getAllReunionesEntidad(req.user.idEntidad);
     const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
     res.render('postlog/reunionList', {repre: rep, reunion: reuniones});
 }
+ctrl.dateList = async (req, res) => {
+    const reuniones = await db.getAllReunionesEntidad(req.user.idEntidad);
+    const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
+    res.render('postlog/datelist', {repre: rep, reunion: reuniones});
+}
 ctrl.representantes = async (req, res) => {
     const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
     res.render('postlog/representantes', {repre: rep});
 }
+ctrl.ingenieros = async (req, res) => {
+    const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
+    res.render('postlog/ingenieros', {repre: rep});
+}
+
 
     
 

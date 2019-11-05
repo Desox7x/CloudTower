@@ -74,6 +74,8 @@ ctrl.addPropertyCPOST = async (req, res) => {
         req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro,
         req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado,
         req.user.idEntidad, req.body.estado);
+    await DB.getRepresentantesEntidad(req.user.idEntidad);
+    await DB.addRepInmueble(req.body.idRep, nuevo.insertId);
     
     
     console.log(req.body);
@@ -106,6 +108,11 @@ ctrl.deleteProperty = async (req, res) => {
     await DB.deleteProperty(req.params.id);
     console.log(req.params);
     res.redirect('/profile/propertylist');
+}
+ctrl.deleteProyect = async (req, res) => {
+    await DB.deleteProperty(req.params.id);
+    res.redirect('/profile/proyectlist');
+    
 }
 
 ctrl.search = (req, res) => {
