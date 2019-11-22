@@ -17,6 +17,9 @@ ctrl.contact = (req, res) => {
     res.render('./postlog/contact');
 }
 
+ctrl.map = (req, res) => {
+    res.render('./postlog/mapa')
+}
 ctrl.profile = async (req, res) => {
     if (req.user.idTipoEntidad == 1 || req.user.idTipoEntidad == 4) {
         return res.render('postlog/profile', {data: req.user, isUser: true});
@@ -74,9 +77,6 @@ ctrl.ingenieros = async (req, res) => {
     const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
     res.render('postlog/ingenieros', {repre: rep});
 }
-
-
-    
 
 ctrl.search = async(req,res) => {
     let data, rep;

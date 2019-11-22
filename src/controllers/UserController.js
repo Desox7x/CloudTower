@@ -121,6 +121,7 @@ ctrl.search = (req, res) => {
 
 ctrl.sendEmail = async (req, res) => {
     const { Correo, text } = req.body;
+    const mail = req.user.correo;
     contentHTML = `
         <h1>User Information</h1>
         <ul>
@@ -133,14 +134,14 @@ ctrl.sendEmail = async (req, res) => {
         port: 25,
         secure: false,
         auth: {
-            user: '',
-            pass: ''
+            user: 'genao_abdel@hotmail.com',
+            pass: 'Desox7x1997'
         }
     });
 
     const info = await transporter.sendMail({
-        from: "",
-        to: '',
+        from: "genao_abdel@hotmail.com",
+        to: mail,
         subject: 'Pruebita',
         html: contentHTML
 

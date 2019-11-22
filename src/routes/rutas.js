@@ -21,7 +21,7 @@ router.get('/about', home.about);
 router.get('/contact', home.contact);
 router.post('/sendemail', user.sendEmail);
 router.get('/profile', isLoggedIn, home.profile);
-
+router.get('/mapa', home.map)
 router.get('/user/:id', isLoggedIn, user.userProfile);
 router.get ('/profile/propertylist', isLoggedIn, requireRole(InmobiliariaRole), home.propertyList);
 router.get('/profile/proyectlist', isLoggedIn, requireRole(ConstructoraRole), home.proyectList);
@@ -75,5 +75,7 @@ router.get('/login', auth.login)
 router.post('/login', auth.loginPOST);
 
 router.get('/logout',  auth.logout);
+
+
 
 module.exports = router;
