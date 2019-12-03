@@ -184,4 +184,8 @@ ctrl.userProfile = async (req, res) => {
     return res.status(404).send('Not Found');
 }
 
+ctrl.viewContract = (req, res) => {
+    res.render('postlog/viewContract');
+}
+
 module.exports = ctrl;
