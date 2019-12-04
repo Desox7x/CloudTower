@@ -54,10 +54,11 @@ ctrl.addPropertyPOST = async (req, res) => {
             req.user.idEntidad);
         await DB.getRepresentantesEntidad(req.user.idEntidad);
         await DB.addRepInmueble(req.body.idRep, nuevo.insertId);
+        
 
-        // req.body.img.forEach(async img => {
-        //     await DB.addImagesInmueble(img, nuevo.insertId);
-        // });
+        // req.file.filename.forEach(async img => {
+        //      await DB.addImagesInmueble(img, nuevo.insertId);
+        //  });
 
         console.log(req.body);
         res.redirect('/profile');
@@ -73,6 +74,10 @@ ctrl.addPropertyCPOST = async (req, res) => {
         req.body.img, req.body.compra, req.body.moneda, req.body.precio, req.body.metro,
         req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado,
         req.user.idEntidad, req.body.estado);
+    await DB.getRepresentantesEntidad(req.user.idEntidad);
+    await DB.addRepInmueble(req.body.idRep, nuevo.insertId);
+    
+    
     console.log(req.body);
     res.redirect('/profile');
 }
@@ -93,15 +98,21 @@ ctrl.addContractPOST = async (req, res) => {
 
 ctrl.getProperty = async (req, res) => {
     const inmueble = await DB.getAllInmuebles();
-
+    
+    
     console.log(inmueble);
-    res.render('postlog/dashboard/cliente', { inmuebles: inmueble })
+    res.render('postlog/dashboard/cliente', { totalInmuebles: inmueble.length, inmuebles: inmueble })
 }
 
 ctrl.deleteProperty = async (req, res) => {
     await DB.deleteProperty(req.params.id);
     console.log(req.params);
     res.redirect('/profile/propertylist');
+}
+ctrl.deleteProyect = async (req, res) => {
+    await DB.deleteProperty(req.params.id);
+    res.redirect('/profile/proyectlist');
+    
 }
 
 ctrl.search = (req, res) => {
@@ -110,6 +121,7 @@ ctrl.search = (req, res) => {
 
 ctrl.sendEmail = async (req, res) => {
     const { Correo, text } = req.body;
+    const mail = req.user.correo;
     contentHTML = `
         <h1>User Information</h1>
         <ul>
@@ -122,14 +134,14 @@ ctrl.sendEmail = async (req, res) => {
         port: 25,
         secure: false,
         auth: {
-            user: '',
-            pass: ''
+            user: 'genao_abdel@hotmail.com',
+            pass: 'Desox7x1997'
         }
     });
 
     const info = await transporter.sendMail({
-        from: "",
-        to: '',
+        from: "genao_abdel@hotmail.com",
+        to: mail,
         subject: 'Pruebita',
         html: contentHTML
 

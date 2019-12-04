@@ -46,14 +46,14 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="/profile/propertylist" aria-labelledby="true">
+        <a class="nav-link" href="/profile/proyectlist" aria-labelledby="true">
           <i class="fas fa-th-list"></i>
-          <span>Lista de inmuebles</span>
+          <span>Lista de proyectos</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/profile/reunionlist" aria-labelledby="true">
+        <a class="nav-link" href="/profile/datelist" aria-labelledby="true">
           <i class="fas fa-calendar-check"></i>
           <span>Citas pendientes</span>
         </a>
@@ -68,15 +68,15 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="/contract">
+        <a class="nav-link" href="/contrato">
           <i class="fas fa-file-signature"></i>
           <span>Llenar contrato</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/profile/representantes">
-          <i class="fas fa-user-tie"></i>
-          <span>Representantes</span></a>
+        <a class="nav-link" href="/profile/ingenieros">
+          <i class="fas fa-hard-hat"></i>
+          <span>Ingenieros</span></a>
       </li>
 
       <li class="nav-item">
@@ -113,9 +113,10 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <button type="button" class="btn btn-sm btn-primary shadow-sm"
-              style="background-color: #1bb2fe; border-color: #1eb2fc;"><i
-                class="fas fa-download fa-sm text-white-50"></i> Añadir Representante</button>
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+              style="background-color: #1bb2fe; border-color: #1eb2fc;" data-target="#Representante"><i
+                class="fas fa-download fa-sm text-white-50"></i> Añadir
+              Ingeniero</button>
             <button type="button" class="btn btn-sm btn-primary shadow-sm"
               style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal" data-target="#newProyect"><i
                 class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
@@ -124,6 +125,7 @@
                 class="fas fa-download fa-sm text-white-50"></i> Editar perfil</button>
           </div>
           {{> addproperty}}
+          {{> addrepre}}
           <!-- Content Row -->
           <div class="row">
 
@@ -149,8 +151,8 @@
                 </div>
                 <div class="card-body">
                   <h5>{{nombre}}</h5>
-                  <button type="button" class="btn btn-danger" data-toggle="modal" 
-                  data-target="#deleteModal{{@index}}">Borrar</button>
+                  <button type="button" class="btn btn-danger" data-toggle="modal"
+                    data-target="#deleteModal{{@index}}">Borrar</button>
                   <button type="button" class="btn btn-primary"
                     style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
                     data-target="#editInmobiliaria{{@index}}">Datos</button>
@@ -159,8 +161,8 @@
               </div>
             </div>
 
-            <div class="modal fade" id="deleteModal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
+            <div class="modal fade" id="deleteModal{{@index}}" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -173,7 +175,7 @@
                   </div>
                   <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a href="/delete/{{idInm}}" class="btn btn-danger">Borrar</a>
+                    <a href="/deleteProyect/{{idInm}}" class="btn btn-danger">Borrar</a>
                   </div>
                 </div>
               </div>
@@ -195,7 +197,50 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
+<div class="modal fade" id="EditProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: #1bb2fe;">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edita tu información</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <form action="/updateuser" method="POST">
+                        <div class="form-group">
+                            <h5>Nombre</h5>
+                            <input type="text" name="fullname" value="{{user.fullname}}" placeholder="Nombre completo"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <h5>Descripcion</h5>
+                            <input type="text" name="descripcion" value="{{user.descripcion}}" placeholder="Trabajo"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <h5>Dirección</h5>
+                            <input type="text" name="direccion" value="{{user.direccion}}" placeholder="Direccion"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <h5>Teléfono</h5>
+                            <input type="tel" name="telefono" value="{{user.telefono}}" placeholder="Número de Telefono"
+                                class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                            <span class="note"> Formato: XXX-XXX-XXXX </span>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary"
+                                style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar info</button>
 
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
   {{> editInmo}}
   <!-- Bootstrap core JavaScript-->

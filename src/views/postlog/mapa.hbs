@@ -1,0 +1,44 @@
+<style>
+    #map-template {
+        height: 100%;
+        width: 100%;
+        position: relative;
+
+
+    }
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<div class="container">
+    <div class="row p-4">
+        <div class="col-md-6">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit a quia possimus cupiditate excepturi
+                recusandae optio placeat rem provident culpa! Fugit vel consequuntur, nemo quasi quibusdam dolor quam
+                neque eius!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit a quia possimus cupiditate excepturi
+                recusandae optio placeat rem provident culpa! Fugit vel consequuntur, nemo quasi quibusdam dolor quam
+                neque eius!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit a quia possimus cupiditate excepturi
+                recusandae optio placeat rem provident culpa! Fugit vel consequuntur, nemo quasi quibusdam dolor quam
+                neque eius!</p>
+        </div>
+        <div class="col-md-6">
+            <div id="map-template"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const map = L.map('map-template').setView([18.4878446, -69.9623265], 13);
+
+    L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png').addTo(map);
+
+    map.locate({enableHighAccuracy: true});
+    map.on('locationfound', e => {
+        console.log(e);
+    });
+
+    const marker = L.marker([18.4878446, -69.9623265]);
+    marker.bindPopup('Av. de Los Próceres 49, Santo Domingo');
+    map.addLayer(marker);
+</script>

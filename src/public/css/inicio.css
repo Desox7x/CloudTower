@@ -1,5 +1,6 @@
+
 .carousel-item {
-    position: fixed;
+    position: relative;
 }
 
 .carousel-caption {

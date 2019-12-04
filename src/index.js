@@ -64,6 +64,21 @@ app.use(multer({
         cb("Error: Archivo no soportado");
     }
 }).single('image'))
+// app.use(multer({
+//     storage,
+//     dest: path.join(__dirname, 'public/uploads'),
+//     limits: {fileSize: 10000000},
+//     fileFilter: (req, file, cb) => {
+//         const filetype = /jpeg|jpg|png/;
+//         const mimetype = filetype.test(file.mimetype);
+//         const extname = filetype.test(path.extname
+//             (file.originalname).toLowerCase());
+//         if (mimetype && extname) {
+//             return cb(null, true);
+//         }
+//         cb("Error: Archivo no soportado");
+//     }
+// }).array('img', 2));
 
 
 //Variables globales

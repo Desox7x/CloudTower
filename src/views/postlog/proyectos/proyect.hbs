@@ -2,6 +2,7 @@
 
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/css/profile.css">
 <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
@@ -27,9 +28,9 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
-
+            
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white nav-link" href="/profile">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
                 <div>
                     <img class="img-profile rounded-circle" src="/uploads/{{ inmo.idImg }}" width="50" height="50">
                 </div>
@@ -80,21 +81,89 @@
                 <div class="container-fluid">
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-sm-8">
                             <div class="card text-center">
                                 <div class="card-header">
-                                    <img src="/img/{{inmo.img}}" alt="" class="img-thumbnail">
+                                    <img src="/img/{{inmo.img}}" alt="" class="card-img-top"
+                                        style=".card-img-top {width: 100%; height: 15vw; object-fit: cover;}">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+
+                        
+                        <div class="col-md-4 ml-auto">
+                            {{#each repre}}
+                            <div class="profile-card py-3 card text-center">
+
+                                <div class="card-body py-4">
+                                    <img class="profile-picture rounded-circle" src="/uploads/{{idImg}}" />
+                                    <h2 class="text-dark h5 font-weight-bold mt-4 mb-1">
+                                        {{fullname}}
+                                    </h2>
+                                    <p class="text-muted font-weight-bold small">
+                                        <i class="fa fa-map-marker"></i>
+                                        {{direccion}}
+                                    </p>
+                                    <p class="text-muted font-weight-bold small">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        {{telefono}}
+                                    </p>
+                                    <p class="px-1 mt-4 mb-4 text-muted quote-text">
+                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                                        roots in a piece of classical Latin literature.
+                                    </p>
+                                    <form action="/user/{{idEntidad}}">
+                                        <button class="btn btn-sm btn-outline-success">Ver perfil</button>
+                                    </form>
+                                    <div class="d-flex social-section justify-content-center">
+                                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a href=""><i class="fab fa-twitter"></i></a>
+                                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                        <a href=""><i class="fab fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                            <br>
+                            <div class="text-center" data-toggle="modal"
+                                data-target="#reservaModal{{@index}}">
+                                <button class="btn btn-info">
+                                    Reservar
+                                </button>
+                            </div>
+                            {{> reservaWin}}
+
+
+
+
+                        </div>
+                        
+
+
+
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card text-justified">
+                                <div class="card-header">
+                                    Descripción
+                                </div>
+                                <div class="card-body">
+                                    <p>{{inmo.descr}}</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-7">
                             <div class="card text-justified">
                                 <div class="card-header">
                                     <h3>Información de {{inmo.nombre}}</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <h5>Localización: {{inmo.ubic}}</h5>
+                                        <h5><b>Localización:</b> {{inmo.ubic}}</h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5">
@@ -103,7 +172,7 @@
                                                     <h5>Construcción: {{inmo.metro}} mt²</h5>
                                                 </li>
                                                 <li>
-                                                    <h5>Habitaciones: {{inmo.hab}}</h5>
+                                                    <p>Habitaciones: {{inmo.hab}}</p>
                                                 </li>
                                                 <li>
                                                     <h5>Baños: {{inmo.bano}}</h5>
@@ -113,13 +182,13 @@
                                         <div class="col-md-5">
                                             <ul>
                                                 <li>
-                                                    <h5>Tipo: {{inmo.tipoInm}}</h5>
+                                                    <p>Tipo: {{inmo.tipoInm}}</p>
                                                 </li>
                                                 <li>
-                                                    <h5>{{inmo.compra}}: {{inmo.precio}}${{inmo.moneda}}</h5>
+                                                    <p>{{inmo.compra}}: {{inmo.precio}}${{inmo.moneda}}</p>
                                                 </li>
                                                 <li>
-                                                    <h5>Parqueo/Garage: {{inmo.parqueo}}</h5>
+                                                    <p>Parqueo/Garage: {{inmo.parqueo}}</p>
                                                     </i>
                                             </ul>
                                         </div>
@@ -132,24 +201,13 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="card text-justified">
-                            <div class="card-header">
-                                Descripción
-                            </div>
-                            <div class="card-body">
-                                <p>{{inmo.descr}}</p>
-                            </div>
-                        </div>
 
                     </div>
                     <br>
-                    <form action="/reservar/{{inmo.idInm}}/add" method="post">
-                        <input type="date" name="fecha">
-                        <input type="time" name="tiempo">
-                        <input type="text" value="{{inmo.ubic}}" disabled>
-                        {{!-- <input type="text" > --}}
-                        <button type="submit">Reservar</button>
-                    </form>
+                    {{#if expressFlash }}
+                    {{expressFlash}}
+                    {{/if}}
+                   
                 </div>
             </div>
         </div>

@@ -75,9 +75,15 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="/profile/representantes">
+          <i class="fas fa-user-tie"></i>
+          <span>Representantes</span></a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="/dashboardin">
           <i class="fas fa-chart-area"></i>
-          <span>Dashboard</span></a>
+          <span>Tablero</span></a>
       </li>
 
       <li class="nav-item">
@@ -108,14 +114,18 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <button type="button" class="btn btn-sm btn-primary shadow-sm"><i
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal" 
+            style="background-color: #1bb2fe; border-color: #1eb2fc;" data-target="#Representante"><i
                 class="fas fa-download fa-sm text-white-50"></i> Añadir Representante</button>
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
-              data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+            <button type="button" class="btn btn-sm btn-primary shadow-sm"
+              style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal" data-target="#newProyect"><i
+                class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
+            <button type="button" class="btn btn-sm btn-primary shadow-sm"
+              style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
               data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar perfil</button>
           </div>
           {{> addproperty}}
+          {{> addrepre}}
           <!-- Content Row -->
           <div class="row">
 
@@ -130,45 +140,45 @@
           </div>
 
           <!-- Content Row -->
-          <div class="row justify-content-center align-items-center"
-          {{#each repre}}>
+          <div class="row justify-content-center align-items-center" {{#each repre}}>
             <div class="col-md-3">
-                
-                
-                <div class="profile-card py-3 card text-center">
-                   
-                    <div class="card-body py-4">
-                        <img class="profile-picture rounded-circle" src="/uploads/{{idImg}}" />
-                        <h2 class="text-dark h5 font-weight-bold mt-4 mb-1">
-                            {{fullname}}
-                        </h2>
-                        <p class="text-muted font-weight-bold small">
-                            <i class="fa fa-map-marker"></i>
-                             {{direccion}}
-                        </p>
-                        <p class="text-muted font-weight-bold small">
-                            <i class="fas fa-mobile-alt"></i>
-                             {{telefono}}
-                        </p>
-                        <p class="px-1 mt-4 mb-4 text-muted quote-text">
-                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature.
-                        </p>
-                        <form action="/user/{{idEntidad}}">
-                          <button class="btn btn-sm btn-outline-success">Ver perfil</button>
-                        </form>
-                        <div class="d-flex social-section justify-content-center">
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
+
+
+              <div class="profile-card py-3 card text-center">
+
+                <div class="card-body py-4">
+                  <img class="profile-picture rounded-circle" src="/uploads/{{idImg}}" />
+                  <h2 class="text-dark h5 font-weight-bold mt-4 mb-1">
+                    {{fullname}}
+                  </h2>
+                  <p class="text-muted font-weight-bold small">
+                    <i class="fa fa-map-marker"></i>
+                    {{direccion}}
+                  </p>
+                  <p class="text-muted font-weight-bold small">
+                    <i class="fas fa-mobile-alt"></i>
+                    {{telefono}}
+                  </p>
+                  <p class="px-1 mt-4 mb-4 text-muted quote-text">
+                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+                    classical Latin literature.
+                  </p>
+                  <form action="/user/{{idEntidad}}">
+                    <button class="btn btn-sm btn-outline-success">Ver perfil</button>
+                  </form>
+                  <div class="d-flex social-section justify-content-center">
+                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                  </div>
                 </div>
-   
+              </div>
+
             </div>
             {{/each}}
-        </div>
- 
+          </div>
+
           <!-- Content Row -->
 
 
