@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="css/jquery-ui.css">
+<script src="script/jquery-1.12.4.js"></script>
+<script src="script/jquery.ui.js"></script>
+
 <div class="modal fade" id="reservaModal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="newProyectTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-center" role="document">
@@ -12,7 +16,12 @@
                 <form action="/reservar/{{inmo.idInm}}/add" method="POST">
                     <div class="form-group">
                         <h5>Programe el día</h5>
-                        <input type="date" name="fecha">
+                        <input type="date" name="fecha" id="fecha" placeholder="YYYY-MM-DD" />
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $("#fecha").datepicker();
+                            });
+                        </script>
                     </div>
                     <hr>
                     <div class="form-group">
@@ -46,7 +55,8 @@
                         <input type="text" value="{{inmo.ubic}}" disabled>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn text-white" style="background-color: #1bb2fe; border-color: #1eb2fc;">Reservar</button>
+                        <button type="submit" class="btn text-white"
+                            style="background-color: #1bb2fe; border-color: #1eb2fc;">Reservar</button>
                     </div>
 
                 </form>

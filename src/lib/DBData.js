@@ -4,13 +4,13 @@ const DB = require('../database');
 module.exports = {
 
     async getAllUsers() {
-        let data = await DB.query('SELECT fullname, telefono, correo, direccion, descripcion, idTipoEntidad FROM entidad');
+        let data = await DB.query('SELECT fullname, telefono, correo, direccion, descripcion, Empleo, idTipoEntidad FROM entidad');
         //console.log(data);
         return data;
     },
 
     async getUserById(id) {
-        let data = await DB.query('SELECT idEntidad, idTipoEntidad, fullname, telefono, correo, direccion, idImg, descripcion FROM entidad WHERE idEntidad = ? LIMIT 1', [id]);
+        let data = await DB.query('SELECT idEntidad, idTipoEntidad, fullname, telefono, correo, direccion, idImg, descripcion, Empleo FROM entidad WHERE idEntidad = ? LIMIT 1', [id]);
         //console.log(data);
         return data;
     },
@@ -21,9 +21,9 @@ module.exports = {
         console.log(data)
     },
 
-    async updateUserInfo(name, desc, tel, dir, id) {
+    async updateUserInfo(name, desc, tel, dir, empleo, id) {
         console.log(name, desc, tel, dir, id);
-        let data = await DB.query("UPDATE entidad SET fullname = ?, descripcion = ?, telefono = ?, direccion = ? WHERE idEntidad = ? ", [name, desc, tel, dir, id]);
+        let data = await DB.query("UPDATE entidad SET fullname = ?, descripcion = ?, telefono = ?, direccion = ?, empleo = ? WHERE idEntidad = ? ", [name, desc, tel, dir, empleo, id]);
         console.log(data);
     },
 
@@ -99,6 +99,7 @@ module.exports = {
         return data;
     },
 
+    
     async searchFilter(nombre, ubic, tipoInm, estado, compra) {
         console.log(nombre, ubic, tipoInm, estado, compra);
         let query = "SELECT * FROM addInmueble WHERE";
@@ -144,10 +145,17 @@ module.exports = {
         let data = await DB.query('SELECT * FROM reunion r JOIN addinmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
         return data;
     },
+    async getUserReunion(id){
+        let data = await DB.query('SELECT * FROM reunion r JOIN addInmueble i ON r.idInm = i.idInm JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE r.idEntidad = ?', [id]);
+        console.log(data);
+        return data;
+    },
 
     async getAllReunionesEntidad(id) {
         let data = await DB.query('SELECT * FROM reunion r JOIN Entidad e ON r.idEntidad = e.idEntidad JOIN addInmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
+        console.log(data);
         return data;
+        
     },
 
     async deleteReunion(id) {

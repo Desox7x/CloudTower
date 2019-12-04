@@ -10,6 +10,7 @@
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
+
 <style>
     .card-title,
     .card-text {
@@ -28,7 +29,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
-            
+
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
                 <div>
@@ -90,7 +91,7 @@
                             </div>
                         </div>
 
-                        
+
                         <div class="col-md-4 ml-auto">
                             {{#each repre}}
                             <div class="profile-card py-3 card text-center">
@@ -125,20 +126,31 @@
                             </div>
                             {{/each}}
                             <br>
-                            
-                            <div class="text-center" data-toggle="modal"
-                                data-target="#reservaModal{{@index}}">
+
+                            <div class="text-center" data-toggle="modal" data-target="#reservaModal{{@index}}">
                                 <button class="btn btn-info">
                                     Reservar
                                 </button>
                             </div>
                             {{> reservaWin}}
+                            <script>
+                                var date = document.getElementById('fecha');
+                                date.addEventListener('change', function () {
+                                    var d = new Date();
+                                    //console.log(d);
+                                    var nd = new Date(this.value);
 
-
-
+                                    if (new Date(this.value).getTime() <= d.getTime()) {
+                                        console.log("Error, Date must be greater than today");
+                                    }
+                                    else {
+                                        console.log("success")
+                                    }
+                                })
+                            </script>
 
                         </div>
-                        
+
 
 
 
@@ -208,7 +220,7 @@
                     {{#if expressFlash }}
                     {{expressFlash}}
                     {{/if}}
-                   
+
                 </div>
             </div>
         </div>

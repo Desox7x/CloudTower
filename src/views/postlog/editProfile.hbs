@@ -1,107 +1,103 @@
-<style>
-    #card2 {
-        margin: 5%;
-    }
-</style>
-
+<link rel="stylesheet" href="/css/tel.css">
 <div class="container-fluid">
-    {{message}}
-    {{#if isUser}}
     <div class="row float-right">
-        <h6 class="p-1">
-            
-            <a class="mr-2" href="/editProfile"><i class="fas fa-user-edit"></i> Editar perfil</a>
-        </h6>
+        <a class="mr-2" href="/editProfile">Editar perfil</a>
+
     </div>
-    {{/if}}
 </div>
 <div class="container p-4">
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card text-center rounded-circle">
                 <div class="card-header bg-light ">
-                    <img src="/uploads/{{data.idImg}}" class="rounded-circle img-thumbnail w-100 h-100" alt=""
-                        onerror="this.onerror=null; this.src='img/userlogo.jpg'">
+                    <img src="/uploads/{{data.idImg}}" class="rounded-circle img-thumbnail w-100 h-100" alt="">
                     <h3>{{data.fullname}}</h3>
+                </div>
+
+
+            </div>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image">
+                <button type="btn btn-success">
+                    Subir
+                </button>
+            </form>
+        </div>
+
+
+    </div>
+    <hr class="sidebar-divider">
+    <form action="/updateuser" method="POST">
+        <div class="row justify-content-center">
+
+
+            <div class="col-md-4">
+                <h5><i class="fas fa-user"></i> Nombre:</h5>
+                   <hr class="divider">
+                   <hr class="divider">
+                <h5><i class="far fa-envelope"></i> Correo:</h5>
+                    <hr class="divider">
+                    
+                <h5><i class="fas fa-mobile-alt"></i> Telefono:</h5>
+                    <hr class="divider">    
+                    <br>
+                    <br>
+                <h5><i class="far fa-map"></i> Direccion:</h5>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="text" name="fullname" value="{{user.fullname}}" placeholder="Nombre completo"
+                        class="form-control">
+                </div>
+                <hr class="divider">
+                <h5>{{data.correo}}</h5>
+                <hr class="divider">
+                <div class="form-group">
+                    <input type="tel" name="telefono" value="{{user.telefono}}" placeholder="Número de Telefono"
+                        class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                    <span class="note"> Formato: XXX-XXX-XXXX </span>
+                </div>
+                <hr class="divider">
+                <div class="form-group">
+                    <input type="text" name="direccion" value="{{user.direccion}}" placeholder="Direccion"
+                        class="form-control">
+                </div>
+               
+
+
+            </div>
+        </div>
+        <hr class="sidebar-divider">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h5>Descripcion:</h5>
+                <hr class="divider">
+                <h5>Lugar de empleo:</h5>
+                <br>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    <input type="text" name="descripcion" value="{{user.descripcion}}" placeholder="Sobre ti"
+                        class="form-control">
+                    <hr class="divider">
+                    <input type="text" name="Empleo" value="{{user.Empleo}}" placeholder="Empleo"
+                        class="form-control">
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center">
+            <div class="form-group">
+                <button class="btn btn-primary" style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar
+                    info</button>
 
-
-    </div>
-    <hr class="sidebar-divider">
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            <h5><i class="far fa-envelope"></i> Correo:</h5>
-            <br>
-            <h5><i class="fas fa-mobile-alt"></i> Telefono:</h5>
-            <br>
-            <h5><i class="far fa-map"></i> Direccion:</h5>
+            </div>
 
         </div>
 
-        <div class="col-md-4">
-            <h5>{{data.correo}}</h5>
-            <hr class="divider">
-            <h5>{{data.telefono}}</h5>
-            <hr class="divider">
-            <h5>{{data.direccion}}</h5>
-            <hr class="divider">
-
-
-        </div>
-    </div>
-    <hr class="sidebar-divider">
-
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            <h5>Descripcion:</h5>
-            <br>
-            <h5>Lugar de empleo:</h5>
-            <br>
-        </div>
-        <div class="col-md-4">
-            <h5>{{data.descripcion}}</h5>
-            <hr class="divider">
-            <h5>{{data.Empleo}}</h5>
-        </div>
-    </div>
-    <h4>Citas pendientes</h4>
-    <hr class="sidebar-divider">
-    {{#each reserva}}
-    <div class="row">
-        <div class="col-md-4">
-            <img src="/img/{{img}}" class="img-thumbnail float-left mr-2" style="width: 10rem; margin-bottom: 8px;">
-            <b>
-                <p>{{nombre}}</p>
-            </b>
-            <p>Hora: {{tiempo}}</p>
-            <p>Fecha: {{fecha}}</p>
-
-
-
-        </div>
-
-        <div class="col-md-3">
-            <b>
-                <p><i class="fas fa-map-marker"> {{ubic}}</i></p>
-            </b>
-            <p>Id de Reserva: {{id}}</p>
-            <p>Inmobiliaria: {{fullname}}</p>
-
-        </div>
-
-        <div class="col-md-3">
-            <b>
-                <p>{{moneda}}${{precio}}</p>
-            </b>
-            <a href="/inmueble/{{idInm}}" class="btn btn-info">Detalles <i class="fas fa-chevron-right"></i></a>
-        </div>
-        <div class="col-sm-2">
-            <a href="/borrar/{{id}}" class="btn btn-xs btn-danger">Cancelar reunion</a>
-        </div>
-    </div>
-    {{/each}}
+    </form>
 
     {{!-- <div class="row">
         <div class="col-md-4">

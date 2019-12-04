@@ -134,8 +134,8 @@ ctrl.sendEmail = async (req, res) => {
         port: 25,
         secure: false,
         auth: {
-            user: 'genao_abdel@hotmail.com',
-            pass: 'Desox7x1997'
+            user: '',
+            pass: ''
         }
     });
 
@@ -161,9 +161,11 @@ ctrl.uploadPOST = async (req, res) => {
     await DB.updateUserImg(req.file.filename, req.user.idEntidad);
     res.redirect('/profile');
 };
-
+ctrl.editProfile = (req, res) => {
+    return res.render("postlog/editProfile", {data: req.user});
+}
 ctrl.updateUser = async (req, res) => {
-    await DB.updateUserInfo(req.body.fullname, req.body.descripcion, req.body.telefono, req.body.direccion, req.user.idEntidad);
+    await DB.updateUserInfo(req.body.fullname, req.body.descripcion, req.body.telefono, req.body.direccion, req.body.Empleo, req.user.idEntidad);
     res.redirect('/profile')
     console.log(req.body)
 };

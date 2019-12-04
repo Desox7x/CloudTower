@@ -22,7 +22,8 @@ ctrl.map = (req, res) => {
 }
 ctrl.profile = async (req, res) => {
     if (req.user.idTipoEntidad == 1 || req.user.idTipoEntidad == 4) {
-        return res.render('postlog/profile', {data: req.user, isUser: true});
+        const reunion = await db.getUserReunion(req.user.idEntidad)
+        return res.render('postlog/profile', {reserva: reunion, data: req.user, isUser: true});
     }
     if (req.user.idTipoEntidad == 2) {
         const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
@@ -44,6 +45,7 @@ ctrl.profile = async (req, res) => {
 
     res.status(403).send('Forbideen');
 }
+
 
 ctrl.propertyList = async (req, res) => {
     const inmueble = await db.getAllInmueblesEntidad(req.user.idEntidad); 
@@ -81,15 +83,14 @@ ctrl.ingenieros = async (req, res) => {
 ctrl.search = async(req,res) => {
     let data, rep;
     if(req.query.nombre != undefined) {
-         data = await db.searchInmueble(req.query.nombre);
+         data = await db.searchUser(req.query.nombre);
          rep = await db.getRepresentantesFromInmueble(req.params.id);
     }
-    
-    
-    
     return res.render('postlog/search', {rep, data})
 
 }
+
+
 
 ctrl.searchFilter = async(req, res) => {
     let data;

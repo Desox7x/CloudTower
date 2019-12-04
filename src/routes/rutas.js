@@ -30,7 +30,7 @@ router.get('/profile/datelist', isLoggedIn, requireRole(ConstructoraRole), home.
 router.get('/profile/representantes', isLoggedIn, requireRole(InmobiliariaRole), home.representantes);
 router.get('/profile/ingenieros', isLoggedIn, requireRole(ConstructoraRole), home.ingenieros);
 router.get('/search', home.search);
-router.get('/busquedaAvanzada', home.searchFilter);
+router.get('/buscarInmuebles', home.searchFilter);
 
 
 // =========== USER ================
@@ -46,6 +46,7 @@ router.post('/upload', user.uploadPOST);
 //router.get('/search', user.search);
 router.get('/searchResult', user.searchResult);
 router.post('/updateuser', user.updateUser);
+router.get('/editProfile', user.editProfile);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
 router.get('/delete/:id', user.deleteProperty);
 router.get('/deleteProyect/:id', user.deleteProyect);
@@ -70,6 +71,7 @@ router.get('/borrar/:id', reserva.deleteReunion);
 router.get('/signup', auth.signup);
 router.post('/signup', auth.signupPOST);
 router.post('/signuprep', auth.signupRepPOST);
+router.post('/signuping', auth.signupIngPOST);
 
 router.get('/login', auth.login)
 router.post('/login', auth.loginPOST);

@@ -95,6 +95,10 @@
         </a>
       </li>
 
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
       {{> editImg}}
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -117,12 +121,15 @@
           <!-- Page Heading -->
 
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal" style="background-color: #1bb2fe; border-color: #1eb2fc;"
-              data-target="#Representante"><i class="fas fa-download fa-sm text-white-50"></i> Añadir
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+              style="background-color: #1bb2fe; border-color: #1eb2fc;" data-target="#Representante"><i
+                class="fas fa-download fa-sm text-white-50"></i> Añadir
               Representante</button>
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal" style="background-color: #1bb2fe; border-color: #1eb2fc;"
-              data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
+            <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+              style="background-color: #1bb2fe; border-color: #1eb2fc;" data-target="#newProyect"><i
+                class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
+            <button type="button" class="btn btn-sm btn-primary shadow-sm"
+              style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
               data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar perfil</button>
           </div>
 
@@ -217,7 +224,8 @@
             <div class="col-xl-12 col-lg-8 ">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between" style="background-color: #1bb2fe;">
+                <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between"
+                  style="background-color: #1bb2fe;">
                   <h6 class="m-0 font-weight-bold text-white">Perfil de Inmobiliaria</h6>
 
                 </div>
@@ -247,15 +255,13 @@
                 <div class="card-image">
                   <span class="card-notify-badge">{{nombre}}</span>
                   <a href="/profile/inmueble/{{idInm}}"><span class="card-notify-year">Ver</span></a>
-                  
-                  
+
+
                 </div>
-                
-                
+
+
                 <div class="card-body text-center">
-                  <img class="img-thumbnail w-100 h-100 card-img"
-                    src="img/{{img}}"
-                    alt="Alternate Text" />
+                  <img class="img-thumbnail w-100 h-100 card-img" src="img/{{img}}" alt="Alternate Text" />
                   <a class="ad-btn" href="#">View</a>
                 </div>
               </div>
@@ -308,7 +314,8 @@
               <span class="note"> Formato: XXX-XXX-XXXX </span>
             </div>
             <div class="form-group">
-              <button class="btn btn-primary" style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar info</button>
+              <button class="btn btn-primary" style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar
+                info</button>
 
             </div>
           </form>
@@ -317,9 +324,62 @@
       </div>
     </div>
   </div>
+  
 
 
   <!-- Bootstrap core JavaScript-->
+  <script>
+    (function ($) {
+      "use strict"; // Start of use strict
+
+      // Toggle the side navigation
+      $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
+        $("body").toggleClass("sidebar-toggled");
+        $(".sidebar").toggleClass("toggled");
+        if ($(".sidebar").hasClass("toggled")) {
+          $('.sidebar .collapse').collapse('hide');
+        };
+      });
+
+      // Close any open menu accordions when window is resized below 768px
+      $(window).resize(function () {
+        if ($(window).width() < 768) {
+          $('.sidebar .collapse').collapse('hide');
+        };
+      });
+
+      // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+      $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
+        if ($(window).width() > 768) {
+          var e0 = e.originalEvent,
+            delta = e0.wheelDelta || -e0.detail;
+          this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+          e.preventDefault();
+        }
+      });
+
+      // Scroll to top button appear
+      $(document).on('scroll', function () {
+        var scrollDistance = $(this).scrollTop();
+        if (scrollDistance > 100) {
+          $('.scroll-to-top').fadeIn();
+        } else {
+          $('.scroll-to-top').fadeOut();
+        }
+      });
+
+      // Smooth scrolling using jQuery easing
+      $(document).on('click', 'a.scroll-to-top', function (e) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+          scrollTop: ($($anchor.attr('href')).offset().top)
+        }, 1000, 'easeInOutExpo');
+        e.preventDefault();
+      });
+
+    })(jQuery); // End of use strict
+  </script>
+  
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
