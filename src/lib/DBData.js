@@ -42,7 +42,7 @@ module.exports = {
         console.log(data);
         return data;
     },
-    async getPropertyById(id){
+    async getPropertyById(id) {
         let data = await DB.query('SELECT * FROM addInmueble WHERE idInm = ?', [id]);
         console.log(data);
         return data;
@@ -57,7 +57,8 @@ module.exports = {
         moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad) {
 
         let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, estado = ?, descr = ?, ubic = ?, tipoInm = ?, compra = ?, img = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, estado, desc, ubic, tipo, compra,
-            img, moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad]);
+            img, moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad
+        ]);
         return data;
 
     },
@@ -84,7 +85,8 @@ module.exports = {
         };
 
         let data = await DB.query('INSERT INTO addContract SET dir = ?, typeP = ?, dateCon = ?, price = ?, cur = ?, nameC = ?, mailC = ?, telC = ?, nameR = ?, mailR = ?, telR = ?', [dir, typeP, dateCon, price, cur, nameC,
-            mailC, telC, nameR, mailR, telR]);
+            mailC, telC, nameR, mailR, telR
+        ]);
         console.log(data);
 
     },
@@ -99,35 +101,43 @@ module.exports = {
         return data;
     },
 
-    
+
     async searchFilter(nombre, ubic, tipoInm, estado, compra) {
         console.log(nombre, ubic, tipoInm, estado, compra);
         let query = "SELECT * FROM addInmueble WHERE";
-        if(nombre != undefined){
-            query+=" nombre LIKE '%"+nombre+"%'"; 
+        if (nombre != undefined) {
+            query += " nombre LIKE '%" + nombre + "%'";
         }
-        if(ubic != undefined){
-            if(nombre != undefined){query+=" AND "}
-            query+=" ubic LIKE '%"+ubic+"%'"; 
+        if (ubic != undefined) {
+            if (nombre != undefined) {
+                query += " AND "
+            }
+            query += " ubic LIKE '%" + ubic + "%'";
         }
-        if(tipoInm != undefined){
-            if(nombre != undefined || ubic != undefined){query+=" AND "}
-            query+=" tipoInm LIKE '%"+tipoInm+"%'"; 
+        if (tipoInm != undefined) {
+            if (nombre != undefined || ubic != undefined) {
+                query += " AND "
+            }
+            query += " tipoInm LIKE '%" + tipoInm + "%'";
         }
-        if(estado != undefined){
-            if(nombre != undefined || ubic != undefined || tipoInm != undefined){query+=" AND "}
-            query+=" estado LIKE '%"+estado+"%'"; 
+        if (estado != undefined) {
+            if (nombre != undefined || ubic != undefined || tipoInm != undefined) {
+                query += " AND "
+            }
+            query += " estado LIKE '%" + estado + "%'";
         }
-        if(compra != undefined){
-            if(nombre != undefined || ubic != undefined || tipoInm != undefined || estado != undefined){query+=" AND "}
-            query+=" compra LIKE '%"+compra+"%'"; 
+        if (compra != undefined) {
+            if (nombre != undefined || ubic != undefined || tipoInm != undefined || estado != undefined) {
+                query += " AND "
+            }
+            query += " compra LIKE '%" + compra + "%'";
         }
         // let data = await DB.query("SELECT * FROM addInmueble WHERE nombre LIKE CONCAT('%', ?,  '%') AND ubic LIKE CONCAT('%', ?,  '%') AND tipoInm LIKE CONCAT('%', ?,  '%') AND estado LIKE CONCAT('%', ?,  '%') AND compra LIKE CONCAT('%', ?,  '%')", [nombre, ubic, tipoInm,
         // estado, compra]);
         let data = await DB.query(query);
         console.log(nombre, ubic, tipoInm, estado, compra);
         return data;
-        
+
     },
 
     async searchUser(nombre) {
@@ -136,16 +146,30 @@ module.exports = {
     },
 
     async addReunion(fecha, tiempo, idInm, idEntidad) {
-        console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
-        let data = await DB.query("INSERT INTO reunion SET fecha = ?, tiempo = ?, idInm = ?, idEntidad = ?", [fecha, tiempo, idInm, idEntidad])
-        return data;
+
+        console.log("check");
+        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ? ", [fecha, idInm]);
+        let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?",[idInm, idEntidad])
+        let esInmo = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 2", [idEntidad]);
+        
+
+        if (check.length == 0 && esRepresentante.length == 0 && esInmo == 0) {
+            console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
+            let data = await DB.query("INSERT INTO reunion SET fecha = ?, tiempo = ?, idInm = ?, idEntidad = ?", [fecha, tiempo, idInm, idEntidad])
+            return 1;
+        } else {
+            return 0;
+        }
+
+
+
     },
 
     async getReunionesEntidad(id) {
         let data = await DB.query('SELECT * FROM reunion r JOIN addinmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
         return data;
     },
-    async getUserReunion(id){
+    async getUserReunion(id) {
         let data = await DB.query('SELECT * FROM reunion r JOIN addInmueble i ON r.idInm = i.idInm JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE r.idEntidad = ?', [id]);
         console.log(data);
         return data;
@@ -155,7 +179,7 @@ module.exports = {
         let data = await DB.query('SELECT * FROM reunion r JOIN Entidad e ON r.idEntidad = e.idEntidad JOIN addInmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
         console.log(data);
         return data;
-        
+
     },
 
     async deleteReunion(id) {
@@ -169,11 +193,11 @@ module.exports = {
         return data;
     },
 
-    async getRepresentantesEntidad(id){
+    async getRepresentantesEntidad(id) {
         let data = await DB.query('SELECT * FROM Representantes r JOIN Entidad e ON r.idEntidad = e.idEntidad WHERE r.idInm = ?', [id]);
         return data;
     },
-    async getRepresentantes(id){
+    async getRepresentantes(id) {
         let data = await DB.query('SELECT * FROM Representantes WHERE idEntidad = ?', [id])
         return data;
     },
@@ -181,8 +205,8 @@ module.exports = {
     async repBelongInmobiliaria(idEntidad, idInm) {
         let data = await DB.query("SELECT * FROM Representantes WHERE idEntidad = ? AND idInm = ?", [idEntidad, idInm]);
         console.log(data);
-        console.log(data!=null);
-        return data!=null;    
+        console.log(data != null);
+        return data != null;
     },
 
     async createRep(fullname, password, telefono, correo, direccion, idTipoEntidad, idInm) {
@@ -196,19 +220,25 @@ module.exports = {
         console.log(data);
     },
 
-  
+
     async getRepInmuebleEntidad(id) {
         let data = await DB.query('SELECT * FROM RepInmueble ri JOIN Representantes r ON ri.idRep = r.idRep JOIN Entidad e ON r.idEntidad = e.idEntidad WHERE ri.id = ?', [id]);
         return data;
     },
 
-    async addImagesInmueble(img, idInm){
+    async addImagesInmueble(img, idInm) {
         let data = await DB.query('INSERT INTO imagen SET img = ?, idInm = ?', [img, idInm]);
         return data;
     },
 
-    async getImagenInmuebleEntidad(id){
+    async getImagenInmuebleEntidad(id) {
         let data = await DB.query('SELECT * FROM imagen i JOIN addInmueble e ON i.idInm = e.idInm WHERE i.idInm = ?', [id]);
+        return data;
+    },
+
+    async getTotalInmuebles(){
+        let data = await DB.query("SELECT COUNT(IdInm) as count, a.idEntidad, e.fullname from addInmueble a JOIN entidad e ON a.idEntidad = e.idEntidad GROUP BY a.idEntidad")
+        console.log(data);
         return data;
     }
 

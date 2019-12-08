@@ -5,7 +5,8 @@ const DB = require('../lib/DBData');
 ctrl.index = async (req, res) => {
     let inm = await DB.getInmueble(req.params.id);
     res.render('postlog/reserva/schedule', {
-        inmo: inm[0]
+        inmo: inm[0],
+        flash: req.flash("Message")
     });
 }
 
@@ -16,9 +17,23 @@ ctrl.add = async (req, res) => {
     let idInm = req.params.id;
     let idEntidad = req.user.idEntidad;
 
+    var reqfecha = new Date(fecha);
+    var today = new Date();
+    today.setHours(0,0,0,0);
+
+    if(reqfecha <= today){
+        req.flash('message', 'fecha no cumple');
+        res.redirect('/inmueble/'+req.params.id);
+        return;
+    }
+
     
     let data = await DB.addReunion(fecha, tiempo, idInm, idEntidad);
-    // req.flash('success', 'hue');
+    if(data == 1){
+        req.flash('success', 'Success');
+    }else{
+        req.flash('message', 'Error');
+    }
     res.redirect('/inmueble/'+req.params.id);
 }
 

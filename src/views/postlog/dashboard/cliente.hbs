@@ -129,15 +129,24 @@
                 </div>
               </div>
             </div>
+            
             <script>
               var ctx = document.getElementById('myChart').getContext('2d');
+              var l = [];
+              var d = [];
+              {{#if ti}}
+                {{#each ti}}
+                  l.push("{{fullname}}");
+                  d.push({{count}});
+                {{/each}}
+              {{/if}}
               var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                  labels: ['Inmobiliaria Perez', 'Inmobiliaria Genao', 'Constructora Tierra Plana'],
+                  labels: l,
                   datasets: [{
                     label: '# de inmuebles por entidad',
-                    data: [3, 1, 2],
+                    data: d,
                     backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',

@@ -9,11 +9,12 @@ ctrl.index = (req, res) => {
  res.render('inicio', );
 }
 
-ctrl.about =  (req, res) => {
+ctrl.about = (req, res) => {
     res.render('./layouts/about');
 }
 
 ctrl.contact = (req, res) => {
+    
     res.render('./postlog/contact');
 }
 
