@@ -23,7 +23,7 @@
 </style>
 
 <body id="page-top">
-    
+
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -88,12 +88,14 @@
                                 <div class="card-header">
                                     <img src="/img/{{inmo.img}}" alt="" class="card-img-top"
                                         style=".card-img-top {width: 100%; height: 15vw; object-fit: cover;}">
+
                                 </div>
                             </div>
                         </div>
 
 
                         <div class="col-md-4 ml-auto">
+                            {{> message}}
                             {{#each repre}}
                             <div class="profile-card py-3 card text-center">
 
@@ -127,7 +129,7 @@
                             </div>
                             {{/each}}
                             <br>
-
+                            
                             <div class="text-center" data-toggle="modal" data-target="#reservaModal{{@index}}">
                                 <button class="btn btn-info">
                                     Reservar

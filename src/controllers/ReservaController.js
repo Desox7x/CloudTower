@@ -22,7 +22,7 @@ ctrl.add = async (req, res) => {
     today.setHours(0,0,0,0);
 
     if(reqfecha <= today){
-        req.flash('message', 'fecha no cumple');
+        req.flash('message', 'No puedes reservar en esta fecha.');
         res.redirect('/inmueble/'+req.params.id);
         return;
     }
@@ -30,9 +30,9 @@ ctrl.add = async (req, res) => {
     
     let data = await DB.addReunion(fecha, tiempo, idInm, idEntidad);
     if(data == 1){
-        req.flash('success', 'Success');
+        req.flash('success', 'Has reservado este inmueble exitosamente!');
     }else{
-        req.flash('message', 'Error');
+        req.flash('message', 'No puedes reservar este inmueble.');
     }
     res.redirect('/inmueble/'+req.params.id);
 }

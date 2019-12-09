@@ -48,24 +48,24 @@ router.get('/searchResult', user.searchResult);
 router.post('/updateuser', user.updateUser);
 router.get('/editProfile', user.editProfile);
 router.get('/signature_pad', isLoggedIn, user.signaturePad);
-router.get('/delete/:id', user.deleteProperty);
-router.get('/deleteProyect/:id', user.deleteProyect);
 router.post('/contract', user.addContractPOST);
 router.get('/schedule', user.scheduleReunion);
 router.post('/add_property', user.addPropertyCPOST);
 
 
 // =========== Inmuebles ============
-router.get('/profile/inmueble/:id', inmueble.privateInmueble);
-router.get('/inmueble/:id', inmueble.publicInmueble);
+router.get('/profile/inmueble/:id', inmueble.privateInmueble, isLoggedIn);
+router.get('/inmueble/:id', inmueble.publicInmueble, isLoggedIn);
+router.get('/delete/:id', user.deleteProperty, isLoggedIn, requireRole(InmobiliariaRole));
+router.get('/deleteProyect/:id', user.deleteProyect, isLoggedIn, requireRole(ConstructoraRole));
 
 // =========== Proyectos ============
 router.get('/profile/proyectos/:id', inmueble.privateProyect);
 router.get('/proyectos/:id', inmueble.publicProyect);
 // =========== Reservas ============
-router.post('/reservar/:id/add', reserva.add);
+router.post('/reservar/:id/add', reserva.add, isLoggedIn);
 router.get('/reservar/:id', reserva.index );
-router.get('/borrar/:id', reserva.deleteReunion);
+router.get('/borrar/:id', reserva.deleteReunion, isLoggedIn);
 
 // =========== AUTH =================
 router.get('/signup', auth.signup);

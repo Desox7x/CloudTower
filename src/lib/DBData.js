@@ -148,7 +148,7 @@ module.exports = {
     async addReunion(fecha, tiempo, idInm, idEntidad) {
 
         console.log("check");
-        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ? ", [fecha, idInm]);
+        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idEntidad = ? ", [fecha, idEntidad]);
         let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?",[idInm, idEntidad])
         let esInmo = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 2", [idEntidad]);
         
