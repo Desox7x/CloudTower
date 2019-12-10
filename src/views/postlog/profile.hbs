@@ -2,6 +2,29 @@
     #card2 {
         margin: 5%;
     }
+
+    section{
+        background: url("../img/stock2.jpg") no-repeat fixed center;
+        background-size: cover;
+    }
+
+    .img-thumbnail{
+        position: relative;
+        display: inline-block;
+    }
+
+    .notify-badge{
+        position: absolute;
+        right: 60px;
+        top: 180px;
+        background: #1bb2fe;
+        text-align: center;
+        border-radius: 50%;
+        width: 50px;
+        line-height: 50px;
+        font-size: 24px;
+        color: #f4f4f4;
+    }
 </style>
 
 <div class="container-fluid">
@@ -15,61 +38,66 @@
     </div>
     {{/if}}
 </div>
-<div class="container p-4">
+
+<section>
+    <div class="container p-4 bg-light">
     <div class="row justify-content-center">
+        {{message}}
+        {{#if isUser}}
         <div class="col-md-4">
             <div class="card text-center rounded-circle">
-                <div class="card-header bg-light ">
-                    <img src="/uploads/{{data.idImg}}" class="rounded-circle img-thumbnail w-100 h-100" alt=""
+                <div class="card-header bg-light">
+                    <img src="/uploads/{{data.idImg}}" class="rounded-circle img-thumbnail w-90 h-90" alt=""
                         onerror="this.onerror=null; this.src='img/userlogo.jpg'">
+                    <a href="/editProfile"><span class="notify-badge"><i class="fas fa-user-edit"></i></span></a>
                     <h3>{{data.fullname}}</h3>
                 </div>
             </div>
         </div>
-
+        {{/if}}
 
     </div>
     <hr class="sidebar-divider">
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <h5><i class="far fa-envelope"></i> Correo:</h5>
+        <div class="col-md-3">
+            <h5><i class="far fa-envelope fa-fw"></i> Correo:</h5>
             <br>
-            <h5><i class="fas fa-mobile-alt"></i> Telefono:</h5>
+            <h5><i class="fas fa-mobile-alt fa-fw"></i> Teléfono:</h5>
             <br>
-            <h5><i class="far fa-map"></i> Direccion:</h5>
+            <h5><i class="far fa-map fa-fw"></i> Dirección:</h5>
 
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-5">
             <h5>{{data.correo}}</h5>
             <hr class="divider">
             <h5>{{data.telefono}}</h5>
             <hr class="divider">
             <h5>{{data.direccion}}</h5>
-            <hr class="divider">
-
-
         </div>
     </div>
     <hr class="sidebar-divider">
 
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <h5>Descripcion:</h5>
+        <div class="col-md-3">
+            <h5><i class="fa fa-pencil fa-fw"></i> Descripción:</h5>
             <br>
-            <h5>Lugar de empleo:</h5>
+            <h5><i class="fa fa-id-badge fa-fw"></i> Lugar de empleo:</h5>
             <br>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <h5>{{data.descripcion}}</h5>
             <hr class="divider">
             <h5>{{data.Empleo}}</h5>
         </div>
     </div>
+
+    <br>
+    <br>
     <h4>Citas pendientes</h4>
     <hr class="sidebar-divider">
     {{#each reserva}}
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-4">
             <img src="/img/{{img}}" class="img-thumbnail float-left mr-2" style="width: 10rem; margin-bottom: 8px;">
             <b>
@@ -91,17 +119,20 @@
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <b>
                 <p>{{moneda}}${{precio}}</p>
             </b>
             <a href="/inmueble/{{idInm}}" class="btn btn-info">Detalles <i class="fas fa-chevron-right"></i></a>
         </div>
         <div class="col-sm-2">
-            <a href="/borrar/{{id}}" class="btn btn-xs btn-danger">Cancelar reunion</a>
+            <a href="/borrar/{{id}}" class="btn btn-xs btn-danger">Cancelar reunión</a>
         </div>
     </div>
     {{/each}}
+</section>
+
+
 
     {{!-- <div class="row">
         <div class="col-md-4">
