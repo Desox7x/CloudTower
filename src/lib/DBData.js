@@ -94,14 +94,14 @@ module.exports = {
     async deleteProperty(id) {
         console.log('check');
         let check = await DB.query('SELECT * FROM reunion WHERE idInm = ?', [id])
-        if(check.length == 0){
+        if (check.length == 0) {
             let data = await DB.query('DELETE FROM addInmueble WHERE idInm = ?', [id]);
             console.log(data);
             return 1;
-        }else{
+        } else {
             return 0;
         }
-        
+
     },
 
     async searchInmueble(nombre) {
@@ -149,17 +149,25 @@ module.exports = {
     },
 
     async searchUser(nombre) {
-        let data = await DB.query("SELECT * from Entidad WHERE fullname LIKE CONCAT('%', ?,  '%')", [nombre]);
-        return data;
+        console.log('check');
+        let check = await DB.query("SELECT * from Entidad WHERE fullname = ?", [nombre]);
+        if (check.length == 0) {
+            let data = await DB.query("SELECT * from Entidad WHERE fullname LIKE CONCAT('%', ?,  '%')", [nombre]);
+            return data;
+        }else{
+            console.log('undefined')
+            return 0;
+        }
+
     },
 
     async addReunion(fecha, tiempo, idInm, idEntidad) {
 
         console.log("check");
         let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idEntidad = ? ", [fecha, idEntidad]);
-        let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?",[idInm, idEntidad])
+        let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?", [idInm, idEntidad])
         let esInmo = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 2", [idEntidad]);
-        
+
 
         if (check.length == 0 && esRepresentante.length == 0 && esInmo == 0) {
             console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
@@ -244,7 +252,7 @@ module.exports = {
         return data;
     },
 
-    async getTotalInmuebles(){
+    async getTotalInmuebles() {
         let data = await DB.query("SELECT COUNT(IdInm) as count, a.idEntidad, e.fullname from addInmueble a JOIN entidad e ON a.idEntidad = e.idEntidad GROUP BY a.idEntidad")
         console.log(data);
         return data;

@@ -83,10 +83,19 @@ ctrl.ingenieros = async (req, res) => {
 
 ctrl.search = async(req,res) => {
     let data, rep;
+    //let check = 0;
     if(req.query.nombre != undefined) {
          data = await db.searchUser(req.query.nombre);
          rep = await db.getRepresentantesFromInmueble(req.params.id);
     }
+
+    if(data == 0){
+        console.log('no hay na');
+        req.flash('message', 'lalalalal')
+    }
+    
+    
+
     return res.render('postlog/search', {rep, data})
 
 }
