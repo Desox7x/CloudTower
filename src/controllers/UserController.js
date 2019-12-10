@@ -107,7 +107,12 @@ ctrl.getProperty = async (req, res) => {
 }
 
 ctrl.deleteProperty = async (req, res) => {
-    await DB.deleteProperty(req.params.id);
+    let data = await DB.deleteProperty(req.params.id);
+    if(data==1){
+        req.flash('success', 'Inmueble eliminado exitosamente!')
+    }else{
+        req.flash('message', 'No se puede eliminar un inmueble con citas pendientes, elimine las citas o espere a que estas se realicen.')
+    }
     console.log(req.params);
     res.redirect('/profile/propertylist');
 }

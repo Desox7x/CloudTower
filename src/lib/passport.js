@@ -11,7 +11,7 @@ passport.use('local.login', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 
-}, async(req, correo, password, done) => {
+}, async (req, correo, password, done) => {
     console.log(req.body);
     console.log(correo);
     console.log(password);
@@ -45,19 +45,23 @@ passport.use('local.signup', new LocalStrategy({
         idTipoEntidad: entidad
     };
     newUser.password = await helpers.encryptPassword(password)
-    const result = await pool.query('INSERT INTO Entidad SET ?', [newUser]);
-    
-    console.log(result);
-    
-    newUser.idEntidad = result.insertId;
-    return done(null, newUser);
+    const check = await pool.query('SELECT * FROM Entidad WHERE telefono = ? AND correo = ?', [telefono, correo]);
+    if (check.length == 0) {
+        const result = await pool.query('INSERT INTO Entidad SET ?', [newUser]);
+        console.log(result);
+        newUser.idEntidad = result.insertId;
+        return done(null, newUser);
+    }else{
+        return done(null, false, req.flash('message', 'Telefono o Correo ya esta en uso'));
+    }
+
 }));
 passport.serializeUser((Entidad, done) => {
     done(null, Entidad.idEntidad);
 });
 
 passport.deserializeUser(async (idEntidad, done) => {
-   //const rows = await pool.query('SELECT * FROM Entidad Where idEntidad = ?', [idEntidad]);
-   const rows = await DB.getUserById(idEntidad)
-   done(null, rows[0]);
+    //const rows = await pool.query('SELECT * FROM Entidad Where idEntidad = ?', [idEntidad]);
+    const rows = await DB.getUserById(idEntidad)
+    done(null, rows[0]);
 })

@@ -92,8 +92,16 @@ module.exports = {
     },
 
     async deleteProperty(id) {
-        let data = await DB.query('DELETE FROM addInmueble WHERE idInm = ?', [id]);
-        console.log(data);
+        console.log('check');
+        let check = await DB.query('SELECT * FROM reunion WHERE idInm = ?', [id])
+        if(check.length == 0){
+            let data = await DB.query('DELETE FROM addInmueble WHERE idInm = ?', [id]);
+            console.log(data);
+            return 1;
+        }else{
+            return 0;
+        }
+        
     },
 
     async searchInmueble(nombre) {
