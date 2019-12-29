@@ -3,6 +3,10 @@ const DB = require('../database');
 
 module.exports = {
 
+
+
+
+
     async getAllUsers() {
         let data = await DB.query('SELECT fullname, telefono, correo, direccion, descripcion, Empleo, idTipoEntidad FROM entidad');
         //console.log(data);
@@ -149,12 +153,15 @@ module.exports = {
     },
 
     async searchUser(nombre) {
-        console.log('check');
+
         let check = await DB.query("SELECT * from Entidad WHERE fullname = ?", [nombre]);
+
         if (check.length == 0) {
+
             let data = await DB.query("SELECT * from Entidad WHERE fullname LIKE CONCAT('%', ?,  '%')", [nombre]);
+            console.log(data.length);
             return data;
-        }else{
+        } else {
             console.log('undefined')
             return 0;
         }
@@ -164,20 +171,18 @@ module.exports = {
     async addReunion(fecha, tiempo, idInm, idEntidad) {
 
         console.log("check");
-        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idEntidad = ? ", [fecha, idEntidad]);
+        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ?", [fecha, idInm]);
         let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?", [idInm, idEntidad])
         let esInmo = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 2", [idEntidad]);
 
 
-        if (check.length == 0 && esRepresentante.length == 0 && esInmo == 0) {
+        if (check.length == 0 && esRepresentante == 0 && esInmo == 0) {
             console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
             let data = await DB.query("INSERT INTO reunion SET fecha = ?, tiempo = ?, idInm = ?, idEntidad = ?", [fecha, tiempo, idInm, idEntidad])
             return 1;
         } else {
             return 0;
         }
-
-
 
     },
 
@@ -256,7 +261,39 @@ module.exports = {
         let data = await DB.query("SELECT COUNT(IdInm) as count, a.idEntidad, e.fullname from addInmueble a JOIN entidad e ON a.idEntidad = e.idEntidad GROUP BY a.idEntidad")
         console.log(data);
         return data;
+    },
+
+    //=========VERIFY USER========
+    async verifyUser(fullname, password, telefono, correo, direccion) {
+        console.log('check')
+        let check = await DB.query('SELECT * FROM Entidad WHERE telefono = ? OR correo = ?', [telefono, correo])
+        if (check.length == 0) {
+            let data = await DB.query('INSERT INTO Verify SET VerFullname = ?, VerPassword = ?, VerTelefono = ?, VerCorreo = ?, Verdireccion = ?', [fullname, password, telefono, correo, direccion]);
+            console.log(data);
+            return 1;
+        }else{
+            return 0;
+        }
+    },
+
+    async getSolicitudes() {
+        let data = await DB.query('SELECT * FROM Verify')
+        return data;
+
+    },
+
+    async createUser(fullname, password, telefono, correo, direccion, idTipoEntidad, id) {
+        let data = await DB.query('INSERT INTO Entidad SET fullname = ?, password = ?, telefono = ?, correo = ?, direccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad]);
+        // await DB.query('DELETE FROM Verify WHERE VerifyID = ?', [id])
+        console.log(data)
+    },
+
+    async deleteVerify(id){
+        let data = await DB.query('DELETE FROM Verify WHERE VerifyID = ?', [id]);
+        console.log(data);
     }
+
+
 
 
 

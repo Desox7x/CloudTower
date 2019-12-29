@@ -1,0 +1,172 @@
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link
+  href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+  rel="stylesheet">
+<link rel="stylesheet" href="css/cards.css">
+
+<div id="wrapper">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
+            <div>
+                <h2>ADMIN</h2>
+            </div>
+            
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interfaz
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/solicitudes">
+                <i class="fas fa-check-double"></i>
+                <span>Solicitudes</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/">
+                <i class="fas fa-hotel"></i>
+                <span>Usuarios Clientes</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/">
+                <i class="fas fa-pencil-ruler"></i>
+                <span>Usuarios Inmobiliaria</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/">
+                <i class="fas fa-chart-area"></i>
+                <span>Usuarios Constructora</span></a>
+        </li>
+
+        
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+
+
+    </ul>
+    
+    <div class="card-body">
+        <h3>Solicitudes Enviadas</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+
+
+                    </tr>
+                </tfoot>
+                {{#each verify}}
+                <tbody>
+                    <tr>
+                        <td>{{VerifyID}}</td>
+                        <td>{{VerFullname}}</td>
+                        <td>{{VerTelefono}}</td>
+                        <td>{{VerCorreo}}</td>
+
+                        <td>
+
+                            <button class="btn btn-primary btn-sm"
+                                style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
+                                data-target="#InmobiliariaModal{{@index}}">Validar</button>
+
+                        </td>
+
+                        <td>
+                            <a href="/deleteVer/{{VerifyID}}" class="btn btn-danger btn-sm">Borrar</a>
+                        </td>
+                    </tr>
+                </tbody>
+                {{/each}}
+        </div>
+
+        </table>
+    </div>
+</div>
+
+
+{{#each verify}}
+<div class="modal fade " id="InmobiliariaModal{{@index}}" tabindex="-1" role="dialog"
+    aria-labelledby="InmobiliariaModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #1bb2fe;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Registrarse</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/validar" method="POST">
+                    <input type="hidden" name="entidad" value="2">
+                    <div class="form-group">
+                        <input type="text" name="fullname" value="{{VerFullname}}"
+                            placeholder="Nombre de la Inmobiliaria" class="form-control" autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" name="correo" value="{{VerCorreo}}" placeholder="Correo de contacto"
+                            class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="password" value="{{VerPassword}}" placeholder="Contraseña"
+                            class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="direccion" value="{{VerDireccion}}" placeholder="Ubicacion"
+                            class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" name="telefono" placeholder="Telefono de Inmobiliaria" value="{{VerTelefono}}"
+                            class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <span class="note" style="font-size: 13px;"> Formato: XXX-XXX-XXXX </span>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">
+                            Validar
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}

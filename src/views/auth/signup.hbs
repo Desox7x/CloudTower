@@ -32,9 +32,9 @@
     </div>
 </div>
 <div class="container p-4">
+    {{> message}}
     <div class="row align-items-start">
         <div class="col-md-3 ml-auto">
-            {{> message}}
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ClienteModal">
                 <i class="fas fa-users"> Cliente</i>
@@ -113,7 +113,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="/signup" method="POST">
+                            <form action="/veruser" method="POST">
                             <input type="hidden" name="entidad" value="2">
                                 <div class="form-group">
                                     <input type="text" name="fullname" placeholder="Nombre de la Inmobiliaria"
@@ -211,6 +211,7 @@
             </div>
         </div>
     </div>
+    
 </div>
 
 <!-- SCRIPT: PRESIONE ENTER PARA TAB -->
