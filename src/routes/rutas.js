@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {requireRole, isLoggedIn} = require('../lib/auth');
+const {requireRole, isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 
 const home = require('../controllers/HomeController');
 const user = require('../controllers/UserController');
@@ -12,6 +12,7 @@ const admin = require('../controllers/AdminController');
 const ClientRole = 1;
 const InmobiliariaRole = 2;
 const ConstructoraRole = 3;
+const AdminRole = 5;
 
 console.log(ClientRole);
 
@@ -74,7 +75,7 @@ router.post('/validar', auth.validarPOST);
 router.post('/signuprep', auth.signupRepPOST);
 router.post('/signuping', auth.signupIngPOST);
 
-router.get('/login', auth.login)
+router.get('/login', isNotLoggedIn, auth.login)
 router.post('/login', auth.loginPOST);
 
 
@@ -84,8 +85,11 @@ router.post('/veruser', auth.VerUser);
 router.get('/logout',  auth.logout);
 
 // =========== ADMIN ================
-router.get('/admin', admin.admin);
+router.get('/admin', isLoggedIn, requireRole(AdminRole), admin.admin);
 router.get('/admin/solicitudes', admin.adminSolicitudes);
+router.get('/admin/clientes', admin.adminClientes);
+router.get('/admin/inmobiliarias', admin.adminInmobiliarias);
+router.get('/admin/constructoras', admin.adminConstructora);
 router.get('/deleteVer/:id', admin.deleteVer);
 
 

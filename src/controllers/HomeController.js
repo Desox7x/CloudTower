@@ -22,8 +22,13 @@ ctrl.map = (req, res) => {
     res.render('./postlog/mapa')
 }
 ctrl.profile = async (req, res) => {
-    if (req.user.idTipoEntidad == 1 || req.user.idTipoEntidad == 4) {
+    if (req.user.idTipoEntidad == 1 || req.user.idTipoEntidad == 4 || req.user.idTipoEntidad == 5) {
         const reunion = await db.getUserReunion(req.user.idEntidad)
+        reunion.forEach(element => {
+            element.fecha = element.fecha.toLocaleDateString()
+            console.log(element.fecha)
+        });
+        
         return res.render('postlog/profile', {reserva: reunion, data: req.user, isUser: true});
     }
     if (req.user.idTipoEntidad == 2) {

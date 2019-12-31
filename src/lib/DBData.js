@@ -12,6 +12,12 @@ module.exports = {
         //console.log(data);
         return data;
     },
+    //====== Total por Entidades ======
+    async getTotalTipoEntidad(id){
+        let data = await DB.query('SELECT * FROM Entidad WHERE idTipoEntidad = ?', [id]);
+        return data;
+    },
+
 
     async getUserById(id) {
         let data = await DB.query('SELECT idEntidad, idTipoEntidad, fullname, telefono, correo, direccion, idImg, descripcion, Empleo FROM entidad WHERE idEntidad = ? LIMIT 1', [id]);
@@ -174,7 +180,7 @@ module.exports = {
         let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ?", [fecha, idInm]);
         let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?", [idInm, idEntidad])
         let esInmo = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 2", [idEntidad]);
-
+        
 
         if (check.length == 0 && esRepresentante == 0 && esInmo == 0) {
             console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
