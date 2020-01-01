@@ -63,12 +63,11 @@ module.exports = {
         return data;
     },
 
-    async addInmueble(name, estado, desc, ubic, tipo, compra, img,
+    async addInmueble(name, estado, desc, ubic, municipio, tipo, compra, img,
         moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad) {
 
-        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, estado = ?, descr = ?, ubic = ?, tipoInm = ?, compra = ?, img = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, estado, desc, ubic, tipo, compra,
-            img, moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad
-        ]);
+        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, estado = ?, descr = ?, ubic = ?, municipio = ?, tipoInm = ?, compra = ?, img = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, estado, desc, ubic, municipio, tipo, compra,
+            img, moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad]);
         return data;
 
     },
@@ -177,12 +176,13 @@ module.exports = {
     async addReunion(fecha, tiempo, idInm, idEntidad) {
 
         console.log("check");
-        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ?", [fecha, idInm]);
+        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ?", [fecha, idInm]);   
         let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?", [idInm, idEntidad])
         let esInmo = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 2", [idEntidad]);
-        
+        let isReserved = await DB.query("SELECT * FROM reunion WHERE idEntidad = ? AND idInm = ?", [idEntidad, idInm]);
+        let isSameDate = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idEntidad = ?", [fecha, idEntidad])
 
-        if (check.length == 0 && esRepresentante == 0 && esInmo == 0) {
+        if (check.length == 0 && esRepresentante == 0 && esInmo == 0 && isReserved == 0 && isSameDate == 0) {
             console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
             let data = await DB.query("INSERT INTO reunion SET fecha = ?, tiempo = ?, idInm = ?, idEntidad = ?", [fecha, tiempo, idInm, idEntidad])
             return 1;

@@ -48,10 +48,9 @@ ctrl.scheduleReunion = (req, res) => {
 ctrl.addPropertyPOST = async (req, res) => {
     const validate = await DB.repBelongInmobiliaria(req.body.idRep, req.user.idEntidad)
     if (validate) {
-        const nuevo = await DB.addInmueble(req.body.nombre, req.body.estado, req.body.descr, req.body.ubic, req.body.tipoInm,
-            req.body.compra, req.body.img, req.body.moneda, req.body.precio, req.body.metro,
-            req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado,
-            req.user.idEntidad);
+        const nuevo = await DB.addInmueble(req.body.nombre, req.body.estado, req.body.descr, req.body.ubic, req.body.municipio, 
+            req.body.tipoInm, req.body.compra, req.body.img, req.body.moneda, req.body.precio, req.body.metro,
+            req.body.hab, req.body.bano, req.body.parqueo, req.body.lBlanca, req.body.amueblado, req.user.idEntidad);
         await DB.getRepresentantesEntidad(req.user.idEntidad);
         await DB.addRepInmueble(req.body.idRep, nuevo.insertId);
         
