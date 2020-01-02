@@ -108,19 +108,23 @@
                                 <table class="table table-fluid" id="myTable">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Nombre</th>
                                             <th>Correo</th>
                                             <th>Telefono</th>
-                                            <th></th>
+                                            <th>Borrar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {{#each users}}
                                         <tr>
+                                            <td>{{idEntidad}}</td>
                                             <td>{{fullname}}</td>
                                             <td>{{correo}}</td>
                                             <td>{{telefono}}</td>
-                                            <td><button class="btn btn-danger">BAN</button></td>
+                                            <td>
+                                                <a href="/deleteuser/{{idEntidad}}" class="btn btn-danger">BAN</a>
+                                            </td>
                                         </tr>
                                         {{/each}}
                                     </tbody>

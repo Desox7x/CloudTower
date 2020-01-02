@@ -30,10 +30,17 @@ ctrl.signupPOST =  passport.authenticate('local.signup', {
 
 ctrl.validarPOST = async (req, res) => {
     let password = await helpers.encryptPassword(req.body.password);
-    await DB.createUser(req.body.fullname, password, req.body.telefono,
+    let register = await DB.createUser(req.body.fullname, password, req.body.telefono,
         req.body.correo, req.body.direccion, 2);
+    if(register==0){
+        req.flash('success', 'Verificacion exitosa')
+    }else{
+        req.flash('message', 'La verificación no ha podido realizarse.')
+    }
     
-    res.redirect('/admin');
+    
+
+    res.redirect('/admin/solicitudes');
 }
     
 

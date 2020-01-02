@@ -8,12 +8,12 @@ module.exports = {
 
 
     async getAllUsers() {
-        let data = await DB.query('SELECT fullname, telefono, correo, direccion, descripcion, Empleo, idTipoEntidad FROM entidad');
+        let data = await DB.query('SELECT idEntidad, fullname, telefono, correo, direccion, descripcion, Empleo, idTipoEntidad FROM entidad');
         //console.log(data);
         return data;
     },
     //====== Total por Entidades ======
-    async getTotalTipoEntidad(id){
+    async getTotalTipoEntidad(id) {
         let data = await DB.query('SELECT * FROM Entidad WHERE idTipoEntidad = ?', [id]);
         return data;
     },
@@ -176,7 +176,7 @@ module.exports = {
     async addReunion(fecha, tiempo, idInm, idEntidad) {
 
         console.log("check");
-        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ?", [fecha, idInm]);   
+        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ?", [fecha, idInm]);
         let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?", [idInm, idEntidad])
         let esInmo = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 2", [idEntidad]);
         let isReserved = await DB.query("SELECT * FROM reunion WHERE idEntidad = ? AND idInm = ?", [idEntidad, idInm]);
@@ -277,7 +277,7 @@ module.exports = {
             let data = await DB.query('INSERT INTO Verify SET VerFullname = ?, VerPassword = ?, VerTelefono = ?, VerCorreo = ?, Verdireccion = ?', [fullname, password, telefono, correo, direccion]);
             console.log(data);
             return 1;
-        }else{
+        } else {
             return 0;
         }
     },
@@ -289,13 +289,26 @@ module.exports = {
     },
 
     async createUser(fullname, password, telefono, correo, direccion, idTipoEntidad, id) {
-        let data = await DB.query('INSERT INTO Entidad SET fullname = ?, password = ?, telefono = ?, correo = ?, direccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad]);
-        // await DB.query('DELETE FROM Verify WHERE VerifyID = ?', [id])
-        console.log(data)
+        let check = await DB.query('SELECT * FROM Verify WHERE VerCorreo = ?', [correo]);
+        if (check.length == 1) {
+            await DB.query('DELETE FROM Verify WHERE VerCorreo = ?', [correo])
+            let data = await DB.query('INSERT INTO Entidad SET fullname = ?, password = ?, telefono = ?, correo = ?, direccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad]);
+            console.log(data)
+            return 0;
+        }else{
+            return 1;
+        }
+
+
     },
 
-    async deleteVerify(id){
+    async deleteVerify(id) {
         let data = await DB.query('DELETE FROM Verify WHERE VerifyID = ?', [id]);
+        console.log(data);
+    },
+
+    async deleteUser(id){
+        let data = await DB.query('DELETE FROM Entidad WHERE idEntidad = ?', [id]);
         console.log(data);
     }
 

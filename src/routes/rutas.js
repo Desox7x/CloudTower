@@ -91,6 +91,6 @@ router.get('/admin/clientes', admin.adminClientes);
 router.get('/admin/inmobiliarias', admin.adminInmobiliarias);
 router.get('/admin/constructoras', admin.adminConstructora);
 router.get('/deleteVer/:id', admin.deleteVer);
-
+router.get('/deleteuser/:id', admin.deleteUser);
 
 module.exports = router;

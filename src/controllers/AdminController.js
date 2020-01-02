@@ -42,4 +42,9 @@ ctrl.deleteVer = async (req, res) => {
     res.redirect('/admin');
 }
 
+ctrl.deleteUser = async (req, res) => {
+    await DB.deleteUser(req.params.id);
+    res.redirect('/admin');
+}
+
 module.exports = ctrl;
