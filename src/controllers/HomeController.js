@@ -22,6 +22,7 @@ ctrl.map = (req, res) => {
     res.render('./postlog/mapa')
 }
 ctrl.profile = async (req, res) => {
+    let noReservas;
     if (req.user.idTipoEntidad == 1 || req.user.idTipoEntidad == 4 || req.user.idTipoEntidad == 5) {
         const reunion = await db.getUserReunion(req.user.idEntidad)
         reunion.forEach(element => {
@@ -29,7 +30,7 @@ ctrl.profile = async (req, res) => {
             console.log(element.fecha)
         });
         
-        return res.render('postlog/profile', {reserva: reunion, data: req.user, isUser: true});
+        return res.render('postlog/profile', {reserva: reunion, data: req.user, isUser: true, noReservas});
     }
     if (req.user.idTipoEntidad == 2) {
         const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
@@ -70,11 +71,19 @@ ctrl.proyectList = async (req, res) => {
 ctrl.reunionList = async (req, res) => {
     const reuniones = await db.getAllReunionesEntidad(req.user.idEntidad);
     const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
+    reuniones.forEach(element => {
+        element.fecha = element.fecha.toLocaleDateString()
+        console.log(element.fecha)
+    });
     res.render('postlog/reunionList', {repre: rep, reunion: reuniones});
 }
 ctrl.dateList = async (req, res) => {
     const reuniones = await db.getAllReunionesEntidad(req.user.idEntidad);
     const rep = await db.getRepresentantesEntidad(req.user.idEntidad);
+    reuniones.forEach(element => {
+        element.fecha = element.fecha.toLocaleDateString()
+        console.log(element.fecha)
+    });
     res.render('postlog/datelist', {repre: rep, reunion: reuniones});
 }
 ctrl.representantes = async (req, res) => {
@@ -89,17 +98,22 @@ ctrl.ingenieros = async (req, res) => {
 ctrl.search = async(req,res) => {
     let data, rep;
     let check = 0;
+    let notFound = 0;
     if(req.query.nombre != undefined) {
          data = await db.searchUser(req.query.nombre);
          rep = await db.getRepresentantesFromInmueble(req.params.id);
+    }else{
+        notFound = 1;
+
     }
 
+    
     // if(data == 0){
     //     console.log('no hay na');
     //     req.flash('message', 'lalalalal')
     // }
     
-    return res.render('postlog/search', {rep, data, check})
+    return res.render('postlog/search', {rep, data, check, notFound})
 
 }
 

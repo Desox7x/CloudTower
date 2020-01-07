@@ -22,7 +22,7 @@ ctrl.adminLogin = (req, res) => {
 
 
 // ==================== POST =======================
-ctrl.signupPOST =  passport.authenticate('local.signup', {
+ctrl.signupPOST = passport.authenticate('local.signup', {
     successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true
@@ -61,6 +61,19 @@ ctrl.loginAdminPOST = (req, res, next) => {
         failureFlash: true
     })(req, res, next);
 };
+
+// ctrl.signupClient = async (req, res) => {
+//     let password = await helpers.encryptPassword(req.body.password);
+//     let check = await DB.createClient(req.body.fullname, password, req.body.telefono, 
+//         req.body.correo, req.body.direccion, 1);
+//     if(check == 1){
+//         req.flash('success', 'Tu cuenta ha sido creada exitosamente! Favor de iniciar sesión para verificar.')
+//         console.log('success')
+//     } else {
+//         req.flash('message', 'Datos duplicados');
+//     }
+//     res.redirect('/profile');
+// }
 
 ctrl.signupRepPOST = async (req, res) => {
     let password = await helpers.encryptPassword(req.body.password)

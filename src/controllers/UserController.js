@@ -1,6 +1,6 @@
 const DB = require('../lib/DBData')
 const pool = require('../database');
-const nodemailer = require('nodemailer');
+const mailer = require('../lib/mailer');
 const ctrl = {}
 
 ctrl.dashboard = (req, res) => {
@@ -126,33 +126,7 @@ ctrl.search = (req, res) => {
 };
 
 ctrl.sendEmail = async (req, res) => {
-    const { Correo, text } = req.body;
-    const mail = req.user.correo;
-    contentHTML = `
-        <h1>User Information</h1>
-        <ul>
-            <li>Para: ${Correo}</li>
-        </ul>
-        <p>${text}</p>
-    `;
-    const transporter = nodemailer.createTransport({
-        host: 'smtp.live.com',
-        port: 25,
-        secure: false,
-        auth: {
-            user: '',
-            pass: ''
-        }
-    });
-
-    const info = await transporter.sendMail({
-        from: "genao_abdel@hotmail.com",
-        to: mail,
-        subject: 'Pruebita',
-        html: contentHTML
-
-    });
-
+    mailer.contacto('lalala', 'lalalala')
     console.log('Message sent', info.messageId);
 
     res.send('recibido');

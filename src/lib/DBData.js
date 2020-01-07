@@ -198,14 +198,56 @@ module.exports = {
     },
     async getUserReunion(id) {
         let data = await DB.query('SELECT * FROM reunion r JOIN addInmueble i ON r.idInm = i.idInm JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE r.idEntidad = ?', [id]);
-        console.log(data);
-        return data;
+        let today = new Date();
+        let reuniones = []
+        await data.forEach(async element => {
+            if(element.fecha.getFullYear() <= today.getFullYear() && element.fecha.getMonth() <= today.getMonth() && element.fecha.getDate() <= today.getDate()){
+                await DB.query('DELETE FROM reunion WHERE id = ?', [element.id]);
+                console.log('check');
+            } else {
+                reuniones.push(element);
+                
+            }
+
+            console.log(today.getFullYear());
+            console.log(element.fecha.getFullYear());
+            console.log(today.getMonth());
+            console.log(element.fecha.getMonth());
+            console.log(today.getDate());
+            console.log(element.fecha.getDate());
+
+
+        });
+
+        return reuniones;
+        
     },
 
     async getAllReunionesEntidad(id) {
         let data = await DB.query('SELECT * FROM reunion r JOIN Entidad e ON r.idEntidad = e.idEntidad JOIN addInmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
-        console.log(data);
-        return data;
+        let today = new Date();
+        let reuniones = []
+        await data.forEach(async element => {
+            if(element.fecha.getFullYear() <= today.getFullYear() && element.fecha.getMonth() <= today.getMonth() && element.fecha.getDate() <= today.getDate()){
+                await DB.query('DELETE FROM reunion WHERE id = ?', [element.id]);
+                console.log('check');
+            } else {
+                reuniones.push(element);
+                
+            }
+
+            console.log(today.getFullYear());
+            console.log(element.fecha.getFullYear());
+            console.log(today.getMonth());
+            console.log(element.fecha.getMonth());
+            console.log(today.getDate());
+            console.log(element.fecha.getDate());
+
+
+        });
+
+        return reuniones;
+        
 
     },
 
@@ -301,6 +343,19 @@ module.exports = {
 
 
     },
+
+    // async createClient(fullname, password, telefono, correo, direccion, idTipoEntidad, id) {
+    //     let check = await DB.query('SELECT * FROM Entidad WHERE correo = ?', [correo]);
+    //     console.log('checked');
+    //     if(check.length == 0) {
+    //         let data = await DB.query('INSERT INTO Entidad SET fullname = ?, password = ?, telefono = ?, correo = ?, direccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad])
+    //         console.log(data);
+    //         return 1;
+    //     }else{
+    //         return 0;
+    //     }
+         
+    // },
 
     async deleteVerify(id) {
         let data = await DB.query('DELETE FROM Verify WHERE VerifyID = ?', [id]);

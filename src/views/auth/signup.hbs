@@ -4,12 +4,12 @@
     #carrusel {
     width: 50vw;
     position: fixed;
-}
+    }
     .btn-lg {
         margin: 15%;
         width: 20rem;
-        border: solid white;
-        position:static;
+        
+        position: static;
     }
 </style>
 
@@ -32,10 +32,14 @@
     </div>
 </div>
 <div class="container p-4">
-    {{> message}}
+    
     <div class="row align-items-start">
+        <div class="col-md-5">
+            {{> message}}
+        </div>
         <div class="col-md-3 ml-auto">
             <!-- Button trigger modal -->
+            
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ClienteModal">
                 <i class="fas fa-users"> Cliente</i>
             </button>

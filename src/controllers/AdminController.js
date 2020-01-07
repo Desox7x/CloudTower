@@ -39,7 +39,7 @@ ctrl.adminSolicitudes = async (req, res) => {
 
 ctrl.deleteVer = async (req, res) => {
     await DB.deleteVerify(req.params.id);
-    res.redirect('/admin');
+     res.redirect('/admin/solicitudes');
 }
 
 ctrl.deleteUser = async (req, res) => {

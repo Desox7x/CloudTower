@@ -39,18 +39,30 @@
                         <img src="/uploads/{{data.idImg}}" class="rounded-circle img-thumbnail w-90 h-90" alt=""
                             onerror="this.onerror=null; this.src='img/userlogo.jpg'">
                         {{#if isUser}}
-                        <a href="/editProfile"><span class="notify-badge"><i class="fas fa-user-edit"></i></span></a>
+                        <a href="/editProfile" id="edit"><span class="notify-badge"><i class="fas fa-user-edit"></i></span></a>
                         {{/if}}
                         <h3>{{data.fullname}}</h3>
                     </div>
                 </div>
             </div>
-            
+            <script>
+                var $btn = $('#edit').hide()
+                $(".card-header").mouseenter(function(){
+                    $btn.fadeIn(300);
+                    $btn.show();
+                    
+                });
+                $(".card-header").mouseleave(function (){
+                    $btn.fadeOut(300);
+                    $btn.hide();
+                    
+                });
+            </script>
 
         </div>
         <hr class="sidebar-divider">
         <div class="row justify-content-center">
-            <div class="col-md-3">
+            <div class="col-md-3 ml-auto">
                 <h5><i class="far fa-envelope fa-fw"></i> Correo:</h5>
                 <br>
                 <h5><i class="fas fa-mobile-alt fa-fw"></i> Teléfono:</h5>
@@ -59,17 +71,33 @@
 
             </div>
 
-            <div class="col-md-5">
+            <div class="col-md-5 ml-auto">
                 <h5>{{data.correo}}</h5>
-                <hr class="divider">
+                <br>
                 <h5>{{data.telefono}}</h5>
-                <hr class="divider">
+                <br>
                 <h5>{{data.direccion}}</h5>
             </div>
         </div>
-        <hr class="sidebar-divider">
-
+        <hr class="divider">
         <div class="row justify-content-center">
+            <div class="col-md-3 ml-auto">
+                <h5><i class="fa fa-pencil fa-fw"></i> Descripción:</h5>
+            </div>
+            <div class="col-md-5 ml-auto">
+                <h5>{{data.descripcion}}</h5>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-3 ml-auto">
+                <h5><i class="fa fa-id-badge fa-fw"></i> Lugar de empleo:</h5>
+            </div>
+            <div class="col-md-5 ml-auto">
+                <h5>{{data.Empleo}}</h5>
+            </div>
+        </div>
+        {{!-- <div class="row justify-content-center">
             <div class="col-md-3">
                 <h5><i class="fa fa-pencil fa-fw"></i> Descripción:</h5>
                 <br>
@@ -79,16 +107,24 @@
             </div>
             <div class="col-md-5">
                 <h5>{{data.descripcion}}</h5>
+                {{#unless data.descripcion}}
+                <p>No hay descripcion</p>
+                {{/unless}}
                 <hr class="divider">
+                <br>
                 <h5>{{data.Empleo}}</h5>
+                {{#unless data.Empleo}}
+                <h5>no hay empleo</h5>
+                {{/unless}}
             </div>
-        </div>
+        </div> --}}
 
         <br>
         <br>
         {{#if isUser}}
         <h4>Citas pendientes</h4>
         <hr class="sidebar-divider">
+        {{#if reserva}}
         {{#each reserva}}
         <div class="row justify-content-center">
             <div class="col-md-4">
@@ -121,9 +157,20 @@
             <div class="col-sm-2">
                 <a href="/borrar/{{id}}" class="btn btn-xs btn-danger">Cancelar reunión</a>
             </div>
+            
         </div>
         {{/each}}
+        {{else}}
+        {{#unless noReservas}}
+        <div class="text-center">
+            <p>Actualmente usted no tiene reservas de ningun inmueble</p>
+        </div>
+        
+        {{/unless}}
         {{/if}}
+        <!--End of reserva if -->
+        {{/if}}
+        <!--End of isUser if  -->
 </section>
 
 
