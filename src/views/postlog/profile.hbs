@@ -3,17 +3,17 @@
         margin: 5%;
     }
 
-    section{
+    section {
         background: url("../img/stock2.jpg") no-repeat fixed center;
         background-size: cover;
     }
 
-    .img-thumbnail{
+    .img-thumbnail {
         position: relative;
         display: inline-block;
     }
 
-    .notify-badge{
+    .notify-badge {
         position: absolute;
         right: 60px;
         top: 180px;
@@ -27,191 +27,153 @@
     }
 </style>
 
+
+
 <section>
     <div class="container p-4 bg-light">
-    <div class="row justify-content-center">
-        {{message}}
-        {{#if isUser}}
-        <div class="col-md-4">
-            <div class="card text-center rounded-circle">
-                <div class="card-header bg-light">
-                    <img src="/uploads/{{data.idImg}}" class="rounded-circle img-thumbnail w-90 h-90" alt=""
-                        onerror="this.onerror=null; this.src='img/userlogo.jpg'">
-                    <a href="/editProfile"><span class="notify-badge"><i class="fas fa-user-edit"></i></span></a>
-                    <h3>{{data.fullname}}</h3>
+        <div class="row justify-content-center">
+            
+            <div class="col-md-4">
+                <div class="card text-center rounded-circle">
+                    <div class="card-header bg-light">
+                        <img src="/uploads/{{data.idImg}}" class="rounded-circle img-thumbnail w-90 h-90" alt=""
+                            onerror="this.onerror=null; this.src='img/userlogo.jpg'">
+                        {{#if isUser}}
+                        <a href="/editProfile" id="edit"><span class="notify-badge"><i class="fas fa-user-edit"></i></span></a>
+                        {{/if}}
+                        <h3>{{data.fullname}}</h3>
+                    </div>
                 </div>
             </div>
+            <script>
+                var $btn = $('#edit').hide()
+                $(".card-header").mouseenter(function(){
+                    $btn.fadeIn(300);
+                    $btn.show();
+                    
+                });
+                $(".card-header").mouseleave(function (){
+                    $btn.fadeOut(300);
+                    $btn.hide();
+                    
+                });
+            </script>
+
         </div>
+        <hr class="sidebar-divider">
+        <div class="row justify-content-center">
+            <div class="col-md-3 ml-auto">
+                <h5><i class="far fa-envelope fa-fw"></i> Correo:</h5>
+                <br>
+                <h5><i class="fas fa-mobile-alt fa-fw"></i> Teléfono:</h5>
+                <br>
+                <h5><i class="far fa-map fa-fw"></i> Dirección:</h5>
+
+            </div>
+
+            <div class="col-md-5 ml-auto">
+                <h5>{{data.correo}}</h5>
+                <br>
+                <h5>{{data.telefono}}</h5>
+                <br>
+                <h5>{{data.direccion}}</h5>
+            </div>
+        </div>
+        <hr class="divider">
+        <div class="row justify-content-center">
+            <div class="col-md-3 ml-auto">
+                <h5><i class="fa fa-pencil fa-fw"></i> Descripción:</h5>
+            </div>
+            <div class="col-md-5 ml-auto">
+                <h5>{{data.descripcion}}</h5>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-3 ml-auto">
+                <h5><i class="fa fa-id-badge fa-fw"></i> Lugar de empleo:</h5>
+            </div>
+            <div class="col-md-5 ml-auto">
+                <h5>{{data.Empleo}}</h5>
+            </div>
+        </div>
+        {{!-- <div class="row justify-content-center">
+            <div class="col-md-3">
+                <h5><i class="fa fa-pencil fa-fw"></i> Descripción:</h5>
+                <br>
+                <br>
+                <h5><i class="fa fa-id-badge fa-fw"></i> Lugar de empleo:</h5>
+                <br>
+            </div>
+            <div class="col-md-5">
+                <h5>{{data.descripcion}}</h5>
+                {{#unless data.descripcion}}
+                <p>No hay descripcion</p>
+                {{/unless}}
+                <hr class="divider">
+                <br>
+                <h5>{{data.Empleo}}</h5>
+                {{#unless data.Empleo}}
+                <h5>no hay empleo</h5>
+                {{/unless}}
+            </div>
+        </div> --}}
+
+        <br>
+        <br>
+        {{#if isUser}}
+        <h4>Citas pendientes</h4>
+        <hr class="sidebar-divider">
+        {{#if reserva}}
+        {{#each reserva}}
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <img src="/img/{{img}}" class="img-thumbnail float-left mr-2" style="width: 10rem; margin-bottom: 8px;">
+                <b>
+                    <p>{{nombre}}</p>
+                </b>
+                <p>Hora: {{tiempo}}</p>
+                <p>Fecha: {{fecha}}</p>
+
+
+
+            </div>
+
+            <div class="col-md-3">
+                <b>
+                    <p><i class="fas fa-map-marker"> {{ubic}}</i></p>
+                </b>
+                <p>Id de Reserva: {{id}}</p>
+                <p>Inmobiliaria: {{fullname}}</p>
+
+            </div>
+
+            <div class="col-md-2">
+                <b>
+                    <p>{{moneda}}${{precio}}</p>
+                </b>
+                <a href="/inmueble/{{idInm}}" class="btn btn-info">Detalles <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="col-sm-2">
+                <a href="/borrar/{{id}}" class="btn btn-xs btn-danger">Cancelar reunión</a>
+            </div>
+            
+        </div>
+        {{/each}}
+        {{else}}
+        {{#unless noReservas}}
+        <div class="text-center">
+            <p>Actualmente usted no tiene reservas de ningun inmueble</p>
+        </div>
+        
+        {{/unless}}
         {{/if}}
-
-    </div>
-    <hr class="sidebar-divider">
-    <div class="row justify-content-center">
-        <div class="col-md-3">
-            <h5><i class="far fa-envelope fa-fw"></i> Correo:</h5>
-            <br>
-            <h5><i class="fas fa-mobile-alt fa-fw"></i> Teléfono:</h5>
-            <br>
-            <h5><i class="far fa-map fa-fw"></i> Dirección:</h5>
-
-        </div>
-
-        <div class="col-md-5">
-            <h5>{{data.correo}}</h5>
-            <hr class="divider">
-            <h5>{{data.telefono}}</h5>
-            <hr class="divider">
-            <h5>{{data.direccion}}</h5>
-        </div>
-    </div>
-    <hr class="sidebar-divider">
-
-    <div class="row justify-content-center">
-        <div class="col-md-3">
-            <h5><i class="fa fa-pencil fa-fw"></i> Descripción:</h5>
-            <br>
-            <h5><i class="fa fa-id-badge fa-fw"></i> Lugar de empleo:</h5>
-            <br>
-        </div>
-        <div class="col-md-5">
-            <h5>{{data.descripcion}}</h5>
-            <hr class="divider">
-            <h5>{{data.Empleo}}</h5>
-        </div>
-    </div>
-
-    <br>
-    <br>
-    <h4>Citas pendientes</h4>
-    <hr class="sidebar-divider">
-    {{#each reserva}}
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            <img src="/img/{{img}}" class="img-thumbnail float-left mr-2" style="width: 10rem; margin-bottom: 8px;">
-            <b>
-                <p>{{nombre}}</p>
-            </b>
-            <p>Hora: {{tiempo}}</p>
-            <p>Fecha: {{fecha}}</p>
-
-
-
-        </div>
-
-        <div class="col-md-3">
-            <b>
-                <p><i class="fas fa-map-marker"> {{ubic}}</i></p>
-            </b>
-            <p>Id de Reserva: {{id}}</p>
-            <p>Inmobiliaria: {{fullname}}</p>
-
-        </div>
-
-        <div class="col-md-2">
-            <b>
-                <p>{{moneda}}${{precio}}</p>
-            </b>
-            <a href="/inmueble/{{idInm}}" class="btn btn-info">Detalles <i class="fas fa-chevron-right"></i></a>
-        </div>
-        <div class="col-sm-2">
-            <a href="/borrar/{{id}}" class="btn btn-xs btn-danger">Cancelar reunión</a>
-        </div>
-    </div>
-    {{/each}}
+        <!--End of reserva if -->
+        {{/if}}
+        <!--End of isUser if  -->
 </section>
 
 
 
-    {{!-- <div class="row">
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-header bg-light">
-                    <img src="/uploads/{{ data.idImg }}" alt="" class="w-100 h-100 img-thumbnail">
 
-                    {{#if isUser}}
-                    <div class="card-body">
-                        <div class="nav-item dropdown active">
-                            <a class="navdivink dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Cambiar imagen
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <form action="/upload" method="POST" enctype="multipart/form-data">
-                                    <input type="file" name="image">
-                                    <button type="btn btn-success">
-                                        Subir
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    {{/if}}
-
-
-                </div>
-            </div>
-            <div class="card" id="card2">
-                <div class="card-header">
-                    <li>Empleos</li>
-                </div>
-            </div>
-            <div class="card" id="card2">
-                <div class="card-header">
-                    <li>Habilidades</li>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header" style="background-color: #1bb2fe;">
-                    <h3 class="card-title text-white">
-                        {{data.fullname}}
-                            {{#if isUser}}
-                            <button type="button" class="btn btn-secondary float-right" data-toggle="modal"
-                                data-target="#exampleModalCenter">Editar</button>
-                            {{/if}}
-                        {{> editwin}}
-                    </h3>
-
-                </div>
-                <div class="card-body">
-                    <h4 class="text-primary">
-                        <li>{{data.descripcion}}</li>
-                    </h4>
-                </div>
-            </div>
-            <br>
-            <div class="card">
-                <div class="card-header" style="background-color: #1bb2fe;">
-                    <h3 class="card-title text-white">
-                        Información
-
-
-
-                    </h3>
-
-
-                </div>
-
-
-                <div class="card-body">
-                    <h5 class="text-primary">
-                        Teléfono: {{data.telefono}}
-                        <br>
-                        Dirección: {{data.direccion}}
-                        <br>
-                        Correo: {{data.correo}}
-
-
-                    </h5>
-
-                </div>
-
-            </div>
-
-
-
-
-        </div>
-    </div> --}}
 </div>

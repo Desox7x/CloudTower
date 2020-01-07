@@ -26,14 +26,19 @@ ctrl.add = async (req, res) => {
         res.redirect('/inmueble/'+req.params.id);
         return;
     }
+    
 
     
     let data = await DB.addReunion(fecha, tiempo, idInm, idEntidad);
+    
     if(data == 1){
         req.flash('success', 'Has reservado este inmueble exitosamente!');
     }else{
-        req.flash('message', 'No puedes reservar este inmueble.');
+        req.flash('message', 'No puedes reservar este inmueble. Es posible que el inmueble ya este reservado.');
     }
+
+    
+
     res.redirect('/inmueble/'+req.params.id);
 }
 

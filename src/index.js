@@ -92,7 +92,7 @@ app.use((req, res, next) => {
 });
 
 //Rutas
-app.use(require('./routes/rutas.js'))
+app.use(require('./routes/rutas.js'));
 // app.use(require('./routes/authentication.js'))
 // app.use(require('./routes/links.js'))
 

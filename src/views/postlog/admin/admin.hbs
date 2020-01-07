@@ -1,0 +1,309 @@
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+<link rel="stylesheet" href="css/cards.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+<style>
+    #imagen {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+</style>
+
+<div id="wrapper">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center text-white" href="/admin">
+            <div>
+                <h2>ADMIN</h2>
+            </div>
+
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interfaz
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/solicitudes">
+                <i class="fas fa-check-double"></i>
+                <span>Solicitudes</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/clientes">
+                <i class="fas fa-hotel"></i>
+                <span>Usuarios Clientes</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/inmobiliarias">
+                <i class="fas fa-pencil-ruler"></i>
+                <span>Usuarios Inmobiliaria</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/constructoras">
+                <i class="fas fa-chart-area"></i>
+                <span>Usuarios Constructora</span></a>
+        </li>
+
+
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+
+
+    </ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div class="p-4" id="content">
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Tablero</h1>
+
+                </div>
+
+                <!-- Content Row -->
+
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col-lg">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Usuarios Registrados</h6>
+
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+
+                                <table class="table table-fluid" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre</th>
+                                            <th>Correo</th>
+                                            <th>Telefono</th>
+                                            <th>Borrar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each users}}
+                                        <tr>
+                                            <td>{{idEntidad}}</td>
+                                            <td>{{fullname}}</td>
+                                            <td>{{correo}}</td>
+                                            <td>{{telefono}}</td>
+                                            <td>
+                                                <a href="/deleteuser/{{idEntidad}}" class="btn btn-danger">BAN</a>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $('#myTable').DataTable({
+                                        language: {
+                                            "decimal": "",
+                                            "emptyTable": "No hay información",
+                                            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                                            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                                            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                                            "infoPostFix": "",
+                                            "thousands": ",",
+                                            "lengthMenu": "Mostrar _MENU_ Entradas",
+                                            "loadingRecords": "Cargando...",
+                                            "processing": "Procesando...",
+                                            "search": "Buscar:",
+                                            "zeroRecords": "Sin resultados encontrados",
+                                            "paginate": {
+                                                "first": "Primero",
+                                                "last": "Ultimo",
+                                                "next": "Siguiente",
+                                                "previous": "Anterior"
+                                            }
+                                        },
+                                        pageLength: 5,
+                                        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']]
+                                    });
+                                });
+                            </script>
+
+
+                        </div>
+
+
+                    </div>
+                    
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- Content Row -->
+            <div class="row text-justify">
+
+                <!-- Content Column -->
+                
+                <div class="col-lg-6 pl-4">
+
+                    <!-- Illustrations -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Usuarios por entidad</h6>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="chart-area">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                            <br>
+
+                        </div>
+                    </div>
+                    <script>
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: ['Clientes', 'Inmobiliarias', 'Constructoras', 'Representantes'],
+
+                                datasets: [{
+                                    label: '# de Usuarios',
+                                    data: ['{{TC}}', {{ TI }}, {{ TCONS }}, {{ TR }}],
+
+                        backgroundColor: [
+                            'rgba(255, 99, 132)',
+                            'rgba(54, 162, 235)',
+                            'rgba(255, 206, 86)',
+                            'rgba(75, 192, 192)',
+                            'rgba(153, 102, 255)',
+                            'rgba(255, 159, 64)'
+                        ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                                borderWidth: 1
+                                    }]
+                                },
+                        
+                                
+                                
+                            });
+                    </script>
+
+                    <!-- Approach -->
+
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            CloudTower
+                        </div>
+                        <div class="card-body">
+                            <img src="/img/LogoFino.png" alt="" class="card-img mx-auto m-2 w-50 align-items-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i>
+                        Últimas inmobiliarias</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Proyecto</th>
+                                        <th>Sector</th>
+                                        <th>Tipo</th>
+                                        <th>Precio</th>
+                                        <th>Metros</th>
+                                        <th>Vendedor</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Proyecto</th>
+                                        <th>Sector</th>
+                                        <th>Tipo</th>
+                                        <th>Precio</th>
+                                        <th>Metros</th>
+                                        <th>Vendedor</th>
+                                    </tr>
+                                </tfoot>
+                                {{#each inmuebles}}
+                                <tbody>
+                                    <tr>
+                                        <td><img class="img-profile rounded-circle" src="img/{{img}}" alt=""></td>
+                                        <td>{{nombre}}</td>
+                                        <td>{{ubic}}</td>
+                                        <td>{{tipoInm}}</td>
+                                        <td>{{precio}}${{moneda}}</td>
+                                        <td>{{metro}}m²</td>
+                                        <td>{{fullname}}</td>
+                                    </tr>
+                                </tbody>
+                                {{/each}}
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+
+
+</div>
+
+<script src="/chart.min.js"></script>

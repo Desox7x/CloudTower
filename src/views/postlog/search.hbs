@@ -77,6 +77,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
+            {{success}}
             <div class="col-md-12">
                 <form action="/search" method="GET">
                     <div class="input-group" id="boot-search-box">
@@ -202,7 +203,7 @@
 
 
             </div>
-            
+
 
 
             <div class="container p-4 ">
@@ -211,19 +212,24 @@
                         <div class="align-text-center">
                             <h3>Búsqueda de usuarios</h3>
                         </div>
+
                     </div>
 
                 </div>
+
+                {{#if data}}
                 {{#each data}}
+
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <img src="uploads/{{idImg}}" class="img-thumbnail float-left mr-2"
+                            onerror="this.onerror=null; this.src='img/userlogo.jpg'"
                             style="width: 10rem; margin-bottom: 8px;">
                         <b>
                             <p>{{fullname}}</p>
                         </b>
                         <p>{{correo}}</p>
-                       
+
 
 
 
@@ -236,6 +242,16 @@
                     </div>
                 </div>
                 {{/each}}
+                {{else}}
+                {{#unless notFound}}
+
+                <div class="col-md-12 text-center">
+                    <h4>No hay resultados &#128531;</h4>
+                </div>
+
+
+                {{/unless }}
+                {{/if}}
 
 
             </div>

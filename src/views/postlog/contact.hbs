@@ -9,7 +9,7 @@
                 <div class="card-body bg-light">
                     <form action="/sendemail" method="POST">
                         <div class="form-group">
-                            <input type="text" name="Correo" class="form-control" placeholder="Correo Electronico">
+                            <input type="text" name="Correo" value="{{user.Correo}}" class="form-control" placeholder="Correo Electronico">
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" name="text" cols="30" rows="10"

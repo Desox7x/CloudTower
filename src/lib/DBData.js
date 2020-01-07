@@ -3,11 +3,21 @@ const DB = require('../database');
 
 module.exports = {
 
+
+
+
+
     async getAllUsers() {
-        let data = await DB.query('SELECT fullname, telefono, correo, direccion, descripcion, Empleo, idTipoEntidad FROM entidad');
+        let data = await DB.query('SELECT idEntidad, fullname, telefono, correo, direccion, descripcion, Empleo, idTipoEntidad FROM entidad');
         //console.log(data);
         return data;
     },
+    //====== Total por Entidades ======
+    async getTotalTipoEntidad(id) {
+        let data = await DB.query('SELECT * FROM Entidad WHERE idTipoEntidad = ?', [id]);
+        return data;
+    },
+
 
     async getUserById(id) {
         let data = await DB.query('SELECT idEntidad, idTipoEntidad, fullname, telefono, correo, direccion, idImg, descripcion, Empleo FROM entidad WHERE idEntidad = ? LIMIT 1', [id]);
@@ -53,12 +63,11 @@ module.exports = {
         return data;
     },
 
-    async addInmueble(name, estado, desc, ubic, tipo, compra, img,
+    async addInmueble(name, estado, desc, ubic, municipio, tipo, compra, img,
         moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad) {
 
-        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, estado = ?, descr = ?, ubic = ?, tipoInm = ?, compra = ?, img = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, estado, desc, ubic, tipo, compra,
-            img, moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad
-        ]);
+        let data = await DB.query('INSERT INTO addInmueble SET nombre = ?, estado = ?, descr = ?, ubic = ?, municipio = ?, tipoInm = ?, compra = ?, img = ?, moneda = ?, precio = ?, metro = ?, hab = ?, bano = ?, parqueo = ?, lBlanca = ?, amueblado = ?, idEntidad = ?', [name, estado, desc, ubic, municipio, tipo, compra,
+            img, moneda, precio, metro, hab, bath, parqueo, lblanca, amueblado, idEntidad]);
         return data;
 
     },
@@ -94,14 +103,14 @@ module.exports = {
     async deleteProperty(id) {
         console.log('check');
         let check = await DB.query('SELECT * FROM reunion WHERE idInm = ?', [id])
-        if(check.length == 0){
+        if (check.length == 0) {
             let data = await DB.query('DELETE FROM addInmueble WHERE idInm = ?', [id]);
             console.log(data);
             return 1;
-        }else{
+        } else {
             return 0;
         }
-        
+
     },
 
     async searchInmueble(nombre) {
@@ -149,27 +158,37 @@ module.exports = {
     },
 
     async searchUser(nombre) {
-        let data = await DB.query("SELECT * from Entidad WHERE fullname LIKE CONCAT('%', ?,  '%')", [nombre]);
-        return data;
+
+        let check = await DB.query("SELECT * from Entidad WHERE fullname = ?", [nombre]);
+
+        if (check.length == 0) {
+
+            let data = await DB.query("SELECT * from Entidad WHERE fullname LIKE CONCAT('%', ?,  '%')", [nombre]);
+            console.log(data.length);
+            return data;
+        } else {
+            console.log('undefined')
+            return 0;
+        }
+
     },
 
     async addReunion(fecha, tiempo, idInm, idEntidad) {
 
         console.log("check");
-        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idEntidad = ? ", [fecha, idEntidad]);
-        let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?",[idInm, idEntidad])
+        let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ?", [fecha, idInm]);
+        let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?", [idInm, idEntidad])
         let esInmo = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 2", [idEntidad]);
-        
+        let isReserved = await DB.query("SELECT * FROM reunion WHERE idEntidad = ? AND idInm = ?", [idEntidad, idInm]);
+        let isSameDate = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idEntidad = ?", [fecha, idEntidad])
 
-        if (check.length == 0 && esRepresentante.length == 0 && esInmo == 0) {
+        if (check.length == 0 && esRepresentante == 0 && esInmo == 0 && isReserved == 0 && isSameDate == 0) {
             console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
             let data = await DB.query("INSERT INTO reunion SET fecha = ?, tiempo = ?, idInm = ?, idEntidad = ?", [fecha, tiempo, idInm, idEntidad])
             return 1;
         } else {
             return 0;
         }
-
-
 
     },
 
@@ -179,14 +198,56 @@ module.exports = {
     },
     async getUserReunion(id) {
         let data = await DB.query('SELECT * FROM reunion r JOIN addInmueble i ON r.idInm = i.idInm JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE r.idEntidad = ?', [id]);
-        console.log(data);
-        return data;
+        let today = new Date();
+        let reuniones = []
+        await data.forEach(async element => {
+            if(element.fecha.getFullYear() <= today.getFullYear() && element.fecha.getMonth() <= today.getMonth() && element.fecha.getDate() <= today.getDate()){
+                await DB.query('DELETE FROM reunion WHERE id = ?', [element.id]);
+                console.log('check');
+            } else {
+                reuniones.push(element);
+                
+            }
+
+            console.log(today.getFullYear());
+            console.log(element.fecha.getFullYear());
+            console.log(today.getMonth());
+            console.log(element.fecha.getMonth());
+            console.log(today.getDate());
+            console.log(element.fecha.getDate());
+
+
+        });
+
+        return reuniones;
+        
     },
 
     async getAllReunionesEntidad(id) {
         let data = await DB.query('SELECT * FROM reunion r JOIN Entidad e ON r.idEntidad = e.idEntidad JOIN addInmueble i ON r.idInm = i.idInm WHERE i.idEntidad = ?', [id]);
-        console.log(data);
-        return data;
+        let today = new Date();
+        let reuniones = []
+        await data.forEach(async element => {
+            if(element.fecha.getFullYear() <= today.getFullYear() && element.fecha.getMonth() <= today.getMonth() && element.fecha.getDate() <= today.getDate()){
+                await DB.query('DELETE FROM reunion WHERE id = ?', [element.id]);
+                console.log('check');
+            } else {
+                reuniones.push(element);
+                
+            }
+
+            console.log(today.getFullYear());
+            console.log(element.fecha.getFullYear());
+            console.log(today.getMonth());
+            console.log(element.fecha.getMonth());
+            console.log(today.getDate());
+            console.log(element.fecha.getDate());
+
+
+        });
+
+        return reuniones;
+        
 
     },
 
@@ -244,11 +305,69 @@ module.exports = {
         return data;
     },
 
-    async getTotalInmuebles(){
+    async getTotalInmuebles() {
         let data = await DB.query("SELECT COUNT(IdInm) as count, a.idEntidad, e.fullname from addInmueble a JOIN entidad e ON a.idEntidad = e.idEntidad GROUP BY a.idEntidad")
         console.log(data);
         return data;
+    },
+
+    //=========VERIFY USER========
+    async verifyUser(fullname, password, telefono, correo, direccion) {
+        console.log('check')
+        let check = await DB.query('SELECT * FROM Entidad WHERE telefono = ? OR correo = ?', [telefono, correo])
+        if (check.length == 0) {
+            let data = await DB.query('INSERT INTO Verify SET VerFullname = ?, VerPassword = ?, VerTelefono = ?, VerCorreo = ?, Verdireccion = ?', [fullname, password, telefono, correo, direccion]);
+            console.log(data);
+            return 1;
+        } else {
+            return 0;
+        }
+    },
+
+    async getSolicitudes() {
+        let data = await DB.query('SELECT * FROM Verify')
+        return data;
+
+    },
+
+    async createUser(fullname, password, telefono, correo, direccion, idTipoEntidad, id) {
+        let check = await DB.query('SELECT * FROM Verify WHERE VerCorreo = ?', [correo]);
+        if (check.length == 1) {
+            await DB.query('DELETE FROM Verify WHERE VerCorreo = ?', [correo])
+            let data = await DB.query('INSERT INTO Entidad SET fullname = ?, password = ?, telefono = ?, correo = ?, direccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad]);
+            console.log(data)
+            return 0;
+        }else{
+            return 1;
+        }
+
+
+    },
+
+    // async createClient(fullname, password, telefono, correo, direccion, idTipoEntidad, id) {
+    //     let check = await DB.query('SELECT * FROM Entidad WHERE correo = ?', [correo]);
+    //     console.log('checked');
+    //     if(check.length == 0) {
+    //         let data = await DB.query('INSERT INTO Entidad SET fullname = ?, password = ?, telefono = ?, correo = ?, direccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad])
+    //         console.log(data);
+    //         return 1;
+    //     }else{
+    //         return 0;
+    //     }
+         
+    // },
+
+    async deleteVerify(id) {
+        let data = await DB.query('DELETE FROM Verify WHERE VerifyID = ?', [id]);
+        console.log(data);
+    },
+
+    async deleteUser(id){
+        let data = await DB.query('DELETE FROM Entidad WHERE idEntidad = ?', [id]);
+        console.log(data);
     }
+
+
 
 
 

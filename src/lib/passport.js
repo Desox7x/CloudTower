@@ -34,7 +34,7 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, fullname, password, done) => {
-    const { telefono, correo, direccion, entidad, isRep } = req.body;
+    const { telefono, correo, direccion, entidad } = req.body;
     console.log(req.body)
     const newUser = {
         fullname,
@@ -45,10 +45,13 @@ passport.use('local.signup', new LocalStrategy({
         idTipoEntidad: entidad
     };
     newUser.password = await helpers.encryptPassword(password)
-    const check = await pool.query('SELECT * FROM Entidad WHERE telefono = ? AND correo = ?', [telefono, correo]);
+    
+    const check = await pool.query('SELECT * FROM Entidad WHERE telefono = ? OR correo = ?', [telefono, correo]);
+    console.log(check);
     if (check.length == 0) {
         const result = await pool.query('INSERT INTO Entidad SET ?', [newUser]);
         console.log(result);
+        console.log('resultados')
         newUser.idEntidad = result.insertId;
         return done(null, newUser);
     }else{
