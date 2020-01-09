@@ -32,7 +32,8 @@
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white" href="/user/{{inmo.idEntidad}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white"
+                href="/user/{{inmo.idEntidad}}">
                 <div>
                     <img class="img-profile rounded-circle" src="/uploads/{{ inmo.idImg }}" width="50" height="50">
                 </div>
@@ -63,12 +64,16 @@
                     <span>Tablero</span></a>
             </li>
 
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
-
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"><i class="fas fa-arrows-alt-h"
+                        style="color: rgba(253, 253, 253, 0.7);"></i></button>
+            </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -129,7 +134,7 @@
                             </div>
                             {{/each}}
                             <br>
-                            
+
                             <div class="text-center" data-toggle="modal" data-target="#reservaModal{{@index}}">
                                 <button class="btn btn-info">
                                     Reservar

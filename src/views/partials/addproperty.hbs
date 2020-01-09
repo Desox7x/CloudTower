@@ -44,22 +44,37 @@
                     </div>
                     <script type="text/javascript">
                         var citiesByState = {
-                            'Santo Domingo': ["Distrito Nacional" ,"Este", "Norte", "Oeste", "Guerra", "Los Alcarrizos", "Boca Chica", "Pedro Brand"],
+                            'Santo Domingo': ["Distrito Nacional" ,"Santo Domingo Este", "Santo Domingo Norte", "Santo Domingo Oeste", "Guerra", "Los Alcarrizos", "Boca Chica", "Pedro Brand"],
                             Santiago: ["Santiago de los Caballeros", "Tamboril", "San José de las Matas"],
-                            'San Cristóbal': ["San Cristóbal", "Villa Altagracia", "Palenque", "Bajos de Haina"],
-                            'La Vega': ["La Vega", "Constanza", "Jarabacoa"],
-                            'Puerto Plata': ["Puerto Plata", "Sosua", "Luperón"],
-                            'San Pedro de Macorís': ["San Pedro de Macorís", "Guayacanes"],
+                            'San Cristóbal': ["San Cristóbal (Cabecera)", "Villa Altagracia", "Palenque", "Bajos de Haina"],
+                            'La Vega': ["La Vega (Cabecera)", "Constanza", "Jarabacoa"],
+                            'Puerto Plata': ["Puerto Plata (Cabecera)", "Sosua", "Luperón"],
+                            'San Pedro de Macorís': ["San Pedro de Macorís (Cabecera)", "Guayacanes"],
                             Duarte: ['San Francisco de Macorís', 'Pimentel', 'Villa Riva'],
                             'La Altagracia': ['Higuey', 'Punta Cana', 'Bayahibe'],
-                            'La Romana': ['La Romana', 'Casa de Campo'],
+                            'La Romana': ['La Romana (Cabecera)', 'Casa de Campo'],
                             'San Juan de la Maguana': ['San Juan', 'El Cercado', 'Las Matas de Farfán'],
                             'Espaillat': ['Moca'],
-                            'Azua de Compostela': ['Azua', 'Las Charcas', 'Sabana Yegua'],
-                            'Barahona': ['Barahona', 'Vicente Noble', 'La Ciénaga'],
-                            'Monte Plata': ['Monte Plata', 'Bayaguana', 'Yamasá'],
+                            'Azua de Compostela': ['Azua (Cabecera)', 'Las Charcas', 'Sabana Yegua'],
+                            'Barahona': ['Barahona (Cabecera)', 'Vicente Noble', 'La Ciénaga'],
+                            'Monte Plata': ['Monte Plata (Cabecera)', 'Bayaguana', 'Yamasá'],
                             'Peravia': ['Baní', 'Nizao', 'Santana'],
-                            'Monseñor Nouel': ['Bonao', 'Piedra Blanca', 'Maimón']
+                            'Monseñor Nouel': ['Bonao', 'Piedra Blanca', 'Maimón'],
+                            Valverde: ['Mao', 'Esperanza', 'Laguna Salada'],
+                            'Sánchez Ramírez': ['Cotuí', 'Fantino'],
+                            'María Trinidad Sánchez': ['Nagua', 'Cabrera', 'Rio San Juan'],
+                            'Monte Cristi': ['Monte Cristi (Cabecera)', 'Pepillo Salcedo', 'Villa Vásquez'],
+                            Samaná: ['Samaná (Cabecera)', 'Sánchez', 'Las Terrenas'],
+                            Bahoruco: ['Neiba', 'Tamayo'],
+                            'Hermanas Mirabal': ['Salcedo', 'Tenares'],
+                            'El Seibo': ['El Seibo (Cabecera)', 'Miches'],
+                            'Hato Mayor': ['Hato Mayor (Cabecera)', 'Sabana de la Mar'],
+                            Dajabón: ['Dajabón (Cabecera)', 'Loma de Cabrera'],
+                            'Elias Piña': ['Comendador'],
+                            'San José de Ocoa': ['San José de Ocoa (Cabecera)', 'Sabana Larga'],
+                            'Santiago Rodríguez': ['Sabaneta', 'Monción'],
+                            'Independencia': ['Jimaní', 'Duvergé'],
+                            Pedernales: ['Pedernales (Cabecera)'] 
                         }
                         function makeSubmenu(value) {
                             if (value.length == 0) document.getElementById("citySelect").innerHTML = "<option></option>";
@@ -107,6 +122,21 @@
                                     <option value="Monte Plata">Monte Plata</option>
                                     <option value="Peravia">Peravia</option>
                                     <option value="Monseñor Nouel">Monseñor Nouel</option>
+                                    <option value="Valverde">Valverde</option>
+                                    <option value="Sánchez Ramírez">Sánchez Ramírez</option>
+                                    <option value="Maria Trinidad Sánchez">Maria Trinidad Sánchez</option>
+                                    <option value="Monte Cristi">Monte Cristi</option>
+                                    <option value="Samaná">Samaná</option>
+                                    <option value="Bahoruco">Bahoruco</option>
+                                    <option value="Hermanas Mirabal">Hermanas Mirabal</option>
+                                    <option value="El Seibo">El Seibo</option>
+                                    <option value="Hato Mayor">Hato Mayor</option>
+                                    <option value="Dajabón">Dajabón</option>
+                                    <option value="Elias Piña">Elias Piña</option>
+                                    <option value="San José de Ocoa">San José de Ocoa</option>
+                                    <option value="Santiago Rodríguez">Santiago Rodríguez</option>
+                                    <option value="Independencia">Independencia</option>
+                                    <option value="Pedernales">Pedernales</option>
                                 </select>
                                 <small>Por cambiar</small>
                                 <div class="invalid-feedback">Escoja una opción válida</div>

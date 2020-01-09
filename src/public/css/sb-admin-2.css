@@ -11208,13 +11208,18 @@ a:focus {
   text-align: center;
   margin-bottom: 1rem;
   cursor: pointer;
+  content: '\f104';
+  font-weight: 900;
+  font-family: 'Font Awesome 5 Free';
 }
+
 
 .sidebar #sidebarToggle::after {
   font-weight: 900;
-  
+
   font-family: 'Font Awesome 5 Free';
   margin-right: 0.1rem;
+
 }
 
 .sidebar #sidebarToggle:hover {
@@ -11438,11 +11443,11 @@ a:focus {
 }
 
 .sidebar-light #sidebarToggle:hover {
-  background-color: #dddfeb;
+  background-color: #1533df;
 }
 
 .sidebar-dark .sidebar-brand {
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 
 .sidebar-dark hr.sidebar-divider {
@@ -11596,9 +11601,9 @@ a:focus {
   border-radius: 0.35rem;
 }
 
-.card .card-header[data-toggle="collapse"].collapsed::after {
+/* .card .card-header[data-toggle="collapse"].collapsed::after {
   
-}
+} */
 
 .chart-area {
   position: relative;
