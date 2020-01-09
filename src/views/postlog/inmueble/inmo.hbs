@@ -32,7 +32,7 @@
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center text-white" href="/user/{{inmo.idEntidad}}">
                 <div>
                     <img class="img-profile rounded-circle" src="/uploads/{{ inmo.idImg }}" width="50" height="50">
                 </div>
@@ -185,19 +185,24 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <h5><b>Localización:</b> {{inmo.ubic}}</h5>
+                                        <div class="col-5">
+                                            <p><b>Localizacion:</b> {{inmo.ubic}}</p>
+                                        </div>
+                                        <div class="col-5">
+                                            <p><b>Municipio:</b> {{inmo.municipio}}</p>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5">
                                             <ul>
                                                 <li>
-                                                    <h5>Construcción: {{inmo.metro}} mt²</h5>
+                                                    <p>Construcción: {{inmo.metro}} mt²</p>
                                                 </li>
                                                 <li>
                                                     <p>Habitaciones: {{inmo.hab}}</p>
                                                 </li>
                                                 <li>
-                                                    <h5>Baños: {{inmo.bano}}</h5>
+                                                    <p>Baños: {{inmo.bano}}</p>
                                                 </li>
                                             </ul>
                                         </div>

@@ -121,14 +121,17 @@ ctrl.search = async(req,res) => {
 
 ctrl.searchFilter = async(req, res) => {
     let data;
+    let notFound = 0;
     if(req.query.nombre != undefined || req.query.ubic != undefined || req.query.tipoInm != undefined || 
         req.query.estado != undefined || req.query.compra != undefined) {
             data = await db.searchFilter(req.query.nombre, req.query.ubic, req.query.tipoInm, 
                 req.query.estado, req.query.compra);
+         } else {
+             notFound = 1;
          }
     // let data = await db.searchFilter(req.query.nombre, req.query.ubic, req.query.tipoInm,
     //     req.query.estado, req.query.compra);
-    return res.render('postlog/searchfilter', {data})
+    return res.render('postlog/searchfilter', {data, notFound})
 }
 
 module.exports = ctrl;
