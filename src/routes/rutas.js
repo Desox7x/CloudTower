@@ -52,6 +52,7 @@ router.get('/signature_pad', isLoggedIn, user.signaturePad);
 router.post('/contract', user.addContractPOST);
 router.get('/schedule', user.scheduleReunion);
 router.post('/add_property', user.addPropertyCPOST);
+router.get('/legalDocs', user.legalDocs);
 
 
 // =========== Inmuebles ============

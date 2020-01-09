@@ -29,6 +29,10 @@ ctrl.contract = (req, res) => {
     res.render('postlog/contract');
 }
 
+ctrl.legalDocs = (req, res) => {
+    res.render('postlog/legalDocs');
+}
+
 ctrl.signaturePad = (req, res) => {
     res.render('postlog/signature_pad');
 }

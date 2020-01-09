@@ -33,7 +33,7 @@ ctrl.validarPOST = async (req, res) => {
     let register = await DB.createUser(req.body.fullname, password, req.body.telefono,
         req.body.correo, req.body.direccion, 2);
     if(register==0){
-        req.flash('success', 'Verificacion exitosa')
+        req.flash('success', 'La verificación ha sido exitosa.')
     }else{
         req.flash('message', 'La verificación no ha podido realizarse.')
     }
@@ -93,9 +93,9 @@ ctrl.VerUser = async (req, res) => {
     let data = await DB.verifyUser(req.body.fullname, req.body.password, req.body.telefono,
          req.body.correo, req.body.direccion);
     if(data == 1){
-        req.flash('success', 'Solicitud enviada')
+        req.flash('success', 'Su solicitud ha sido enviada. Espere la verificación de los administradores.')
     }else{
-        req.flash('message', 'duplicado');
+        req.flash('message', 'Uno o varios de los datos que introdujo ya están vinculados a una cuenta.'); //duplicado
     }
     res.redirect('/signup');
 }
