@@ -22,10 +22,10 @@ passport.use('local.login', new LocalStrategy({
         if (validPassword) {
             done(null, user);
         } else {
-            done(null, false, req.flash('message', 'Contrasena incorrecta'));
+            done(null, false, req.flash('message', 'Contraseña incorrecta'));
         }
     } else {
-        return done(null, false, req.flash('message', 'Usuario no existe'));
+        return done(null, false, req.flash('message', 'Este usuario no existe'));
     }
 }));
 
@@ -55,7 +55,7 @@ passport.use('local.signup', new LocalStrategy({
         newUser.idEntidad = result.insertId;
         return done(null, newUser);
     }else{
-        return done(null, false, req.flash('message', 'Telefono o Correo ya esta en uso'));
+        return done(null, false, req.flash('message', 'El Teléfono y/o Correo digitados ya están vinculados a una cuenta'));
     }
 
 }));
