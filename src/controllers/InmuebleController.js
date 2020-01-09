@@ -3,9 +3,13 @@ ctrl = {}
 const DB = require('../lib/DBData');
 
 ctrl.publicInmueble = async (req,res) => {
-    
+    let inmEntidad = await DB.getAllInmueblesEntidad(req.params.id);
     let inm = await DB.getInmueble(req.params.id);
     let rep = await DB.getRepresentantesFromInmueble(req.params.id);
+    let isInm = (inmEntidad.idInm == req.user.idEntidad)
+    if(isInm){
+        res.render('postlog/inmueble/inmopriv')
+    }
     
     res.render('postlog/inmueble/inmo', {repre: rep, inmo: inm[0], expressFlash: req.flash('success')});
 }; 
