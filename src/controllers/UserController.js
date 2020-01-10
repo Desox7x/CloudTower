@@ -86,9 +86,16 @@ ctrl.addPropertyCPOST = async (req, res) => {
 }
 
 ctrl.updateInmoPOST = async (req, res) => {
-    const inmue = await DB.updateInmo(req.body.nombre, req.body.descr, req.body.ubic, req.body.precio, req.body.idInm);
-    console.log(req.body);
+    await DB.updateInmo(req.body.nombre, req.body.estado, req.body.descr, req.body.precio,
+        req.body.moneda, req.body.compra, req.params.id);
     res.redirect('/profile/propertyList');
+    console.log(req.body);
+}
+
+ctrl.updateUser = async (req, res) => {
+    await DB.updateUserInfo(req.body.fullname, req.body.descripcion, req.body.telefono, req.body.direccion, req.body.Empleo, req.user.idEntidad);
+    res.redirect('/profile')
+    console.log(req.body)
 }
 
 ctrl.addContractPOST = async (req, res) => {
@@ -148,11 +155,7 @@ ctrl.uploadPOST = async (req, res) => {
 ctrl.editProfile = (req, res) => {
     return res.render("postlog/editProfile", {data: req.user});
 }
-ctrl.updateUser = async (req, res) => {
-    await DB.updateUserInfo(req.body.fullname, req.body.descripcion, req.body.telefono, req.body.direccion, req.body.Empleo, req.user.idEntidad);
-    res.redirect('/profile')
-    console.log(req.body)
-};
+
 
 ctrl.userProfile = async (req, res) => {
     let user = await DB.getUserById(req.params.id);

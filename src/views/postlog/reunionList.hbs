@@ -117,9 +117,10 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <button type="button" class="btn btn-sm btn-primary shadow-sm"
-                            style="background-color: #1bb2fe; border-color: #1eb2fc;"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Añadir Representante</button>
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                            style="background-color: #1bb2fe; border-color: #1eb2fc;" data-target="#Representante"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Añadir
+                            Representante</button>
                         <button type="button" class="btn btn-sm btn-primary shadow-sm"
                             style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
                             data-target="#newProyect"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo
@@ -130,6 +131,7 @@
                             perfil</button>
                     </div>
                     {{> addproperty}}
+                    {{> addrepre}}
                     <!-- Content Row -->
                     <div class="row">
 
@@ -214,9 +216,108 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <link rel="stylesheet" href="/css/tel.css">
+    <div class="modal fade" id="EditProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: #1bb2fe;">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edita tu información</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <form action="/updateuser" method="POST">
+                        <div class="form-group">
+                            <h5>Nombre</h5>
+                            <input type="text" name="fullname" value="{{user.fullname}}" placeholder="Nombre completo"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <h5>Descripcion</h5>
+                            <input type="text" name="descripcion" value="{{user.descripcion}}" placeholder="Trabajo"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <h5>Dirección</h5>
+                            <input type="text" name="direccion" value="{{user.direccion}}" placeholder="Direccion"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <h5>Teléfono</h5>
+                            <input type="tel" name="telefono" value="{{user.telefono}}" placeholder="Número de Telefono"
+                                class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                            <span class="note"> Formato: XXX-XXX-XXXX </span>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary"
+                                style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar
+                                info</button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
 
     {{> infowin}}
+
+    <script>
+        (function ($) {
+            "use strict"; // Start of use strict
+
+            // Toggle the side navigation
+            $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
+                $("body").toggleClass("sidebar-toggled");
+                $(".sidebar").toggleClass("toggled");
+                if ($(".sidebar").hasClass("toggled")) {
+                    $('.sidebar .collapse').collapse('hide');
+                };
+            });
+
+            // Close any open menu accordions when window is resized below 768px
+            $(window).resize(function () {
+                if ($(window).width() < 768) {
+                    $('.sidebar .collapse').collapse('hide');
+                };
+            });
+
+            // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+            $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
+                if ($(window).width() > 768) {
+                    var e0 = e.originalEvent,
+                        delta = e0.wheelDelta || -e0.detail;
+                    this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+                    e.preventDefault();
+                }
+            });
+
+            // Scroll to top button appear
+            $(document).on('scroll', function () {
+                var scrollDistance = $(this).scrollTop();
+                if (scrollDistance > 100) {
+                    $('.scroll-to-top').fadeIn();
+                } else {
+                    $('.scroll-to-top').fadeOut();
+                }
+            });
+
+            // Smooth scrolling using jQuery easing
+            $(document).on('click', 'a.scroll-to-top', function (e) {
+                var $anchor = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: ($($anchor.attr('href')).offset().top)
+                }, 1000, 'easeInOutExpo');
+                e.preventDefault();
+            });
+
+        })(jQuery); // End of use strict
+    </script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

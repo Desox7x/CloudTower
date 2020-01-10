@@ -49,7 +49,7 @@ module.exports = {
     },
     async getAllInmueblesEntidad(id) {
         let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad WHERE i.idEntidad = ?', [id])
-        console.log(data);
+        // console.log(data);
         return data;
     },
     async getPropertyById(id) {
@@ -72,9 +72,8 @@ module.exports = {
 
     },
 
-    async updateInmo(nombre, descr, ubic, precio, id) {
-        console.log(nombre, descr, ubic, precio, id);
-        let data = await DB.query('UPDATE addInmueble SET nombre = ?, descr = ?, ubic = ?, precio = ? WHERE idInm = ? ', [nombre, descr, ubic, precio, id]);
+    async updateInmo(nombre, estado, descr, precio, moneda, compra, id) {
+        let data = await DB.query('UPDATE addInmueble SET nombre = ?, estado = ?, descr = ?, precio = ?, moneda = ?, compra = ? WHERE idInm = ?', [nombre, estado, descr, precio, moneda, compra, id]);
         console.log(data);
     },
 

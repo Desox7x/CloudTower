@@ -44,7 +44,7 @@
                     </div>
                     <script type="text/javascript">
                         var citiesByState = {
-                            'Santo Domingo': ["Distrito Nacional" ,"Santo Domingo Este", "Santo Domingo Norte", "Santo Domingo Oeste", "Guerra", "Los Alcarrizos", "Boca Chica", "Pedro Brand"],
+                            'Santo Domingo': ["Distrito Nacional", "Santo Domingo Este", "Santo Domingo Norte", "Santo Domingo Oeste", "Guerra", "Los Alcarrizos", "Boca Chica", "Pedro Brand"],
                             Santiago: ["Santiago de los Caballeros", "Tamboril", "San José de las Matas"],
                             'San Cristóbal': ["San Cristóbal (Cabecera)", "Villa Altagracia", "Palenque", "Bajos de Haina"],
                             'La Vega': ["La Vega (Cabecera)", "Constanza", "Jarabacoa"],
@@ -74,7 +74,7 @@
                             'San José de Ocoa': ['San José de Ocoa (Cabecera)', 'Sabana Larga'],
                             'Santiago Rodríguez': ['Sabaneta', 'Monción'],
                             'Independencia': ['Jimaní', 'Duvergé'],
-                            Pedernales: ['Pedernales (Cabecera)'] 
+                            Pedernales: ['Pedernales (Cabecera)']
                         }
                         function makeSubmenu(value) {
                             if (value.length == 0) document.getElementById("citySelect").innerHTML = "<option></option>";
@@ -97,65 +97,62 @@
                         }
 
                     </script>
-                    <!-- Adress goes here ↓ -->
-                    
-                        <div class="form-row" onload="resetSelection()">
-                            <!-- Location; subject to change -->
-                            <div class="form-group col-md-6">
-                                <label for="ubic">Provincia</label>
-                                <select name="ubic" class="custom-select" id="countrySelect" size="1"
-                                    onchange="makeSubmenu(this.value)" required>
-                                    <option value="">Escoja...</option>
-                                    <option value="Santo Domingo">Santo Domingo</option>
-                                    <option value="Santiago">Santiago</option>
-                                    <option value="San Cristóbal">San Cristóbal</option>
-                                    <option value="La Vega">La Vega</option>
-                                    <option value="Puerto Plata">Puerto Plata</option>
-                                    <option value="San Pedro de Macorís">San Pedro de Macorís</option>
-                                    <option value="Duarte">Duarte</option>
-                                    <option value="La Altagracia">La Altagracia</option>
-                                    <option value="La Romana">La Romana</option>
-                                    <option value="San Juan de la Maguana">San Juan de la Maguana</option>
-                                    <option value="Espaillat">Espaillat</option>
-                                    <option value="Azua de Compostela">Azua de Compostela</option>
-                                    <option value="Barahona">Barahona</option>
-                                    <option value="Monte Plata">Monte Plata</option>
-                                    <option value="Peravia">Peravia</option>
-                                    <option value="Monseñor Nouel">Monseñor Nouel</option>
-                                    <option value="Valverde">Valverde</option>
-                                    <option value="Sánchez Ramírez">Sánchez Ramírez</option>
-                                    <option value="Maria Trinidad Sánchez">Maria Trinidad Sánchez</option>
-                                    <option value="Monte Cristi">Monte Cristi</option>
-                                    <option value="Samaná">Samaná</option>
-                                    <option value="Bahoruco">Bahoruco</option>
-                                    <option value="Hermanas Mirabal">Hermanas Mirabal</option>
-                                    <option value="El Seibo">El Seibo</option>
-                                    <option value="Hato Mayor">Hato Mayor</option>
-                                    <option value="Dajabón">Dajabón</option>
-                                    <option value="Elias Piña">Elias Piña</option>
-                                    <option value="San José de Ocoa">San José de Ocoa</option>
-                                    <option value="Santiago Rodríguez">Santiago Rodríguez</option>
-                                    <option value="Independencia">Independencia</option>
-                                    <option value="Pedernales">Pedernales</option>
-                                </select>
-                                <small>Por cambiar</small>
-                                <div class="invalid-feedback">Escoja una opción válida</div>
-                            </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="municipio">Municipio</label>
-                                <select name="municipio" class="custom-select" id="citySelect" size="1" required>
-                                    <option value="">Escoja...</option>
-                                    <option></option>
-
-                                </select>
-                                <small>Por cambiar</small>
-                                <div class="invalid-feedback">Escoja una opción válida</div>
-                            </div>
+                    <div class="form-row" onload="resetSelection()">
+                        <!-- Location; subject to change -->
+                        <div class="form-group col-md-6">
+                            <label for="ubic">Provincia</label>
+                            <select name="ubic" class="custom-select" id="countrySelect" size="1"
+                                onchange="makeSubmenu(this.value)" required>
+                                <option value="">Escoja...</option>
+                                <option value="Santo Domingo">Santo Domingo</option>
+                                <option value="Santiago">Santiago</option>
+                                <option value="San Cristóbal">San Cristóbal</option>
+                                <option value="La Vega">La Vega</option>
+                                <option value="Puerto Plata">Puerto Plata</option>
+                                <option value="San Pedro de Macorís">San Pedro de Macorís</option>
+                                <option value="Duarte">Duarte</option>
+                                <option value="La Altagracia">La Altagracia</option>
+                                <option value="La Romana">La Romana</option>
+                                <option value="San Juan de la Maguana">San Juan de la Maguana</option>
+                                <option value="Espaillat">Espaillat</option>
+                                <option value="Azua de Compostela">Azua de Compostela</option>
+                                <option value="Barahona">Barahona</option>
+                                <option value="Monte Plata">Monte Plata</option>
+                                <option value="Peravia">Peravia</option>
+                                <option value="Monseñor Nouel">Monseñor Nouel</option>
+                                <option value="Valverde">Valverde</option>
+                                <option value="Sánchez Ramírez">Sánchez Ramírez</option>
+                                <option value="Maria Trinidad Sánchez">Maria Trinidad Sánchez</option>
+                                <option value="Monte Cristi">Monte Cristi</option>
+                                <option value="Samaná">Samaná</option>
+                                <option value="Bahoruco">Bahoruco</option>
+                                <option value="Hermanas Mirabal">Hermanas Mirabal</option>
+                                <option value="El Seibo">El Seibo</option>
+                                <option value="Hato Mayor">Hato Mayor</option>
+                                <option value="Dajabón">Dajabón</option>
+                                <option value="Elias Piña">Elias Piña</option>
+                                <option value="San José de Ocoa">San José de Ocoa</option>
+                                <option value="Santiago Rodríguez">Santiago Rodríguez</option>
+                                <option value="Independencia">Independencia</option>
+                                <option value="Pedernales">Pedernales</option>
+                            </select>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
                         </div>
 
+                        <div class="form-group col-md-6">
+                            <label for="municipio">Municipio</label>
+                            <select name="municipio" class="custom-select" id="citySelect" size="1" required>
+                                <option value="">Escoja...</option>
+                                <option></option>
+
+                            </select>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
+                        </div>
+                    </div>
+
                     <div class="form-row">
-                        <!-- Location; subject to change -->
+
                         <div class="form-group col-md-6">
                             <label for="idRep">Representante</label>
                             <select name="idRep" class="custom-select" required>
@@ -279,7 +276,7 @@
 
                         <!-- Furniture; binary answer -->
                         <div class="form-group col-md-4">
-                            <label for="amueblado">Parqueo</label>
+                            <label for="amueblado">Amueblado</label>
                             <select name="amueblado" class="custom-select" required>
                                 <option value="Si">Sí</option>
                                 <option value="No">No</option>

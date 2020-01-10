@@ -42,7 +42,7 @@ router.get('/contrato', isLoggedIn, requireRole(ConstructoraRole), user.contract
 //router.get('/contract', user.signaturePad);
 router.get('/add_property', requireRole(InmobiliariaRole), user.addProperty);
 router.post('/add_property', user.addPropertyPOST);
-router.post('/updateInmo', user.updateInmoPOST);
+router.post('/updateInmo/:id', user.updateInmoPOST);
 router.post('/upload', user.uploadPOST);
 //router.get('/search', user.search);
 router.get('/searchResult', user.searchResult);

@@ -1,64 +1,84 @@
-<div class="container">
-    <div class="modal fade" id="editInmobiliaria{{@index}}" tabindex="-1" role="dialog" aria-labelledby="editInmobiliariaTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-white" style="background-color: #1bb2fe;">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Edita tu información</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-dark">
-                    <form action="/updateInmo" method="POST">
-                        <div class="form-group col-md-12">
+<div class="modal fade" id="editInmobiliaria{{@index}}" tabindex="-1" role="dialog"
+    aria-labelledby="editInmobiliariaTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #1bb2fe;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edita tu información</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-dark">
+                <form action="/updateInmo/{{idInm}}" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
                             <!-- Name -->
                             <label for="nombre">Nombre</label>
-                            <input name="nombre" type="text" class="form-control" value="{{nombre}}" placeholder="Ej. Las Damas II"
-                                >
+                            <input name="nombre" type="text" class="form-control" value="{{nombre}}"
+                                placeholder="Ej. Las Damas II">
                             <div class="invalid-feedback">Digite un nombre válido</div>
                         </div>
-
-                        <div class="form-row">
-                            <!-- Description -->
-                            <div class="form-group col-md-12">
-                                <label for="descr">Descripción</label>
-                                <textarea name="descr" class="form-control" rows="4" value="{{descr}}"
-                                    placeholder="Ej. Amarillo, cerca de tienda x, etc." ></textarea>
-                                <div class="invalid-feedback">Digite una descripción válida</div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <!-- Location; subject to change -->
-                            <div class="form-group col-md-12">
-                                <label for="ubic">Ubicación</label>
-                                <select name="ubic" class="custom-select" >
-                                    <option value="">Escoja...</option>
-                                    <option value="Santo Domingo Este">Santo Domingo Este</option>
-                                    <option value="Santo Domingo Norte">Santo Domingo Norte</option>
-                                    <option value="Santo Domingo Oeste">Santo Domingo Oeste</option>
-                                    <option value="Distrito Nacional">Distrito Nacional</option>
-                                </select>
-                                <small>Por cambiar</small>
-                                <div class="invalid-feedback">Escoja una opción válida</div>
-                            </div>
-                        </div>
-
                         <div class="form-group col-md-6">
+                            <label for="estado">Estado del inmueble</label>
+                            <select name="estado" class="custom-select">
+                                <option value="{{estado}}" selected disabled>{{estado}}</option>
+                                <option value="En proceso">En proceso</option>
+                                <option value="Completado">Completado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Description -->
+                        <div class="form-group col-md-12">
+                            <label for="descr">Descripción</label>
+                            <textarea id="mytextarea" name="descr" class="form-control" rows="4"
+                                placeholder="Ej. Amarillo, cerca de tienda x, etc.">{{descr}}</textarea>
+                            <div class="invalid-feedback">Digite una descripción válida</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
                             <label for="price">Precio</label>
-                            <input type="number" class="form-control" id="price" name="precio" >                            <div class="invalid-feedback">Digite un precio válido</div>
+                            <input type="number" class="form-control" id="price" name="precio" value="{{precio}}">
+                            <div class="invalid-feedback">Digite un precio válido</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="currency">Moneda utilizada</label>
+                            <select name="moneda" id="currency" class="custom-select">
+                                <option value="{{moneda}}" selected disabled>{{moneda}}</option>
+                                <option value="USD">USD</option>
+                                <option value="DOP">DOP</option>
+                            </select>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="compra">El inmueble está en:</label>
+                            <select name="compra" class="custom-select">
+                                <option value="{{compra}}" selected disabled>{{compra}}</option>
+                                <option value="Venta">Venta</option>
+                                <option value="Alquiler">Alquiler</option>
+                            </select>
+                            <div class="invalid-feedback">Escoja una opción válida</div>
                         </div>
 
-                        <div class="form-group">
-                            <button class="btn btn-primary" style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar info</button>
-                        </div>
-                
+                    </div>
 
-                </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit"
+                            style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar info</button>
+                    </div>
                 </form>
+
             </div>
 
         </div>
+
     </div>
 </div>
+
+<script>
+    document.getElementById("#mytextarea").value = '{{descr}}'
+</script>

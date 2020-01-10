@@ -1,7 +1,7 @@
  {{#each inmuebles}}
   <div class="modal fade" id="infomodal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="ClienteModalTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       
       <div class="modal-content">
         <div class="modal-header text-white" style="background-color: #65cafe;">
@@ -21,10 +21,10 @@
               <li><strong>Descripción</strong></li>
               <h6 class="text-justified">{{descr}}</h6>
               <li><strong>Localización</strong></li>
-              <h6 class="text-justified">{{ubic}}</h6>
+              <h6 class="text-justified">{{ubic}}, {{municipio}}</h6>
               <li><strong>Tipo de inmueble</strong></li>
               <h6 class="text-justified">{{tipoInm}}</h6>
-              <br>
+              
               <b>Datos</b>
               <li>{{hab}} Habitación/es</li>
               <li>{{bano}} Baño/s</li>

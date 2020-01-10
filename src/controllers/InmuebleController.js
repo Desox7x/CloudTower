@@ -17,8 +17,12 @@ ctrl.publicInmueble = async (req,res) => {
 ctrl.privateInmueble = async (req, res) => {
     let inm = await DB.getInmueble(req.params.id);
     let rep = await DB.getRepresentantesFromInmueble(req.params.id);
+    let descNotFound = 0;
+    if(req.user.descripcion.length == 0){
+        descNotFound = 1;
+    }
     // let img = await db.getImagenInmuebleEntidad(req.user.idEntidad);
-    res.render('postlog/inmueble/inmopriv', {repre: rep, inmo: inm[0], expressFlash: req.flash('success')});
+    res.render('postlog/inmueble/inmopriv', {descNotFound, repre: rep, inmo: inm[0], expressFlash: req.flash('success')});
 };
 
 ctrl.publicProyect = async(req,res) => {
