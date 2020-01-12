@@ -18,6 +18,7 @@ console.log(ClientRole);
 
 // =========== HOME ================
 router.get('/', home.index);
+// router.get('*', home.notFound)
 router.get('/about', home.about);
 router.get('/contact', home.contact);
 router.post('/sendemail', user.sendEmail);
@@ -57,13 +58,15 @@ router.get('/legalDocs', user.legalDocs);
 
 // =========== Inmuebles ============
 router.get('/profile/inmueble/:id', inmueble.privateInmueble, isLoggedIn);
-router.get('/inmueble/:id', inmueble.publicInmueble, isLoggedIn);
 router.get('/delete/:id', user.deleteProperty, isLoggedIn, requireRole(InmobiliariaRole));
-router.get('/deleteProyect/:id', user.deleteProyect, isLoggedIn, requireRole(ConstructoraRole));
 
 // =========== Proyectos ============
 router.get('/profile/proyectos/:id', inmueble.privateProyect);
-router.get('/proyectos/:id', inmueble.publicProyect);
+router.get('/deleteProyect/:id', user.deleteProyect, isLoggedIn, requireRole(ConstructoraRole));
+
+// =========== Propiedades ============
+router.get('/propiedad/:id', inmueble.publicProperty, isLoggedIn);
+
 // =========== Reservas ============
 router.post('/reservar/:id/add', reserva.add, isLoggedIn);
 router.get('/reservar/:id', reserva.index );

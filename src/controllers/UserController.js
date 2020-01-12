@@ -88,7 +88,7 @@ ctrl.addPropertyCPOST = async (req, res) => {
 ctrl.updateInmoPOST = async (req, res) => {
     await DB.updateInmo(req.body.nombre, req.body.estado, req.body.descr, req.body.precio,
         req.body.moneda, req.body.compra, req.params.id);
-    res.redirect('/profile/propertyList');
+    res.redirect('/profile');
     console.log(req.body);
 }
 

@@ -23,7 +23,7 @@ ctrl.add = async (req, res) => {
 
     if(reqfecha <= today){
         req.flash('message', 'No puedes reservar en esta fecha.');
-        res.redirect('/inmueble/'+req.params.id);
+        res.redirect('/propiedad/'+req.params.id);
         return;
     }
     
@@ -39,7 +39,7 @@ ctrl.add = async (req, res) => {
 
     
 
-    res.redirect('/inmueble/'+req.params.id);
+    res.redirect('/propiedad/'+req.params.id);
 }
 
 ctrl.deleteReunion = async (req, res) => {

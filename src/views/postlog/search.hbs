@@ -9,12 +9,10 @@
         border: none;
         color: #FFF;
         font-size: 16px;
-        cursor: pointer;
+        
     }
 
-    .btn-primary:hover {
-        background-color: #4682b4;
-    }
+    
 
     .btn-secondary {
         background-color: #c0c0c0;
@@ -24,9 +22,7 @@
         cursor: pointer;
     }
 
-    .btn-secondary:hover {
-        background-color: #a6a6a6;
-    }
+    
 
     .container-fluid {
         padding-top: 10px;
@@ -54,36 +50,33 @@
             margin: 5px auto;
         }
 
-        .dropdown.dropdown-lg {
-            position: static !important;
-        }
+        
 
         .dropdown.dropdown-lg .dropdown-menu {
             min-width: 500px;
         }
     }
 </style>
-<script>
+{{!-- <script>
     $('#Dropdown .dropdown-menu').on({
         "click": function (e) {
             e.stopPropagation();
         }
     });
 
-</script>
+</script> --}}
 
 <!-- BODY -->
 
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            {{success}}
-            <div class="col-md-12">
-                <form action="/search" method="GET">
-                    <div class="input-group" id="boot-search-box">
-                        <input type="text" class="form-control" placeholder="Búsqueda" name="nombre">
 
-                        {{!-- <div class="input-group-btn">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/search" method="GET">
+                <div class="input-group" id="boot-search-box">
+                    <input type="text" class="form-control" placeholder="Búsqueda" name="nombre">
+
+                    {{!-- <div class="input-group-btn">
                             <div class="btn-group" role="group">
                                 <div class="dropdown dropdown-lg">
                                     <button type="button" onclick="btnToggle()" class="btn btn-default dropdown-toggle"
@@ -191,74 +184,74 @@
                                 </div>
                             </div>
                         </div> --}}
-                        <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
 
+                </div>
+
+            </form>
+            <a href="/buscarInmuebles">
+                <button class="btn btn-info"><i class="fas fa-tools"></i> Buscar inmuebles</button>
+            </a>
+
+
+
+        </div>
+
+
+
+        <div class="container p-4 ">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="align-text-center">
+                        <h3>Búsqueda de usuarios</h3>
                     </div>
 
-                </form>
-                <a href="/buscarInmuebles">
-                    <button class="btn btn-info"><i class="fas fa-tools"></i> Buscar inmuebles</button>
-                </a>
+                </div>
+
+            </div>
+
+            {{#if data}}
+            {{#each data}}
+
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <img src="uploads/{{idImg}}" class="img-thumbnail float-left mr-2"
+                        onerror="this.onerror=null; this.src='img/userlogo.jpg'"
+                        style="width: 10rem; margin-bottom: 8px;">
+                    <b>
+                        <p>{{fullname}}</p>
+                    </b>
+                    <p>{{correo}}</p>
 
 
 
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <a href="/user/{{idEntidad}}" class="btn btn-info">Ver perfil <i
+                            class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+            {{/each}}
+            {{else}}
+            {{#unless notFound}}
+            <div class="col-md-12 text-center">
+                <h4>No hay resultados &#128531;</h4>
             </div>
 
 
 
-            <div class="container p-4 ">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="align-text-center">
-                            <h3>Búsqueda de usuarios</h3>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                {{#if data}}
-                {{#each data}}
-
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <img src="uploads/{{idImg}}" class="img-thumbnail float-left mr-2"
-                            onerror="this.onerror=null; this.src='img/userlogo.jpg'"
-                            style="width: 10rem; margin-bottom: 8px;">
-                        <b>
-                            <p>{{fullname}}</p>
-                        </b>
-                        <p>{{correo}}</p>
+            {{/unless }}
+            {{/if}}
 
 
-
-
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <a href="/user/{{idEntidad}}" class="btn btn-info">Ver perfil <i
-                                class="fas fa-chevron-right"></i></a>
-                    </div>
-                </div>
-                {{/each}}
-                {{else}}
-                {{#unless notFound}}
-                <div class="col-md-12 text-center">
-                    <h4>No hay resultados &#128531;</h4>
-                </div>
-
-
-
-                {{/unless }}
-                {{/if}}
-
-
-            </div>
         </div>
     </div>
-    {{> infowin}}
-</body>
+</div>
+{{> infowin}}
+
 
 <!-- SCRIPTS -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

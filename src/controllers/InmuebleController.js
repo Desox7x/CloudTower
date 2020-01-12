@@ -2,7 +2,7 @@ ctrl = {}
 
 const DB = require('../lib/DBData');
 
-ctrl.publicInmueble = async (req,res) => {
+ctrl.publicProperty = async (req,res) => {
     let inmEntidad = await DB.getAllInmueblesEntidad(req.params.id);
     let inm = await DB.getInmueble(req.params.id);
     let rep = await DB.getRepresentantesFromInmueble(req.params.id);

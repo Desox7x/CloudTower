@@ -5,7 +5,7 @@
 <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
-
+<link rel="stylesheet" href="css/cards.css">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -98,6 +98,10 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"><i class="fas fa-arrows-alt-h"
+                        style="color: rgba(253, 253, 253, 0.7);"></i></button>
+            </div>
 
 
         </ul>
@@ -115,8 +119,9 @@
                     <!-- Page Heading -->
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal" style="background-color: #1bb2fe; border-color: #1eb2fc;"
-                            data-target="#Ingeniero"><i class="fas fa-download fa-sm text-white-50"></i> Añadir
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                            style="background-color: #1bb2fe; border-color: #1eb2fc;" data-target="#Ingeniero"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Añadir
                             Ingeniero</button>
                         <button type="button" class="btn btn-sm btn-primary shadow-sm"
                             style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
@@ -233,13 +238,13 @@
                                 <div class="card-body">
                                     <div class="chart-area" style="height: 8rem;">
                                         <ul>
-                                            <h4>{{user.direccion}}</h4>
+                                            <h4><i class="fas fa-map-marked"></i> - {{user.direccion}}</h4>
                                         </ul>
                                         <ul>
-                                            <h5>{{user.telefono}}</h5>
+                                            <h5><i class="fas fa-phone"></i> - {{user.telefono}}</h5>
                                         </ul>
                                         <ul>
-                                            <h5>{{user.correo}}</h5>
+                                            <h5><i class="fas fa-reply-all"></i> - {{user.correo}}</h5>
                                         </ul>
                                     </div>
                                 </div>
@@ -248,20 +253,23 @@
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row">
+                    <div class="row" id="ads">
                         {{#each inmuebles}}
-                        <div class="col-md-3">
-                            <div class="card text-center mx-auto">
-                                <a href="/profile/proyectos/{{idInm}}">
-                                    <div class="card-body">
-                                        <img src="img/{{img}}" alt="" class="w-100 h-100 img-thumbnail card-img"
-                                            data-toggle="modal" data-target="#infomodal{{@index}}">
-                                        <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                                            <h5 class="card-title">{{nombre}}</h5>
-                                            {{!-- <p class="card-text">{{ubic}}</p> --}}
-                                        </div>
-                                    </div>
-                                </a>
+                        <div class="col-md-4">
+                            <div class="card rounded">
+                                <div class="card-image">
+                                    <span class="card-notify-badge" style="background-color: #1eb2fc">{{nombre}}</span>
+                                    <a href="/profile/proyectos/{{idInm}}"><span class="card-notify-year">Ver</span></a>
+
+
+                                </div>
+
+
+                                <div class="card-body text-center">
+                                    <img class="img-thumbnail w-100 h-100 card-img" src="img/{{img}}"
+                                        alt="Alternate Text" />
+                                    <a class="ad-btn" href="#">View</a>
+                                </div>
                             </div>
                         </div>
                         {{/each}}
@@ -276,6 +284,59 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
+    <!-- Sidebar Toggler Script-->
+    <script>
+        (function ($) {
+            "use strict"; // Start of use strict
+
+            // Toggle the side navigation
+            $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
+                $("body").toggleClass("sidebar-toggled");
+                $(".sidebar").toggleClass("toggled");
+                if ($(".sidebar").hasClass("toggled")) {
+                    $('.sidebar .collapse').collapse('hide');
+                };
+            });
+
+            // Close any open menu accordions when window is resized below 768px
+            $(window).resize(function () {
+                if ($(window).width() < 768) {
+                    $('.sidebar .collapse').collapse('hide');
+                };
+            });
+
+            // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+            $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
+                if ($(window).width() > 768) {
+                    var e0 = e.originalEvent,
+                        delta = e0.wheelDelta || -e0.detail;
+                    this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+                    e.preventDefault();
+                }
+            });
+
+            // Scroll to top button appear
+            $(document).on('scroll', function () {
+                var scrollDistance = $(this).scrollTop();
+                if (scrollDistance > 100) {
+                    $('.scroll-to-top').fadeIn();
+                } else {
+                    $('.scroll-to-top').fadeOut();
+                }
+            });
+
+            // Smooth scrolling using jQuery easing
+            $(document).on('click', 'a.scroll-to-top', function (e) {
+                var $anchor = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: ($($anchor.attr('href')).offset().top)
+                }, 1000, 'easeInOutExpo');
+                e.preventDefault();
+            });
+
+        })(jQuery); // End of use strict
+    </script>
 
     <link rel="stylesheet" href="/css/tel.css">
     <div class="modal fade" id="EditProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"

@@ -6,7 +6,7 @@ const ctrl = {}
 
 ctrl.index = (req, res) => {
     db.getUserById(2);
- res.render('inicio', );
+ res.render('inicio');
 }
 
 ctrl.about = (req, res) => {
@@ -16,7 +16,9 @@ ctrl.about = (req, res) => {
 ctrl.contact = (req, res) => {
     
     res.render('./postlog/contact');
-}
+},
+
+
 
 ctrl.map = (req, res) => {
     res.render('./postlog/mapa')
@@ -134,4 +136,8 @@ ctrl.searchFilter = async(req, res) => {
     return res.render('postlog/searchfilter', {data, notFound})
 }
 
+// ctrl.notFound = (req, res) => {
+//     res.status(404).send('gg')
+
+// }
 module.exports = ctrl;
