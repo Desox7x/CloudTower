@@ -6,6 +6,8 @@ const helpers = require('../lib/helpers');
 
 const DB = require('../lib/DBData');
 
+const mailer = require('../lib/mailer');
+
 passport.use('local.login', new LocalStrategy({
     usernameField: 'correo',
     passwordField: 'password',
@@ -53,6 +55,9 @@ passport.use('local.signup', new LocalStrategy({
         console.log(result);
         console.log('resultados')
         newUser.idEntidad = result.insertId;
+
+        await mailer.newuser(newUser.idEntidad);
+
         return done(null, newUser);
     }else{
         return done(null, false, req.flash('message', 'El Teléfono y/o Correo digitados ya están vinculados a una cuenta'));
