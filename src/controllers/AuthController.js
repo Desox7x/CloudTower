@@ -1,7 +1,7 @@
 const passport = require('passport');
 const DB = require('../lib/DBData')
 const helpers = require('../lib/helpers')
-
+const mailer = require('../lib/mailer');
 const ctrl = {}
 
 ctrl.signup =  (req, res) => {
@@ -89,10 +89,9 @@ ctrl.signupIngPOST = async (req, res) => {
 };
 
 ctrl.VerUser = async (req, res) => {
-    
     let data = await DB.verifyUser(req.body.fullname, req.body.password, req.body.telefono,
          req.body.correo, req.body.direccion);
-    if(data == 1){
+    if(data == 1){      
         req.flash('success', 'Su solicitud ha sido enviada. Espere la verificación de los administradores.')
     }else{
         req.flash('message', 'Uno o varios de los datos que introdujo ya están vinculados a una cuenta.'); //duplicado

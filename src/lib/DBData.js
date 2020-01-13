@@ -1,4 +1,5 @@
 const DB = require('../database');
+const mailer = require('../lib/mailer');
 
 
 module.exports = {
@@ -327,6 +328,11 @@ module.exports = {
         let data = await DB.query('SELECT * FROM Verify')
         return data;
 
+    },
+
+    async getSolicitudesById(id) {
+        let data = await DB.query('SELECT * FROM Verify WHERE VerifyID = ?', [id]);
+        return data;
     },
 
     async createUser(fullname, password, telefono, correo, direccion, idTipoEntidad, id) {

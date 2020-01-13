@@ -5,8 +5,8 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: '',
-        pass: ''
+        user: 'cloudtower2020@gmail.com',
+        pass: 'cloudtower123'
     }
 });
 
@@ -40,9 +40,9 @@ mailer.newuser = async(id) => {
 
     let user = await DB.getUserById(id);
 
-    let html=`<h1> Hola ${user[0].fullname}</h1>
+    let html=`<h1> Bienvenido a CloudTower ${user[0].fullname}!</h1>
     <p>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum vel ratione exercitationem quisquam blanditiis officia, modi, veniam rerum corporis est alias assumenda, corrupti similique nulla doloribus. Quam ipsam, eius aut praesentium dolores possimus, facere dicta beatae atque placeat laboriosam, excepturi reprehenderit. Id doloremque eaque ab mollitia ipsam? Soluta cupiditate ratione quas, hic rem labore, error saepe natus placeat facilis nulla temporibus quo numquam totam nemo dolorem veniam unde laudantium explicabo perspiciatis. Itaque earum dignissimos natus omnis error, pariatur temporibus quidem? Amet officia harum quos incidunt non, dolore nihil velit cumque quas! Repellendus suscipit maiores unde deserunt tenetur. Cumque, nulla deleniti?
+    
     </p>`;
 
 
@@ -51,5 +51,26 @@ mailer.newuser = async(id) => {
     await enviarMail(html, bienvenida, user[0].correo);
 
 }
+
+mailer.successReserva = async(id) => {
+    let user = await DB.getUserById(id);
+    let html = `<h1> Gracias! ${user[0].fullname}! <h1>
+    <p> Tu reserva a se ha realizado exitosamente. </p>
+    `;
+    let correo = 'Correo de verificación.'
+    await enviarMail(html, correo, user[0].correo);
+
+
+}
+
+mailer.validateUser = async(id) => {
+    let user = await DB.getUserById(id);
+    console.log(user);
+    let html = `<h3>Su cuenta ha sido validada exitosamente!</h3>
+    <p>Entre a cloudtower.xyz/login para iniciar sesion. </p>`;
+    let sujeto = 'Validacion exitosa';
+    await enviarMail(html, sujeto, user[0].correo)
+}
+
 
 module.exports = mailer;

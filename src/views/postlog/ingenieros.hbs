@@ -158,7 +158,8 @@
                             <div class="profile-card py-3 card text-center">
 
                                 <div class="card-body py-4">
-                                    <img class="profile-picture rounded-circle" src="/uploads/{{idImg}}" />
+                                    <img class="profile-picture rounded-circle" src="/uploads/{{idImg}}" 
+                                    onerror="this.onerror=null; this.src='/img/userlogo.jpg'"/>
                                     <h2 class="text-dark h5 font-weight-bold mt-4 mb-1">
                                         Ing. {{fullname}}
                                     </h2>
