@@ -75,7 +75,7 @@ router.get('/borrar/:id', reserva.deleteReunion, isLoggedIn);
 // =========== AUTH =================
 router.get('/signup', auth.signup);
 router.post('/signup', auth.signupPOST);
-router.post('/validar', auth.validarPOST);
+
 router.post('/signuprep', auth.signupRepPOST);
 router.post('/signuping', auth.signupIngPOST);
 
@@ -83,8 +83,11 @@ router.get('/login', isNotLoggedIn, auth.login)
 router.post('/login', auth.loginPOST);
 
 
+router.post('/veruserinmo', auth.VerUserInmo);
+router.post('/verusercons', auth.VerUserCons);
 
-router.post('/veruser', auth.VerUser);
+router.post('/validarinmo', auth.validarInmoPOST);
+router.post('/validarcons', auth.validarConsPOST);
 
 router.get('/logout',  auth.logout);
 

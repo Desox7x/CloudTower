@@ -312,11 +312,11 @@ module.exports = {
     },
 
     //=========VERIFY USER========
-    async verifyUser(fullname, password, telefono, correo, direccion) {
+    async verifyUser(fullname, password, telefono, correo, direccion, idTipoEntidad) {
         console.log('check')
         let check = await DB.query('SELECT * FROM Entidad WHERE telefono = ? OR correo = ?', [telefono, correo])
         if (check.length == 0) {
-            let data = await DB.query('INSERT INTO Verify SET VerFullname = ?, VerPassword = ?, VerTelefono = ?, VerCorreo = ?, Verdireccion = ?', [fullname, password, telefono, correo, direccion]);
+            let data = await DB.query('INSERT INTO Verify SET VerFullname = ?, VerPassword = ?, VerTelefono = ?, VerCorreo = ?, Verdireccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad]);
             console.log(data);
             return 1;
         } else {
@@ -324,8 +324,8 @@ module.exports = {
         }
     },
 
-    async getSolicitudes() {
-        let data = await DB.query('SELECT * FROM Verify')
+    async getSolicitudes(id) {
+        let data = await DB.query('SELECT * FROM Verify WHERE idTipoEntidad = ?', [id]);
         return data;
 
     },

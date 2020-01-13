@@ -70,6 +70,7 @@
         </div>
         
         <div class="table-responsive">
+            <h5>Inmobiliarias</h5>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
@@ -93,7 +94,7 @@
 
                     </tr>
                 </tfoot>
-                {{#each verify}}
+                {{#each inmo}}
                 <tbody>
                     <tr>
                         <td>{{VerifyID}}</td>
@@ -116,15 +117,65 @@
                     </tr>
                 </tbody>
                 {{/each}}
-                
+            </table>    
+        </div>
+        <div class="table-responsive">
+            <h5>Constructoras</h5>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+
+
+                    </tr>
+                </tfoot>
+                {{#each cons}}
+                <tbody>
+                    <tr>
+                        <td>{{VerifyID}}</td>
+                        <td>{{VerFullname}}</td>
+                        <td>{{VerTelefono}}</td>
+                        <td>{{VerCorreo}}</td>
+
+                        <td>
+
+                            <button class="btn btn-primary btn-sm"
+                                style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
+                                data-target="#InmobiliariaModal{{@index}}">Validar</button>
+
+                        </td>
+
+                        <td>
+                            <a href="/deleteVer/{{VerifyID}}" id="delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>    
         </div>
 
-        </table>
+        
     </div>
 </div>
 
 
-{{#each verify}}
+{{#each inmo}}
 <div class="modal fade " id="InmobiliariaModal{{@index}}" tabindex="-1" role="dialog"
     aria-labelledby="InmobiliariaModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -136,7 +187,60 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/validar" method="POST">
+                <form action="/validarinmo" method="POST">
+                    <input type="hidden" name="entidad" value="2">
+                    <div class="form-group">
+                        <input type="text" name="fullname" value="{{VerFullname}}"
+                            placeholder="Nombre de la Inmobiliaria" class="form-control" autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" name="correo" value="{{VerCorreo}}" placeholder="Correo de contacto"
+                            class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="password" value="{{VerPassword}}" placeholder="Contraseña"
+                            class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="direccion" value="{{VerDireccion}}" placeholder="Ubicacion"
+                            class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" name="telefono" placeholder="Telefono de Inmobiliaria" value="{{VerTelefono}}"
+                            class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <span class="note" style="font-size: 13px;"> Formato: XXX-XXX-XXXX </span>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">
+                            Validar
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+{{#each cons}}
+<div class="modal fade " id="InmobiliariaModal{{@index}}" tabindex="-1" role="dialog"
+    aria-labelledby="InmobiliariaModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #1bb2fe;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Registrarse</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/validarcons" method="POST">
                     <input type="hidden" name="entidad" value="2">
                     <div class="form-group">
                         <input type="text" name="fullname" value="{{VerFullname}}"

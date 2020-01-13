@@ -31,9 +31,12 @@ ctrl.adminConstructora = async (req, res) => {
 }
 
 ctrl.adminSolicitudes = async (req, res) => {
-    let ver = await DB.getSolicitudes();
-    res.render('./postlog/admin/adminreq', {verify: ver});
+    let inmo = await DB.getSolicitudes(2);
+    let cons = await DB.getSolicitudes(3);
+    res.render('./postlog/admin/adminreq', {inmo, cons});
 }
+
+
 
 
 
