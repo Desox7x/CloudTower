@@ -21,7 +21,7 @@ module.exports = {
 
     async getUserById(id) {
         let data = await DB.query('SELECT idEntidad, idTipoEntidad, fullname, telefono, correo, direccion, idImg, descripcion, Empleo FROM entidad WHERE idEntidad = ? LIMIT 1', [id]);
-        //console.log(data);
+        console.log(data);
         return data;
     },
 
