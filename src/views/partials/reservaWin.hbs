@@ -49,6 +49,16 @@
                         </select>
                         <small>Formato esta en 24 horas</small>
                     </div>
+                    <hr>
+                    <h5>Representante</h5>
+                    <div>
+                        {{#each repre}}
+                        <p>
+                            Su representante será <b>{{fullname}}</b>
+                        </p>
+                        {{/each}}
+                    </div>
+                    
 
                     <div class="form-group">
                         <button type="submit" class="btn text-white"

@@ -1,5 +1,4 @@
 const DB = require('../database');
-const mailer = require('../lib/mailer');
 
 
 module.exports = {
@@ -21,8 +20,8 @@ module.exports = {
 
 
     async getUserById(id) {
-        let data = await DB.query('SELECT idEntidad, idTipoEntidad, fullname, telefono, correo, direccion, idImg, descripcion, Empleo FROM entidad WHERE idEntidad = ? LIMIT 1', [id]);
-        console.log(data);
+        let data = await DB.query('SELECT idEntidad, idTipoEntidad, fullname, telefono, correo, direccion, idImg, descripcion, Empleo FROM entidad WHERE idEntidad = ?', [id]);
+        console.log(data)
         return data;
     },
 
@@ -312,11 +311,11 @@ module.exports = {
     },
 
     //=========VERIFY USER========
-    async verifyUser(fullname, password, telefono, correo, direccion, idTipoEntidad) {
+    async verifyUser(fullname, password, telefono, correo, direccion, VerTipoEntidad) {
         console.log('check')
         let check = await DB.query('SELECT * FROM Entidad WHERE telefono = ? OR correo = ?', [telefono, correo])
         if (check.length == 0) {
-            let data = await DB.query('INSERT INTO Verify SET VerFullname = ?, VerPassword = ?, VerTelefono = ?, VerCorreo = ?, Verdireccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad]);
+            let data = await DB.query('INSERT INTO Verify SET VerFullname = ?, VerPassword = ?, VerTelefono = ?, VerCorreo = ?, Verdireccion = ?, VerTipoEntidad = ?', [fullname, password, telefono, correo, direccion, VerTipoEntidad]);
             console.log(data);
             return 1;
         } else {
@@ -325,7 +324,7 @@ module.exports = {
     },
 
     async getSolicitudes(id) {
-        let data = await DB.query('SELECT * FROM Verify WHERE idTipoEntidad = ?', [id]);
+        let data = await DB.query('SELECT * FROM Verify WHERE VerTipoEntidad = ?', [id]);
         return data;
 
     },

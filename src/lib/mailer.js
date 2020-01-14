@@ -1,5 +1,6 @@
 const mailer = {}
 const nodemailer = require('nodemailer');
+const DB = require('./DBData');
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -10,13 +11,13 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const DB = require('./DBData');
+
 
 //const defaultEmail = "noreply@cloudtower.do";
 
 async function enviarMail(html, subject, to){ 
     await transporter.sendMail({
-        from: '"CloudTower.do" <noreply@cloudtower.do>',
+        from: '"CloudTower" <cloudtower2020@gmail.com>',
         to,
         subject,
         html
@@ -58,19 +59,19 @@ mailer.successReserva = async(id) => {
     <p> Tu reserva a se ha realizado exitosamente. </p>
     `;
     let correo = 'Correo de verificación.'
+    console.log('sent');
     await enviarMail(html, correo, user[0].correo);
 
 
 }
 
-mailer.validateUser = async(id) => {
-    let user = await DB.getUserById(id);
-    console.log(user);
-    let html = `<h3>Su cuenta ha sido validada exitosamente!</h3>
-    <p>Entre a cloudtower.xyz/login para iniciar sesion. </p>`;
-    let sujeto = 'Validacion exitosa';
-    await enviarMail(html, sujeto, user[0].correo)
-}
+// mailer.validateUser = async(id) => {
+//     let user = await DB.getUserById(id);
+//     let html = `<h3>Su cuenta ha sido validada exitosamente!</h3>
+//     <p>Entre a cloudtower.xyz/login para iniciar sesion. </p>`;
+//     let sujeto = 'Validacion exitosa';
+//     await enviarMail(html, sujeto, user[0].correo)
+// }
 
 
 module.exports = mailer;

@@ -55,7 +55,6 @@ passport.use('local.signup', new LocalStrategy({
         console.log(result);
         console.log('resultados')
         newUser.idEntidad = result.insertId;
-
         await mailer.newuser(newUser.idEntidad);
 
         return done(null, newUser);
