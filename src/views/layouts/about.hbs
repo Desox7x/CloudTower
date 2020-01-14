@@ -3,6 +3,42 @@
         <div class="col-10 mx-auto">
             <div class="accordion" id="faq">
                 <div class="card">
+                    {{!-- ABOUT --}}
+                    <div class="card-header p-2" id="headingZero">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" 
+                            data-target="#collapseZero" aria-expanded="true" 
+                            aria-controls="collapseZero">
+                                ¿Quiénes somos?
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div class="collapse show" id="collapseZero" aria-labelledby="headingZero" 
+                    data-parent="#faq">
+                        <div class="card-body">
+                            Somos un grupo universitario que, además de querer completar 
+                            nuestro ciclo estudiantil, busca mejorar uno de los sectores 
+                            en la República Dominicana que consideramos más necesitados de 
+                            alternativas tecnológicas como la que presentamos.
+                            <br>
+                            <br>
+                            Nuestro <b>objetivo principal</b> es el de crear es un sistema 
+                            para el sector inmobiliario en busca de eficientizar la 
+                            comunicación entre las empresas inmobiliarias, las constructoras 
+                            y los clientes cuando apliquen. Por otra parte, queremos ayudar a 
+                            que el proceso de compraventa de un inmueble sea lo menos tedioso 
+                            posible, tanto para el vendedor como para el cliente.
+                            <br>
+                            <br>
+                            A continuación se presenta nuestro FODA:
+                            <img class="img-fluid" src="../img/FODA.png" alt="foda">
+                        </div>
+                    </div>                    
+                </div>
+
+                
+                <div class="card">
                     {{!-- FAQ1 --}}
                     <div class="card-header p-2" id="headingOne">
                         <h5 class="mb-0">
@@ -14,7 +50,7 @@
                         </h5>
                     </div>
 
-                    <div class="collapse show" id="collapseOne" aria-labelledby="headingOne" 
+                    <div class="collapse" id="collapseOne" aria-labelledby="headingOne" 
                     data-parent="#faq">
                         <div class="card-body">
                             <b>R:</b> Se diferencia en que para cada uno hay una interfaz 
