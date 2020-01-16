@@ -55,8 +55,9 @@ mailer.newuser = async(id) => {
 
 mailer.successReserva = async(id) => {
     let user = await DB.getUserById(id);
-    let html = `<h1> Gracias! ${user[0].fullname}! <h1>
-    <p> Tu reserva a se ha realizado exitosamente. </p>
+    let html = `<h1> ¡Gracias, ${user[0].fullname}! <h1>
+    <p>Su reserva se ha realizado exitosamente. Para más información acerca de esta
+    visite su perfil en nuestra página.</p>
     `;
     let correo = 'Correo de verificación.'
     console.log('sent');
@@ -65,13 +66,13 @@ mailer.successReserva = async(id) => {
 
 }
 
-// mailer.validateUser = async(id) => {
-//     let user = await DB.getUserById(id);
-//     let html = `<h3>Su cuenta ha sido validada exitosamente!</h3>
-//     <p>Entre a cloudtower.xyz/login para iniciar sesion. </p>`;
-//     let sujeto = 'Validacion exitosa';
-//     await enviarMail(html, sujeto, user[0].correo)
-// }
+//  mailer.validateUser = async(id) => {
+//      let user = await DB.getSolicitudesById(id);
+//      let html = `<h3>Su cuenta ha sido validada exitosamente! </h3>
+//      <p>Entre a cloudtower.xyz/login para iniciar sesion. </p>`;
+//      let sujeto = 'Validacion exitosa';
+//      await enviarMail(html, sujeto, user[0].VerCorreo)
+//  }
 
 
 module.exports = mailer;

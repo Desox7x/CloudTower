@@ -33,7 +33,7 @@ ctrl.validarInmoPOST = async (req, res) => {
     let register = await DB.createUser(req.body.fullname, password, req.body.telefono,
         req.body.correo, req.body.direccion, 2);
     if (register == 0) {
-
+        // await mailer.validateUser(req.params.id);
         req.flash('success', 'La verificación ha sido exitosa.')
     } else {
         req.flash('message', 'La verificación no ha podido realizarse.')

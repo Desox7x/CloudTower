@@ -178,10 +178,11 @@ module.exports = {
         let check = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idInm = ?", [fecha, idInm]);
         let esRepresentante = await DB.query("SELECT * FROM repinmueble ri JOIN representantes r on ri.idRep = r.idRep WHERE ri.idInm = ? AND r.idEntidad = ?", [idInm, idEntidad])
         let esInmo = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 2", [idEntidad]);
+        let esCons = await DB.query("SELECT * FROM entidad WHERE idEntidad = ? AND idTipoEntidad = 3", [idEntidad]);
         let isReserved = await DB.query("SELECT * FROM reunion WHERE idEntidad = ? AND idInm = ?", [idEntidad, idInm]);
         let isSameDate = await DB.query("SELECT * FROM reunion WHERE fecha = ? AND idEntidad = ?", [fecha, idEntidad])
 
-        if (check.length == 0 && esRepresentante == 0 && esInmo == 0 && isReserved == 0 && isSameDate == 0) {
+        if (check.length == 0 && esRepresentante == 0 && esInmo == 0 && esCons == 0 && isReserved == 0 && isSameDate == 0) {
             console.log(fecha, tiempo, idInm, idEntidad, "AGREGADO")
             let data = await DB.query("INSERT INTO reunion SET fecha = ?, tiempo = ?, idInm = ?, idEntidad = ?", [fecha, tiempo, idInm, idEntidad])
             return 1;
@@ -330,7 +331,7 @@ module.exports = {
     },
 
     async getSolicitudesById(id) {
-        let data = await DB.query('SELECT * FROM Verify WHERE VerifyID = ?', [id]);
+        let data = await DB.query('SELECT * FROM Verify v JOIN Entidad e ON v.idEntidad = e.idEntidad WHERE VerifyID = ?', [id]);
         return data;
     },
 

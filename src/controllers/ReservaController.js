@@ -32,7 +32,7 @@ ctrl.add = async (req, res) => {
     let data = await DB.addReunion(fecha, tiempo, idInm, idEntidad);
     
     if(data == 1){
-        // await mailer.successReserva(idEntidad);
+        await mailer.successReserva(idEntidad);
         req.flash('success', 'Has reservado este inmueble exitosamente!');
     }else{
         req.flash('message', 'No puedes reservar este inmueble. Es posible que el inmueble ya este reservado.');
