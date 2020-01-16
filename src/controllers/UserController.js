@@ -3,15 +3,20 @@ const pool = require('../database');
 const mailer = require('../lib/mailer');
 const ctrl = {}
 
-ctrl.dashboard = (req, res) => {
-    if (req.user.idTipoEntidad == 1) {
-        return res.render('postlog/dashboard/cliente');
+ctrl.dashboard = async (req, res) => {
+    const inmueble = await DB.getAllInmuebles();
+    const inmueblelimit = await DB.getAllInmueblesLIMIT();
+    const totalInmuebles = await DB.getTotalInmuebles();
+    
+
+    if (req.user.idTipoEntidad == 1 || req.user.idTipoEntidad == 4 || req.user.idTipoEntidad == 5) {
+        return res.render('postlog/dashboard/cliente', {inmueblelimit, inmuebles: inmueble, ti:totalInmuebles});
     }
     if (req.user.idTipoEntidad == 2) {
-        return res.render('postlog/dashboard/inmobiliaria');
+        return res.render('postlog/dashboard/inmobiliaria', {totalInmuebles: inmueble.length, inmuebles: inmueble, ti:totalInmuebles});
     }
     if (req.user.idTipoEntidad == 3) {
-        return res.render('postlog/dashboard/constructora');
+        return res.render('postlog/dashboard/constructora', {totalInmuebles: inmueble.length, inmuebles: inmueble, ti:totalInmuebles});
     }
 
     res.status(403).send('Forbideen');

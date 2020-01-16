@@ -36,7 +36,7 @@ router.get('/buscarInmuebles', home.searchFilter);
 
 
 // =========== USER ================
-router.get('/dashboard', isLoggedIn, user.dashboard, user.getProperty);
+router.get('/dashboard', isLoggedIn, user.dashboard);
 router.get('/dashboardin', user.getProperty);
 router.get('/contract', isLoggedIn, requireRole(InmobiliariaRole), user.contract);
 router.get('/contrato', isLoggedIn, requireRole(ConstructoraRole), user.contract);

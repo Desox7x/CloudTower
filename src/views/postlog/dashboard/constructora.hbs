@@ -1,5 +1,11 @@
-<title>Perfil</title>
-
+<title>Cloud Tower Dashboard</title>
+<style>
+    #map-template {
+        height: 19vw;
+        width: 100%;
+        object-fit: cover;
+    }
+</style>
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link
@@ -8,14 +14,10 @@
 
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 
-<style>
-  .card-title, .card-text {  
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;   
-  }
-
-</style>
 
 <body id="page-top">
 
@@ -26,13 +28,23 @@
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #50aafe;">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center text-white nav-link" href="/profile">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/profile">
         <div>
           <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
         </div>
-        <div class="sidebar-brand-text mx-3">{{user.fullname}} </div>
+
       </a>
-      
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboardin">
+          <i class="fas fa-chart-area"></i>
+          <span>Tablero </span></a>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -42,21 +54,13 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-     
       <li class="nav-item">
-        <a class="nav-link" href="/profile/propertylist" aria-labelledby="true">
-          <i class="fas fa-th-list"></i>
-          <span>Lista de inmuebles</span>
+        <a class="nav-link" href="/profile" aria-labelledby="true">
+          <i class="fas fa-user-circle"></i>
+          <span>Volver al perfil</span>
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="/profile/reunionlist" aria-labelledby="true">
-          <i class="fas fa-calendar-check"></i>
-          <span>Reuniones pendientes</span>
-        </a>
-      </li>
-     
       <!-- Nav Item - Charts -->
       <li class="nav-item">
         <a class="nav-link" href="/search">
@@ -64,34 +68,61 @@
           <span>Buscador</span></a>
       </li>
 
-      <!-- Nav Item - Tables -->
-      
       <li class="nav-item">
-        <a class="nav-link" href="/contract">
+        <a class="nav-link" href="/legalDocs">
           <i class="fas fa-file-signature"></i>
-          <span>Llenar contrato</span></a>
+          <span>Documentos legales</span></a>
       </li>
-      
+
+        <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <div class="sidebar-heading">
+        Opciones
+      </div>
+
       <li class="nav-item">
-        <a class="nav-link" href="/dashboardin">
-          <i class="fas fa-chart-area"></i>
-          <span>Tablero</span></a>
+          <a class="nav-link" href="/profile/proyectlist" aria-labelledby="true">
+                    <i class="fas fa-th-list"></i>
+                    <span>Lista de proyectos</span>
+          </a>
       </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/datelist" aria-labelledby="true">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Citas pendientes</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="/contrato">
+                    <i class="fas fa-file-signature"></i>
+                    <span>Llenar contrato</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/ingenieros">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>Ingenieros</span></a>
+            </li>
+
+
+
       
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="modal" data-target="#modalImage" aria-expanded="true"
-          aria-controls="modalImage">
-          <i class="fas fa-file-image"></i>
-          <span>Cambiar imagen</span>
-        </a>
-      </li>
-      
-      {{> editImg}}
+
+
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
-
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"><i class="fas fa-arrows-alt-h"
+        style="color: rgba(253, 253, 253, 0.7);"></i></button>
+      </div>
 
     </ul>
     <!-- End of Sidebar -->
@@ -102,207 +133,285 @@
       <!-- Main Content -->
       <div class="p-4" id="content">
 
+
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
-         
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generar Reportes</button>
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
-              data-target="#newProyectC"><i class="fas fa-download fa-sm text-white-50"></i> Nuevo Proyecto</button>
-            <button type="button" class="btn btn-sm btn-primary shadow-sm" style="background-color: #1bb2fe; border-color: #1eb2fc;" data-toggle="modal"
-              data-target="#EditProfileModal"><i class="fas fa-download fa-sm text-white-50"></i> Editar perfil</button>
-          </div>
-          
-          {{> addPropertyC}}
-          <!-- Content Row -->
-          <div class="row">
+            <h1 class="h3 mb-0 text-gray-800">Tablero</h1>
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ganancias (Mes)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$0</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Ganancias (Anuales)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$0</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Inmuebles en proceso</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%</div>
-                        </div>
-                        <div class="col">
-                          <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10"
-                              aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Citas pendientes</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalReuniones}}</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Content Row -->
+
+
+          <!-- Content Row -->
+
           <div class="row">
 
             <!-- Area Chart -->
-            <div class="col-xl-12 col-lg-8 ">
+            <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between" style="background-color: #1bb2fe;">
-                  <h6 class="m-0 font-weight-bold text-white">Perfil de Inmobiliaria</h6>
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Inmuebles por Entidad</h6>
 
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="chart-area" style="height: 8rem;">
-                    <ul>
-                      <h4>{{user.direccion}}</h4>
-                    </ul>
-                    <ul>
-                      <h5>{{user.telefono}}</h5>
-                    </ul>
-                    <ul>
-                      <h5>{{user.correo}}</h5>
-                    </ul>
+                  <div class="chart-area">
+                    <canvas id="myChart" style="max-width: 680px; max-height: 680px"></canvas>
                   </div>
                 </div>
               </div>
             </div>
+            
+            <script>
+              var ctx = document.getElementById('myChart').getContext('2d');
+              var l = [];
+              var d = [];
+              {{#if ti}}
+                {{#each ti}}
+                  l.push("{{fullname}}");
+                  d.push({{count}});
+                {{/each}}
+              {{/if}}
+              var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: l,
+                  datasets: [{
+                    label: '# de inmuebles por entidad',
+                    data: d,
+                    backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                  }]
+                },
+                options: {
+                  scales: {
+                    yAxes: [{
+                      ticks: {
+                        beginAtZero: true,
+                        precision: 0
+                        
+                      }
+                    }]
+                  }
+                }
+              });
+            </script>
+
+
+
+            <!-- Pie Chart -->
+            <div class="col-xl-4 col-lg-5">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Destacados</h6>
+                  <select name="select-location" id="select-location">
+                    <option value="-1">Selecciona uno...</option>
+                    <option value="18.4508722,-69.9656328">Inmobiliaria Perez</option>
+                    <option value="18.450119,-69.9558738">Inmobiliaria Genao</option>
+                    <option value="18.4616732,-69.9584737">Constructora Tierra Plana</option>
+                  </select>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div id="map-template"></div>
+                </div>
+              </div>
+            </div>
           </div>
+          <script>
+            const map = L.map('map-template').setView([18.4616732,-69.9619069], 11);
+
+            L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png').addTo(map);
+            L.marker([18.4508722,-69.9656328]).addTo(map);
+            L.marker([18.450119,-69.9558738]).addTo(map);
+            L.marker([18.4616732,-69.9584737]).addTo(map);
+
+            document.getElementById('select-location').addEventListener('change', function(e) {
+              const coords = e.target.value.split(",");
+              map.flyTo(coords, 18);
+            })
+          </script>
+
+
 
           <!-- Content Row -->
-          <div class="row">
-            {{#each inmuebles}}
-            <div class="col-md-3">
-              <div class="card text-center mx-auto">
+          <div class="row text-justify">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Enfoque de desarrollo</h6>
+                </div>
                 <div class="card-body">
-                  <img src="img/{{img}}" alt="" class="w-100 h-100 img-thumbnail card-img" data-toggle="modal" 
-                  data-target="#infomodal{{@index}}">
-                  <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                    <h5 class="card-title">{{nombre}}</h5>
-                    {{!-- <p class="card-text">{{ubic}}</p> --}}
-                  </div>
+                  <p>CloudTower es un sistema hecho para el sector inmobiliario que busca eficientizar la comunicación
+                    entre las empresas inmobiliarias, las constructoras y los clientes cuando apliquen. El sistema
+                    mostrará información relevante sobre los inmuebles que estén disponibles para la venta y los que no.
+                    La información será actualizada a tiempo real de acuerdo a los procesos que se realicen por parte de
+                    las empresas, entre otras características.</p>
+
                 </div>
               </div>
-            </div>
-            {{/each}}
-          </div>
 
+
+            </div>
+
+            <div class="col-lg-6 mb-4">
+
+              <!-- Illustrations -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Inmuebles y proyectos destacados</h6>
+                </div>
+                <div class="card-body">
+                  <div class="text-center">
+
+                    <div class="row">
+                      {{#each inmuebles}}
+                      <div class="col-md-4">
+                        <a href="/propiedad/{{idInm}}">
+                          <img class="img-thumbnail" style="width: 10rem;" src="img/{{img}}" alt="">
+                        </a>
+                      </div>
+                      {{/each}}
+                    </div>
+
+                  </div>
+                  <br>
+                  <a target="_blank" rel="nofollow" href="/buscarInmuebles">Buscar inmuebles &rarr;</a>
+                </div>
+              </div>
+
+              <!-- Approach -->
+
+
+            </div>
+          </div>
         </div>
+
       </div>
+      <!-- /.container-fluid -->
+
     </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    {{!-- <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2019</span>
+          </div>
+        </div>
+      </footer> --}}
+    <!-- End of Footer -->
+
   </div>
-  
+  <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
   <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
+  <a class="scroll-to-top rounded " href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <link rel="stylesheet" href="/css/tel.css">
-  <div class="modal fade" id="EditProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+  <!-- Logout Modal-->
+  {{!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header text-white" style="background-color: #1bb2fe;">
-          <h5 class="modal-title" id="exampleModalLongTitle">Edita tu información</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body text-dark">
-          <form action="/updateuser" method="POST">
-            <div class="form-group">
-              <h5>Nombre</h5>
-              <input type="text" name="fullname" value="{{user.fullname}}" placeholder="Nombre completo"
-                class="form-control">
-            </div>
-            <div class="form-group">
-              <h5>Descripcion</h5>
-              <input type="text" name="descripcion" value="{{user.descripcion}}" placeholder="Trabajo"
-                class="form-control">
-            </div>
-            <div class="form-group">
-              <h5>Dirección</h5>
-              <input type="text" name="direccion" value="{{user.direccion}}" placeholder="Direccion"
-                class="form-control">
-            </div>
-            <div class="form-group">
-              <h5>Teléfono</h5>
-              <input type="tel" name="telefono" value="{{user.telefono}}" placeholder="Número de Telefono"
-                class="form-control" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-              <span class="note"> Formato: XXX-XXX-XXXX </span>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary" style="background-color: #1bb2fe; border-color: #1eb2fc;">Editar info</button>
-
-            </div>
-          </form>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="/login">Logout</a>
         </div>
-
       </div>
     </div>
-  </div>
-
-
+  </div> --}}
+  {{!-- Info Modal --}}
+  {{> infowin}}
   <!-- Bootstrap core JavaScript-->
+  <script>
+    (function ($) {
+      "use strict"; // Start of use strict
+
+      // Toggle the side navigation
+      $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
+        $("body").toggleClass("sidebar-toggled");
+        $(".sidebar").toggleClass("toggled");
+        if ($(".sidebar").hasClass("toggled")) {
+          $('.sidebar .collapse').collapse('hide');
+        };
+      });
+
+      // Close any open menu accordions when window is resized below 768px
+      $(window).resize(function () {
+        if ($(window).width() < 768) {
+          $('.sidebar .collapse').collapse('hide');
+        };
+      });
+
+      // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+      $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
+        if ($(window).width() > 768) {
+          var e0 = e.originalEvent,
+            delta = e0.wheelDelta || -e0.detail;
+          this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+          e.preventDefault();
+        }
+      });
+
+      // Scroll to top button appear
+      $(document).on('scroll', function () {
+        var scrollDistance = $(this).scrollTop();
+        if (scrollDistance > 100) {
+          $('.scroll-to-top').fadeIn();
+        } else {
+          $('.scroll-to-top').fadeOut();
+        }
+      });
+
+      // Smooth scrolling using jQuery easing
+      $(document).on('click', 'a.scroll-to-top', function (e) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+          scrollTop: ($($anchor.attr('href')).offset().top)
+        }, 1000, 'easeInOutExpo');
+        e.preventDefault();
+      });
+
+    })(jQuery); // End of use strict
+  </script>
+  <script data-search-pseudo-elements defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js"></script>
+
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

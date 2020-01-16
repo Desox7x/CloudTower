@@ -42,9 +42,13 @@ module.exports = {
         console.log(data);
         return data;
     },
-
-    async getAllInmuebles() {
-        let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad')
+    
+    async getAllInmuebles(){
+        let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad');
+        return data;
+    },
+    async getAllInmueblesLIMIT() {
+        let data = await DB.query('SELECT * FROM addInmueble i JOIN Entidad e ON i.idEntidad = e.idEntidad ORDER BY idInm DESC LIMIT 6')
         return data;
     },
     async getAllInmueblesEntidad(id) {

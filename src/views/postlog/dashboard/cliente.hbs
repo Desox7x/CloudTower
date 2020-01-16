@@ -118,7 +118,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Inmuebles por inmobiliarias</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Inmuebles por Entidad</h6>
 
                 </div>
                 <!-- Card Body -->
@@ -185,7 +185,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Inmobiliarias destacadas</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Destacados</h6>
                   <select name="select-location" id="select-location">
                     <option value="-1">Selecciona uno...</option>
                     <option value="18.4508722,-69.9656328">Inmobiliaria Perez</option>
@@ -284,7 +284,7 @@
                   <div class="text-center">
 
                     <div class="row">
-                      {{#each inmuebles}}
+                      {{#each inmueblelimit}}
                       <div class="col-md-4">
                         <a href="/propiedad/{{idInm}}">
                           <img class="img-thumbnail" style="width: 10rem;" src="img/{{img}}" alt="">
@@ -308,10 +308,10 @@
             <div class="card mb-3">
               <div class="card-header">
                 <i class="fas fa-table"></i>
-                Últimas inmobiliarias</div>
+                Inmuebles y Proyectos</div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
                         <th>Imagen</th>
@@ -336,8 +336,9 @@
                         <th>Vendedor</th>
                       </tr>
                     </tfoot>
-                    {{#each inmuebles}}
+                    
                     <tbody>
+                      {{#each inmuebles}}
                       <tr>
                         <td><img class="img-profile rounded-circle" src="img/{{img}}" alt=""></td>
                         <td>{{nombre}}</td>
@@ -354,11 +355,40 @@
                         </td>
                         <td>{{fullname}}</td>
                       </tr>
+                      {{/each}}
                     </tbody>
-                    {{/each}}
+                    
+                  </table>
                 </div>
+                <script>
+                    $(document).ready(function () {
+                        $('#myTable').DataTable({
+                            language: {
+                                            "decimal": "",
+                                            "emptyTable": "No hay información",
+                                            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                                            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                                            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                                            "infoPostFix": "",
+                                            "thousands": ",",
+                                            "lengthMenu": "Mostrar _MENU_ Entradas",
+                                            "loadingRecords": "Cargando...",
+                                            "processing": "Procesando...",
+                                            "search": "Buscar:",
+                                            "zeroRecords": "Sin resultados encontrados",
+                                            "paginate": {
+                                                "first": "Primero",
+                                                "last": "Ultimo",
+                                                "next": "Siguiente",
+                                                "previous": "Anterior"
+                                            }
+                                        },
+                            pageLength: 5,
+                            lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']]
+                        });
+                    });
+                </script>
 
-                </table>
               </div>
             </div>
           </div>
