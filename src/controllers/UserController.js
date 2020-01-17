@@ -161,10 +161,20 @@ ctrl.editProfile = (req, res) => {
     return res.render("postlog/editProfile", {data: req.user});
 }
 
+// ctrl.plusRate = async (req, res) => {
+//     await DB.plusRating(req.params.id);
+//     res.redirect('back');
+// }
 
+// ctrl.minusRate = async (req, res) => {
+//     await DB.minusRating(req.params.id, req.body.rating);
+
+//     res.redirect('back');
+// }
 ctrl.userProfile = async (req, res) => {
     let user = await DB.getUserById(req.params.id);
     const inmueble = await DB.getAllInmueblesEntidad(req.params.id);
+    
     console.log(user.length);
 
     if (user.length > 0) {
@@ -176,7 +186,7 @@ ctrl.userProfile = async (req, res) => {
 
         if (user[0].idTipoEntidad == 2) {
 
-            return res.render('postlog/publicinmo', { data: user[0], inmuebles: inmueble })
+            return res.render('postlog/publicinmo', { data: user[0], inmuebles: inmueble})
         }
 
         if (user[0].idTipoEntidad == 3) {

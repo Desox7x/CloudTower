@@ -54,6 +54,8 @@ router.post('/contract', user.addContractPOST);
 router.get('/schedule', user.scheduleReunion);
 router.post('/add_property', user.addPropertyCPOST);
 router.get('/legalDocs', user.legalDocs);
+// router.get('/plusrate/:id', user.plusRate);
+// router.get('/minusrate/:id', user.minusRate);
 
 
 // =========== Inmuebles ============

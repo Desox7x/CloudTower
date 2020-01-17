@@ -20,10 +20,28 @@ module.exports = {
 
 
     async getUserById(id) {
-        let data = await DB.query('SELECT idEntidad, idTipoEntidad, fullname, telefono, correo, direccion, idImg, descripcion, Empleo FROM entidad WHERE idEntidad = ?', [id]);
-        console.log(data)
+        let data = await DB.query('SELECT idEntidad, idTipoEntidad, fullname, telefono, correo, direccion, idImg, descripcion, Empleo, rating FROM entidad WHERE idEntidad = ?', [id]);
+        
         return data;
     },
+
+    // async plusRating(id){
+    //     let data = await DB.query('UPDATE entidad SET rating = rating + 5 WHERE idEntidad = ?', [id]);
+        
+    // },
+
+    // async minusRating(id){
+    //     let isNotZero = await DB.query('SELECT rating FROM Entidad WHERE idEntidad = ?', [id]);
+    //     console.log(isNotZero)
+    //     if (isNotZero > 0){
+    //         await DB.query('UPDATE entidad SET rating = rating - 5 WHERE idEntidad = ?', [id]);
+    //         console.log('no es cero');
+    //     }
+        
+        
+    // },
+
+
 
     async updateUserImg(img, id) {
         console.log(img, id)
@@ -339,11 +357,11 @@ module.exports = {
         return data;
     },
 
-    async createUser(fullname, password, telefono, correo, direccion, idTipoEntidad, id) {
+    async createUser(fullname, password, telefono, correo, direccion, idTipoEntidad, rating) {
         let check = await DB.query('SELECT * FROM Verify WHERE VerCorreo = ?', [correo]);
         if (check.length == 1) {
             await DB.query('DELETE FROM Verify WHERE VerCorreo = ?', [correo])
-            let data = await DB.query('INSERT INTO Entidad SET fullname = ?, password = ?, telefono = ?, correo = ?, direccion = ?, idTipoEntidad = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad]);
+            let data = await DB.query('INSERT INTO Entidad SET fullname = ?, password = ?, telefono = ?, correo = ?, direccion = ?, idTipoEntidad = ?, rating = ?', [fullname, password, telefono, correo, direccion, idTipoEntidad, rating]);
             console.log(data)
             return 0;
         }else{
