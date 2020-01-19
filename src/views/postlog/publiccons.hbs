@@ -1,13 +1,17 @@
 <title>Perfil</title>
 
+
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
 <link rel="stylesheet" href="/css/cards.css">
+
+
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/profile.css">
 
 <style>
     .card-title,
@@ -15,8 +19,31 @@
 
         background-color: rgba(0, 0, 0, 0.5);
         color: white;
+    }
 
+    #all {
+        width: 100%;
+        margin: 0 auto;
+        /*centers the website*/
+    }
 
+    #likes {
+        height: 5px;
+        width: 50%;
+        background: #0000ee;
+        float: left;
+    }
+
+    #dislikes {
+        height: 5px;
+        width: 50%;
+        background: #ccc;
+        float: right;
+    }
+
+    #bar {
+        margin: 0 auto;
+        width: 60%;
     }
 </style>
 
@@ -71,6 +98,10 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"><i class="fas fa-arrows-alt-h"
+                        style="color: rgba(253, 253, 253, 0.7);"></i></button>
+            </div>
 
 
         </ul>
@@ -85,35 +116,81 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+
+
+
                     <div class="row">
+                        {{> message}}
 
                         <!-- Area Chart -->
-                        <div class="col-xl-12 col-lg-8 ">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between"
-                                    style="background-color: #1bb2fe;">
-                                    <h6 class="m-0 font-weight-bold text-white">Perfil de Constructora</h6>
+                        <div class="col-xl-7 col-lg-8 ">
+                            <div class="accordion" id="faq">
+                                <div class="card shadow mb-4">
+                                    {{!-- ABOUT --}}
+                                    <div class="card-header d-flex flex-row justify-content-between"
+                                        style="background-color: #1bb2fe;" id="headingZero" data-toggle="collapse"
+                                        data-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                                        <h5 class="m-0 font-weight-bold text-white">
+                                            Datos de la constructora
 
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area" style="height: 8rem;">
-                                        <ul>
-                                            <h4>{{data.direccion}}</h4>
-                                        </ul>
-                                        <ul>
-                                            <h5>{{data.telefono}}</h5>
-                                        </ul>
-                                        <ul>
-                                            <h5>{{data.correo}}</h5>
-                                        </ul>
+                                        </h5>
+                                        <div class="font-weight-bold text-white">
+                                            <i class="fas fa-angle-down"></i>
+
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="collapse" id="collapseZero" aria-labelledby="headingZero"
+                                        data-parent="#faq">
+                                        <div class="card-body">
+                                            <ul>
+                                                <h5><i class="fas fa-map-marked"></i> - {{data.direccion}}</h5>
+                                            </ul>
+                                            <ul>
+                                                <h5><i class="fas fa-phone"></i> - {{data.telefono}}</h5>
+                                            </ul>
+                                            <ul>
+                                                <h5><i class="fas fa-reply-all"></i> - {{data.correo}}</h5>
+
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="col-xl-5 col-lg-4 ">
+                            <div class="accordion" id="faq1">
+                                <div class="card shadow mb-4">
+                                    {{!-- ABOUT --}}
+                                    <div class="card-header py-8 d-flex flex-row align-items-center justify-content-between"
+                                        style="background-color: #1bb2fe;" id="headingOne" data-toggle="collapse"
+                                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <h5 class="m-0 font-weight-bold text-white">
+                                            Sobre nosotros
+
+                                        </h5>
+                                        <div class="font-weight-bold text-white">
+                                            <i class="fas fa-angle-down"></i>
+
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="collapse" id="collapseOne" aria-labelledby="headingOne"
+                                        data-parent="#faq1">
+                                        <div class="card-body text-justify">
+                                            {{data.descripcion}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
+                    <h4>Inmuebles</h4>
+                    <hr class="mt-1">
                     <div class="row" id="ads">
                         {{#each inmuebles}}
                         <div class="col-md-4">
@@ -121,7 +198,6 @@
                                 <div class="card-image">
                                     <span class="card-notify-badge" style="background-color: #1eb2fc">{{nombre}}</span>
                                     <a href="/propiedad/{{idInm}}"><span class="card-notify-year">Ver</span></a>
-
 
                                 </div>
 
@@ -135,11 +211,55 @@
                         </div>
                         {{/each}}
                     </div>
-                    {{> infowin}}
+                    <h4>Ingenieros</h4>
+                    <hr class="mt-1">
+                    <div class="row justify-content-center align-items-center">
+
+                        {{#each ing}}
+                        <div class="col-md-3">
+
+
+                            <div class="profile-card py-3 card text-center">
+
+                                <div class="card-body py-4">
+                                    <img class="profile-picture rounded-circle" src="/uploads/{{idImg}}"
+                                        onerror="this.onerror=null; this.src='/img/userlogo.jpg'" />
+                                    <h2 class="text-dark h5 font-weight-bold mt-4 mb-1">
+                                        {{fullname}}
+                                    </h2>
+                                    <p class="text-muted font-weight-bold small">
+                                        <i class="fa fa-map-marker"></i>
+                                        {{direccion}}
+                                    </p>
+                                    <p class="text-muted font-weight-bold small">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        {{telefono}}
+                                    </p>
+                                    <p class="px-1 mt-4 mb-4 text-muted quote-text">
+                                        
+                                    </p>
+                                    <form action="/user/{{idEntidad}}">
+                                        <button class="btn btn-sm btn-outline-success">Ver perfil</button>
+                                    </form>
+                                    <div class="d-flex social-section justify-content-center">
+                                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a href=""><i class="fab fa-twitter"></i></a>
+                                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                        <a href=""><i class="fab fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        {{/each}}
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -147,6 +267,58 @@
     </a>
 
     {{> infowin}}
+
+    <script>
+        (function ($) {
+            "use strict"; // Start of use strict
+
+            // Toggle the side navigation
+            $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
+                $("body").toggleClass("sidebar-toggled");
+                $(".sidebar").toggleClass("toggled");
+                if ($(".sidebar").hasClass("toggled")) {
+                    $('.sidebar .collapse').collapse('hide');
+                };
+            });
+
+            // Close any open menu accordions when window is resized below 768px
+            $(window).resize(function () {
+                if ($(window).width() < 768) {
+                    $('.sidebar .collapse').collapse('hide');
+                };
+            });
+
+            // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+            $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
+                if ($(window).width() > 768) {
+                    var e0 = e.originalEvent,
+                        delta = e0.wheelDelta || -e0.detail;
+                    this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+                    e.preventDefault();
+                }
+            });
+
+            // Scroll to top button appear
+            $(document).on('scroll', function () {
+                var scrollDistance = $(this).scrollTop();
+                if (scrollDistance > 100) {
+                    $('.scroll-to-top').fadeIn();
+                } else {
+                    $('.scroll-to-top').fadeOut();
+                }
+            });
+
+            // Smooth scrolling using jQuery easing
+            $(document).on('click', 'a.scroll-to-top', function (e) {
+                var $anchor = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: ($($anchor.attr('href')).offset().top)
+                }, 1000, 'easeInOutExpo');
+                e.preventDefault();
+            });
+
+        })(jQuery); // End of use strict
+    </script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

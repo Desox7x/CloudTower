@@ -31,7 +31,7 @@ ctrl.signupPOST = passport.authenticate('local.signup', {
 ctrl.validarInmoPOST = async (req, res) => {
     let password = await helpers.encryptPassword(req.body.password);
     let register = await DB.createUser(req.body.fullname, password, req.body.telefono,
-        req.body.correo, req.body.direccion, 2, 0);
+        req.body.correo, req.body.direccion, 2);
     if (register == 0) {
         // await mailer.validateUser(req.params.id);
         req.flash('success', 'La verificación ha sido exitosa.')
@@ -45,7 +45,7 @@ ctrl.validarInmoPOST = async (req, res) => {
 ctrl.validarConsPOST = async (req, res) => {
     let password = await helpers.encryptPassword(req.body.password);
     let register = await DB.createUser(req.body.fullname, password, req.body.telefono,
-        req.body.correo, req.body.direccion, 3, 0);
+        req.body.correo, req.body.direccion, 3);
     if (register == 0) {
 
         req.flash('success', 'La verificación ha sido exitosa.')

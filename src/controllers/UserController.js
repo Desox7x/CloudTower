@@ -13,10 +13,10 @@ ctrl.dashboard = async (req, res) => {
         return res.render('postlog/dashboard/cliente', {inmueblelimit, inmuebles: inmueble, ti:totalInmuebles});
     }
     if (req.user.idTipoEntidad == 2) {
-        return res.render('postlog/dashboard/inmobiliaria', {totalInmuebles: inmueble.length, inmuebles: inmueble, ti:totalInmuebles});
+        return res.render('postlog/dashboard/inmobiliaria', {inmueblelimit, inmuebles: inmueble, ti:totalInmuebles});
     }
     if (req.user.idTipoEntidad == 3) {
-        return res.render('postlog/dashboard/constructora', {totalInmuebles: inmueble.length, inmuebles: inmueble, ti:totalInmuebles});
+        return res.render('postlog/dashboard/constructora', {inmueblelimit, inmuebles: inmueble, ti:totalInmuebles});
     }
 
     res.status(403).send('Forbideen');
@@ -161,19 +161,12 @@ ctrl.editProfile = (req, res) => {
     return res.render("postlog/editProfile", {data: req.user});
 }
 
-// ctrl.plusRate = async (req, res) => {
-//     await DB.plusRating(req.params.id);
-//     res.redirect('back');
-// }
 
-// ctrl.minusRate = async (req, res) => {
-//     await DB.minusRating(req.params.id, req.body.rating);
-
-//     res.redirect('back');
-// }
 ctrl.userProfile = async (req, res) => {
     let user = await DB.getUserById(req.params.id);
     const inmueble = await DB.getAllInmueblesEntidad(req.params.id);
+    const repre = await DB.getRepresentantesEntidad(req.params.id);
+    const ing = await DB.getRepresentantesEntidad(req.params.id);
     
     console.log(user.length);
 
@@ -186,12 +179,12 @@ ctrl.userProfile = async (req, res) => {
 
         if (user[0].idTipoEntidad == 2) {
 
-            return res.render('postlog/publicinmo', { data: user[0], inmuebles: inmueble})
+            return res.render('postlog/publicinmo', { data: user[0], inmuebles: inmueble, repre})
         }
 
         if (user[0].idTipoEntidad == 3) {
 
-            return res.render('postlog/publiccons', { data: user[0], inmuebles: inmueble })
+            return res.render('postlog/publiccons', { data: user[0], inmuebles: inmueble, ing })
         }
 
         return res.render('postlog/profile', { data: user[0], isUser });
