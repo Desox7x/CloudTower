@@ -31,6 +31,7 @@ router.get('/profile/reunionlist', isLoggedIn, requireRole(InmobiliariaRole), ho
 router.get('/profile/datelist', isLoggedIn, requireRole(ConstructoraRole), home.dateList);
 router.get('/profile/representantes', isLoggedIn, requireRole(InmobiliariaRole), home.representantes);
 router.get('/profile/ingenieros', isLoggedIn, requireRole(ConstructoraRole), home.ingenieros);
+router.get('/profile/reservas', isLoggedIn, requireRole(InmobiliariaRole), home.misreservas);
 router.get('/search', home.search);
 router.get('/buscarInmuebles', home.searchFilter);
 

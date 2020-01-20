@@ -66,13 +66,14 @@ mailer.successReserva = async(id) => {
 
 }
 
-//  mailer.validateUser = async(id) => {
-//      let user = await DB.getSolicitudesById(id);
-//      let html = `<h3>Su cuenta ha sido validada exitosamente! </h3>
-//      <p>Entre a cloudtower.xyz/login para iniciar sesion. </p>`;
-//      let sujeto = 'Validacion exitosa';
-//      await enviarMail(html, sujeto, user[0].VerCorreo)
-//  }
+  mailer.validateUser = async(nombre, correo) => {
+    //   let user = await DB.getSolicitudesById(id);
+      let html = `<h3>Su cuenta ha sido validada exitosamente ${nombre}! </h3>
+      <p>Entre a cloudtower.xyz/login para iniciar sesion. </p>`;
+      let sujeto = 'Validacion exitosa';
+      console.log('enviado');
+      await enviarMail(html, sujeto, correo)
+  }
 
 
 module.exports = mailer;

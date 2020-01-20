@@ -335,7 +335,7 @@ module.exports = {
     },
 
     async getSolicitudesById(id) {
-        let data = await DB.query('SELECT * FROM Verify v JOIN Entidad e ON v.idEntidad = e.idEntidad WHERE VerifyID = ?', [id]);
+        let data = await DB.query('SELECT * FROM Verify WHERE VerifyID = ?', [id]);
         return data;
     },
 

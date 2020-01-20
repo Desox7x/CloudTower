@@ -33,7 +33,7 @@ ctrl.validarInmoPOST = async (req, res) => {
     let register = await DB.createUser(req.body.fullname, password, req.body.telefono,
         req.body.correo, req.body.direccion, 2);
     if (register == 0) {
-        // await mailer.validateUser(req.params.id);
+        await mailer.validateUser(req.body.fullname, req.body.correo);
         req.flash('success', 'La verificación ha sido exitosa.')
     } else {
         req.flash('message', 'La verificación no ha podido realizarse.')
@@ -47,7 +47,7 @@ ctrl.validarConsPOST = async (req, res) => {
     let register = await DB.createUser(req.body.fullname, password, req.body.telefono,
         req.body.correo, req.body.direccion, 3);
     if (register == 0) {
-
+        await mailer.validateUser(req.body.fullname, req.body.correo)
         req.flash('success', 'La verificación ha sido exitosa.')
     } else {
         req.flash('message', 'La verificación no ha podido realizarse.')
