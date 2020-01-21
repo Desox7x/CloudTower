@@ -155,7 +155,7 @@ ctrl.searchResult = (req, res) => {
 ctrl.uploadPOST = async (req, res) => {
 
     await DB.updateUserImg(req.file.filename, req.user.idEntidad);
-    res.redirect('/profile');
+    res.redirect('back');
 };
 ctrl.editProfile = (req, res) => {
     return res.render("postlog/editProfile", {data: req.user});

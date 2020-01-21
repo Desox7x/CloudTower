@@ -111,7 +111,8 @@
                             <div class="profile-card py-3 card text-center">
 
                                 <div class="card-body py-4">
-                                    <img class="profile-picture rounded-circle" src="/uploads/{{idImg}}" />
+                                    <img class="profile-picture rounded-circle" src="/uploads/{{idImg}}" 
+                                    onerror="this.onerror=null; this.src='/img/userlogo.jpg'"/>
                                     <h2 class="text-dark h5 font-weight-bold mt-4 mb-1">
                                         {{fullname}}
                                     </h2>
@@ -192,7 +193,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-5">
-                                            <p><b>Localizacion:</b> {{inmo.ubic}}</p>
+                                            <p><b>Localización:</b> {{inmo.ubic}}</p>
                                         </div>
                                         <div class="col-5">
                                             <p><b>Municipio:</b> {{inmo.municipio}}</p>

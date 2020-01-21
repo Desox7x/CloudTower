@@ -30,7 +30,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/profile">
         <div>
-          <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
+          <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50"
+          onerror="this.onerror=null; this.src='/img/userlogo.jpg'">
+        
         </div>
 
       </a>

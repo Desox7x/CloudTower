@@ -30,7 +30,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/profile">
         <div>
-          <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50">
+          <img class="img-profile rounded-circle" src="/uploads/{{ user.idImg }}" width="50" height="50"
+            onerror="this.onerror=null; this.src='/img/userlogo.jpg'">
+        
         </div>
 
       </a>
@@ -305,8 +307,8 @@
 
             </div>
           </div>
-          <div class="row">
-            <div class="card mb-3">
+          <div class="row d-flex">
+            <div class="card mb-3 mx-auto">
               <div class="card-header">
                 <i class="fas fa-table"></i>
                 Inmuebles y Proyectos</div>
@@ -317,7 +319,6 @@
                       <tr>
                         <th>Imagen</th>
                         <th>Proyecto</th>
-                        <th>Sector</th>
                         <th>Tipo</th>
                         <th>Precio</th>
                         <th>Metros</th>
@@ -329,7 +330,6 @@
                       <tr>
                         <th>Imagen</th>
                         <th>Proyecto</th>
-                        <th>Sector</th>
                         <th>Tipo</th>
                         <th>Precio</th>
                         <th>Metros</th>
@@ -343,7 +343,6 @@
                       <tr>
                         <td><img class="img-profile rounded-circle" src="img/{{img}}" alt=""></td>
                         <td>{{nombre}}</td>
-                        <td>{{ubic}}</td>
                         <td>{{tipoInm}}</td>
                         <td>{{precio}}${{moneda}}</td>
                         <td>{{metro}}m²</td>
